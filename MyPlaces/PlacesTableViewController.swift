@@ -22,7 +22,7 @@ class PlacesTableViewController: UITableViewController {
         // Configure the cell...
         cell.nameLabel.text = place?.name
         cell.idLabel.text = place?.id
- //       cell.backgroundImage.image = place?.image
+        cell.backgroundImageView.image = place?.image
         
         return cell
     }
