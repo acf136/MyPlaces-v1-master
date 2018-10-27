@@ -29,6 +29,7 @@ class Place {
     var description = ""
     var location: CLLocationCoordinate2D!
     var image: UIImage?
+    var www: String?
     	
     // We need to learn a bit more about initialization, but meanwhile we create some initializers.
     // This one has no information about name or description, so it creates an almost empty place.
@@ -49,11 +50,12 @@ class Place {
     // This one creates a generic or touristic place (based on parameter) with basic name and
     // description information. But wait a minute... shouldn't we create a PlaceTourist instance
     // if we wanted a touristic place? :)
-    init(type: PlaceType, name: String, description: String, image_in: UIImage?) {
+    init(type: PlaceType, name: String, description: String, image_in: UIImage?, www: String?) {
         self.id = UUID().uuidString
         self.type = type
         self.name = name
         self.description = description
         self.image = image_in
+        self.www = www
     }
 }

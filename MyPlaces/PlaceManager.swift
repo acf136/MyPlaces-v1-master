@@ -86,22 +86,21 @@ class PlaceManager {
     }
 
     // MARK: - Only for demo purposes
-    
     let someTestPlaces = [
         Place(name: "UOC 22@",
               description: "Seu de la Universitat Oberta de Catalunya",
               image_in: UIImage(named: "BavarianChurchSnow1") ),
         Place(name: "Rostisseria Lolita",
               description: "Els millors pollastres de Sant Cugat",
-              image_in: UIImage(named: "Beach-Ireland")),
+              image_in: UIImage(named: "Beach-Ireland") ),
         Place(name: "CIFO L'Hospitalet",
               description: "Seu del Centre d'Innovació i Formació per a l'Ocupació. El Centre d'Innovació i Formació per a l'Ocupació (CIFO) de l'Hospitalet ofereix formació en les àrees d'Edició i de Disseny gràfic i Multimèdia, a treballadors",
               image_in: UIImage(named: "Forest7")),
         PlaceTourist(name: "CosmoCaixa",
                      description: "Museu de la Ciència de Barcelona",
-                     discount_tourist: "50%", image_in: UIImage(named: "sea4")),
+                     discount_tourist: "50%", image_in: UIImage(named: "sea4") , www: "" ),
         PlaceTourist(name: "Park Güell",
                      description: "Obra d'Antoni Gaudí a Barcelona",
-                     discount_tourist: "10%", image_in: UIImage(named: "Tale2"))
+                     discount_tourist: "10%", image_in: UIImage(named: "Tale2"), www: "") ,
     ]
 }

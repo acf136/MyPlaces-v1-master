@@ -19,11 +19,7 @@ class PlacesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PlaceCell", for: indexPath) as! PlaceCell
         let place = manager.itemAt(position: indexPath.item)
-        // Configure the cell...
-        cell.nameLabel.text = place?.name
-        cell.idLabel.text = place?.id
-        cell.backgroundImageView.image = place?.image
-        
+        cell.bind(place: place)
         return cell
     }
 
