@@ -76,6 +76,15 @@ class PlaceManager {
         places = places.filter {$0.id != place.id}
     }
     
+    // Returns a color UIColor for the given place with id calculated in function of the type of place
+    func itemTypeColor(_ id: String) -> UIColor {
+        let colorComp : Int = places.filter {$0.id == id}[0].type.rawValue % 3
+        return ( colorComp == 1 ? UIColor(red:1.0,green:0.0,blue:0.0,alpha:1.0) :
+                 (colorComp == 2 ? UIColor(red:0.0,green:1.0,blue:0.0,alpha:1.0) :
+                                        UIColor(red:0.0,green:0.0,blue:1.0,alpha:1.0) )
+        )
+    }
+
     // MARK: - Only for demo purposes
     
     let someTestPlaces = [
@@ -86,7 +95,7 @@ class PlaceManager {
               description: "Els millors pollastres de Sant Cugat",
               image_in: UIImage(named: "Beach-Ireland")),
         Place(name: "CIFO L'Hospitalet",
-              description: "Seu del Centre d'Innovació i Formació per a l'Ocupació",
+              description: "Seu del Centre d'Innovació i Formació per a l'Ocupació. El Centre d'Innovació i Formació per a l'Ocupació (CIFO) de l'Hospitalet ofereix formació en les àrees d'Edició i de Disseny gràfic i Multimèdia, a treballadors",
               image_in: UIImage(named: "Forest7")),
         PlaceTourist(name: "CosmoCaixa",
                      description: "Museu de la Ciència de Barcelona",

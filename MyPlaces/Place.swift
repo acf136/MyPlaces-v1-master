@@ -14,9 +14,10 @@ class Place {
     // Place.swift file but outside the class (so, between those "import MapKit" and "class Place {"
     // lines). However if we know we are only going to use it from our Place, it's probably cleaner
     // if the enumeration lives inside the class.
-    enum PlaceType {
-        case generic
+    enum PlaceType : Int {
+        case generic = 1
         case touristic
+        case services
     }
     
     // We don't need to specify types when the compiler can infer them from context. That doesn't
