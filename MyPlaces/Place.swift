@@ -35,6 +35,8 @@ class Place {
     // This one has no information about name or description, so it creates an almost empty place.
     init() {
         self.id = UUID().uuidString
+        // -90 < latitude < 90 , -180 < longitude < 180  [in degrees]
+        self.location = CLLocationCoordinate2D(latitude: Double.random(in: 1...360) - 90.0, longitude: Double.random(in: 1...360) - 180.0)
     }
     
     // We need to learn a bit more about initialization, but meanwhile we create some initializers.
@@ -43,6 +45,8 @@ class Place {
         self.id = UUID().uuidString
         self.name = name
         self.description = description
+        // -90 < latitude < 90 , -180 < longitude < 180  [in degrees]
+        self.location = CLLocationCoordinate2D(latitude: Double.random(in: 1...360) - 90.0, longitude: Double.random(in: 1...360) - 180.0)
         self.image = image_in
     }
     
@@ -50,12 +54,15 @@ class Place {
     // This one creates a generic or touristic place (based on parameter) with basic name and
     // description information. But wait a minute... shouldn't we create a PlaceTourist instance
     // if we wanted a touristic place? :)
-    init(type: PlaceType, name: String, description: String, image_in: UIImage?, www: String?) {
+    init(type: PlaceType, name: String, description: String , image_in: UIImage?, www: String?) {
         self.id = UUID().uuidString
         self.type = type
         self.name = name
         self.description = description
+        // -90 < latitude < 90 , -180 < longitude < 180  [in degrees]
+        self.location = CLLocationCoordinate2D(latitude: Double.random(in: 1...360) - 90.0, longitude: Double.random(in: 1...360) - 180.0)
         self.image = image_in
         self.www = www
     }
+    
 }

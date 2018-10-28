@@ -33,8 +33,7 @@ class PlaceDetailViewController: UIViewController {
         descrOfPlace.text = place.description
         ///TODO: assign image of place on detail
         imageOfPlace.image = place.image
-        let coords : CLLocationCoordinate2D? = place.location
-        locationOfPlace.text = "Latitude = \(String(describing: coords?.latitude)) \nLongitude = \(String(describing: coords?.longitude))"
+        locationOfPlace.text = String(format: "Latitude: %3.2f Longitude: %3.2f", arguments: [place.location.latitude, place.location.longitude])
     }
 
 }

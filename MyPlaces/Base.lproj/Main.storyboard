@@ -162,19 +162,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IdOfPlace" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g7L-DP-cyy">
-                                <rect key="frame" x="5" y="71" width="50.5" height="12"/>
+                                <rect key="frame" x="5" y="67" width="50.5" height="12"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
                                 <color key="textColor" red="1" green="0.2357262688" blue="0.4281457461" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="typeOfPlace" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JgN-ku-11u">
-                                <rect key="frame" x="16" y="81" width="343" height="18"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <color key="textColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="locationOfPlace" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uzy-4Z-xUq">
+                                <rect key="frame" x="5" y="80" width="269.5" height="19.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view alpha="0.10000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jKJ-Gp-9Mp">
-                                <rect key="frame" x="0.0" y="99" width="375" height="519"/>
+                                <rect key="frame" x="0.0" y="98" width="375" height="520"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="iev-gs-8lD">
@@ -195,35 +195,37 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="locationOfPlace" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uzy-4Z-xUq">
-                                        <rect key="frame" x="0.0" y="66" width="365" height="19.5"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
-                                        <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OKQ-OL-RVg">
-                                        <rect key="frame" x="0.0" y="90.5" width="365" height="413.5"/>
+                                        <rect key="frame" x="0.0" y="66" width="365" height="438"/>
                                     </imageView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="Z1H-FJ-L6W" firstAttribute="top" secondItem="iev-gs-8lD" secondAttribute="top" constant="21" id="1gw-IP-Q0W"/>
-                                    <constraint firstItem="Uzy-4Z-xUq" firstAttribute="leading" secondItem="iev-gs-8lD" secondAttribute="leading" id="hxA-Pc-4cx"/>
                                 </constraints>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="typeOfPlace" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JgN-ku-11u">
+                                <rect key="frame" x="279.5" y="80" width="90.5" height="19.5"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <color key="textColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="de4-S9-kZk" firstAttribute="trailing" secondItem="JgN-ku-11u" secondAttribute="trailing" constant="16" id="2Qx-hd-XlO"/>
+                            <constraint firstItem="Uzy-4Z-xUq" firstAttribute="leading" secondItem="de4-S9-kZk" secondAttribute="leading" constant="5" id="4pF-7a-dsI"/>
+                            <constraint firstItem="JgN-ku-11u" firstAttribute="leading" secondItem="Uzy-4Z-xUq" secondAttribute="trailing" constant="5" id="5Ey-I8-zDj"/>
+                            <constraint firstItem="jKJ-Gp-9Mp" firstAttribute="top" secondItem="g7L-DP-cyy" secondAttribute="bottom" constant="19" id="9tj-Ia-iah"/>
                             <constraint firstItem="iev-gs-8lD" firstAttribute="top" secondItem="de4-S9-kZk" secondAttribute="top" constant="50" id="EZO-o4-iBt"/>
+                            <constraint firstItem="JgN-ku-11u" firstAttribute="height" secondItem="Uzy-4Z-xUq" secondAttribute="height" id="FRC-pB-4rd"/>
                             <constraint firstItem="de4-S9-kZk" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="g7L-DP-cyy" secondAttribute="trailing" id="Fly-2R-hNl"/>
+                            <constraint firstItem="de4-S9-kZk" firstAttribute="trailing" secondItem="JgN-ku-11u" secondAttribute="trailing" constant="5" id="ODg-KR-yxt"/>
                             <constraint firstItem="jKJ-Gp-9Mp" firstAttribute="leading" secondItem="de4-S9-kZk" secondAttribute="leading" id="R3N-PB-KTy"/>
-                            <constraint firstItem="JgN-ku-11u" firstAttribute="leading" secondItem="de4-S9-kZk" secondAttribute="leading" constant="16" id="cYJ-bd-DWv"/>
+                            <constraint firstItem="JgN-ku-11u" firstAttribute="top" secondItem="de4-S9-kZk" secondAttribute="top" constant="16" id="XCa-2E-G8J"/>
+                            <constraint firstItem="Uzy-4Z-xUq" firstAttribute="top" secondItem="de4-S9-kZk" secondAttribute="top" constant="16" id="cp5-jT-c1G"/>
                             <constraint firstItem="de4-S9-kZk" firstAttribute="trailing" secondItem="iev-gs-8lD" secondAttribute="trailing" constant="5" id="dRg-U0-QGY"/>
                             <constraint firstItem="g7L-DP-cyy" firstAttribute="leading" secondItem="de4-S9-kZk" secondAttribute="leading" constant="5" id="gNc-bC-cW9"/>
                             <constraint firstItem="de4-S9-kZk" firstAttribute="bottom" secondItem="iev-gs-8lD" secondAttribute="bottom" id="jXS-7K-MUm"/>
-                            <constraint firstItem="JgN-ku-11u" firstAttribute="top" secondItem="de4-S9-kZk" secondAttribute="top" constant="17" id="nHB-4h-tCA"/>
-                            <constraint firstItem="g7L-DP-cyy" firstAttribute="top" secondItem="de4-S9-kZk" secondAttribute="top" constant="7" id="qCM-dk-BGX"/>
-                            <constraint firstItem="jKJ-Gp-9Mp" firstAttribute="top" secondItem="JgN-ku-11u" secondAttribute="bottom" id="rhb-CM-9JT"/>
+                            <constraint firstItem="g7L-DP-cyy" firstAttribute="top" secondItem="de4-S9-kZk" secondAttribute="top" constant="3" id="qCM-dk-BGX"/>
                             <constraint firstItem="de4-S9-kZk" firstAttribute="bottom" secondItem="jKJ-Gp-9Mp" secondAttribute="bottom" id="v60-N6-XV0"/>
                             <constraint firstItem="de4-S9-kZk" firstAttribute="trailing" secondItem="jKJ-Gp-9Mp" secondAttribute="trailing" id="w3g-1e-Pd0"/>
                             <constraint firstItem="iev-gs-8lD" firstAttribute="leading" secondItem="de4-S9-kZk" secondAttribute="leading" constant="5" id="zzb-5Q-0Ev"/>
@@ -243,10 +245,10 @@
             </objects>
             <point key="canvasLocation" x="2572" y="-791.15442278860576"/>
         </scene>
-        <!--Detail Controller-->
+        <!--Add Place Controller-->
         <scene sceneID="cyh-b9-HD4">
             <objects>
-                <viewController id="FyZ-fq-klw" customClass="DetailController" customModule="MyPlaces" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="FyZ-fq-klw" customClass="AddPlaceController" customModule="MyPlaces" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5xG-GX-9CT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

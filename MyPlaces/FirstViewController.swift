@@ -93,7 +93,7 @@ class FirstViewController: UITableViewController {
     // and, if it is the "ShowPlaceDetail" one, we send the place object to the destination screen.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowPlaceDetail" {
-            if let dc = segue.destination as? DetailController {
+            if let dc = segue.destination as? AddPlaceController {
                 dc.place = sender as? Place
             }
         }

@@ -1,5 +1,5 @@
 //
-//  DetailController.swift
+//  AddPlaceController.swift
 //  MyPlaces
 //
 //  Created by Albert Mata Guerra on 28/09/2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailController: UIViewController {
+class AddPlaceController: UIViewController {
     var place: Place?
     
     @IBOutlet weak var name: UILabel!
@@ -24,4 +24,6 @@ class DetailController: UIViewController {
     @IBAction func close(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+    
+    
 }

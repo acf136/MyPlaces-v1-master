@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import MapKit
 
 // Do you see those MARK lines there in the code? They do nothing (of course, they are comments
 // after all). But that special syntax let you define some nice sections in the header. Have a look
@@ -84,7 +85,7 @@ class PlaceManager {
                                         UIColor(red:0.0,green:0.0,blue:1.0,alpha:1.0) )
         )
     }
-
+    
     // MARK: - Only for demo purposes
     let someTestPlaces = [
         Place(name: "UOC 22@",
