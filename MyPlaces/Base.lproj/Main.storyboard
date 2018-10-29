@@ -94,7 +94,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="149.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KVK-A9-yzl">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KVK-A9-yzl">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="149.5"/>
                                         </imageView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ASr-p4-MT7">
@@ -119,6 +119,7 @@
                                         </stackView>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="KVK-A9-yzl" firstAttribute="centerY" secondItem="ASr-p4-MT7" secondAttribute="centerY" id="1J1-dJ-9QS"/>
                                         <constraint firstAttribute="trailing" secondItem="KVK-A9-yzl" secondAttribute="trailing" id="9aO-fe-3xE"/>
                                         <constraint firstItem="ASr-p4-MT7" firstAttribute="top" secondItem="snT-3l-Olo" secondAttribute="top" constant="20" symbolic="YES" id="JDE-mj-Uwc"/>
                                         <constraint firstAttribute="trailing" secondItem="ASr-p4-MT7" secondAttribute="trailing" constant="20" symbolic="YES" id="PkM-VX-PuV"/>
