@@ -12,6 +12,11 @@ class PlacesTableViewController: UITableViewController {
 
     let manager = PlaceManager.shared
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Places", style: .plain, target: nil, action: nil)
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return manager.count()
     }
@@ -30,6 +35,10 @@ class PlacesTableViewController: UITableViewController {
             let place = manager.itemAt(position: index)
             let pdvc = segue.destination as! PlaceDetailViewController
             pdvc.place = place
+        }
+        if segue.identifier == "AddPlaceInTable" {
+            let apvc = segue.destination as! AddPlaceController
+            apvc.tbv = tableView 
         }
     }
 }

@@ -10,7 +10,8 @@ import UIKit
 
 class PlaceCell: UITableViewCell {
 
-    @IBOutlet weak var idLabel: UILabel!
+    //@IBOutlet weak var idLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var backgroundImageView: UIImageView! {
         didSet {
@@ -20,9 +21,10 @@ class PlaceCell: UITableViewCell {
     
     // Set data of the place in the cell IBOutlets
     func bind(place: Place?) {
+        //idLabel.text = place?.id
+        locationLabel.text = String(format: "Latitude: %3.2f Longitude: %3.2f", arguments: [(place?.location.latitude)!, (place?.location.longitude)!] )
         nameLabel.text = place?.name
-        idLabel.text = place?.id
-        // Crop image to adapt to table cell size
-        backgroundImageView.image = place?.image?.cropped(boundingBox : CGRect(origin: CGPoint(x:0,y:0) , size: CGSize(width:375,height:150)) )
+        // Crop image from left-top corner to adapt to table cell bounds
+        backgroundImageView.image = place?.image?.cropped(boundingBox : self.bounds )
     }
 }
