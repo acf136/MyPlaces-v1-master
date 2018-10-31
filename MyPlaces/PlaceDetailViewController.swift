@@ -16,7 +16,6 @@ class PlaceDetailViewController: UIViewController {
         
     @IBOutlet weak var idOfPlace: UILabel!
     @IBOutlet weak var typeOfPlace: UILabel!
-    
     @IBOutlet weak var descrOfPlace: UILabel!
     @IBOutlet weak var imageOfPlace: UIImageView!
     @IBOutlet weak var locationOfPlace: UILabel!

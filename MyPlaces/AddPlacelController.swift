@@ -26,6 +26,7 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
     @IBOutlet weak var descEditPlace: UITextField!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var descrEditPlace: UITextView!
     
     // Number of columns of data picker
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -58,7 +59,7 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
         currenPickerValue = .generic
         nameEditPlace.text = "Enter a name"
         descLabelPlace.text = "Description of place"
-        descEditPlace.text = "Enter a description"
+        descrEditPlace.text = "Enter a description"
         // post-processing of layout
         saveButton.layer.cornerRadius = 10
         cancelButton.layer.cornerRadius = 10
@@ -72,7 +73,7 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
     // Button Save data to manager of places
     @IBAction func savePlace(_ sender: UIButton) {
         if sender.titleLabel?.text == "Save" {
-            place = Place(type: .generic ,name: nameEditPlace.text!, description: descEditPlace.text! , image_in: nil , www: nil )
+            place = Place(type: .generic ,name: nameEditPlace.text!, description: descrEditPlace.text! , image_in: nil , www: nil )
             place?.location = locationNew
             place?.type = currenPickerValue
             manager.append(place!)
