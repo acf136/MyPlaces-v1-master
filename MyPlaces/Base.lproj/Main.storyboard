@@ -255,17 +255,18 @@
                             </label>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wdb-sn-b1M">
                                 <rect key="frame" x="27" y="84" width="321" height="111"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="111" id="iiM-E8-uox"/>
                                 </constraints>
                             </pickerView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="nameEditPlace" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P9g-dC-BW7">
-                                <rect key="frame" x="75" y="203" width="225" height="25"/>
+                                <rect key="frame" x="92" y="203" width="191" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="3Lf-FD-k0h"/>
                                 </constraints>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="25"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="descLabelPlace" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x8T-Oq-ZVd">
@@ -362,6 +363,7 @@
                         <outlet property="descLabelPlace" destination="x8T-Oq-ZVd" id="lSO-H6-l2t"/>
                         <outlet property="locationPlace" destination="1eS-8f-IY2" id="Lm3-Ba-Obg"/>
                         <outlet property="nameEditPlace" destination="P9g-dC-BW7" id="vCH-tL-l5t"/>
+                        <outlet property="picktypePlace" destination="Wdb-sn-b1M" id="QUP-nk-5Dy"/>
                         <outlet property="saveButton" destination="cny-3z-XEN" id="9bl-Wr-zLt"/>
                         <outlet property="typeLabelPlace" destination="ECu-j9-Prf" id="8f6-SR-nx2"/>
                     </connections>
