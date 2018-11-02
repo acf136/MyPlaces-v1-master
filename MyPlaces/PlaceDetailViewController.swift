@@ -28,8 +28,8 @@ class PlaceDetailViewController: UIViewController {
         idOfPlace.text = place.id
         typeOfPlace.text = "\(place.type)"
         typeOfPlace.textColor = manager.itemTypeColor(place.id) //UIColor(red: 0.0, green: 1.0, blue: 0.0, alpha: 1.0)
-        //descrOfPlace.text = place.description
-        descrOfPlace.text = " bla bla lba bla bla lbabla bla lbabla bla lbabla bla lbabla bla lbabla bla lbabla bla lbabla bla lbabla bla lbabla bla lbabla bla lbabla bla lbabla bla lbabla bla lba "
+        descrOfPlace.text = place.description
+        //descrOfPlace.text = " bla bla lba bla bla lbabla bla lbabla bla lbabla bla lbabla bla lbabla bla lbabla bla lbabla bla lbabla bla lbabla bla lbabla bla lbabla bla lbabla bla lbabla bla lba "
         descrOfPlace.sizeToFit()
         
         imageOfPlace.image = place.image
