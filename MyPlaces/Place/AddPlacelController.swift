@@ -25,7 +25,6 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
     @IBOutlet weak var descLabelPlace: UILabel!
     @IBOutlet weak var descEditPlace: UITextField!
     @IBOutlet weak var saveButton: UIButton!
-    @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var descrEditPlace: UITextView!
     
     // Number of columns of data picker
@@ -62,14 +61,8 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
         descrEditPlace.text = "Enter a description"
         // post-processing of layout
         saveButton.layer.cornerRadius = 10
-        cancelButton.layer.cornerRadius = 10
     }
-    // Button Cancel
-    @IBAction func cancelAdd(_ sender: UIButton) {
-        if sender.titleLabel?.text == "Cancel" {
-            dismiss(animated: true, completion: nil)
-        }
-    }
+
     // Button Save data to manager of places
     @IBAction func savePlace(_ sender: UIButton) {
         if sender.titleLabel?.text == "Save" {

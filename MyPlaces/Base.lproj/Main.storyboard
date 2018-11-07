@@ -317,7 +317,7 @@
                                 </constraints>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cny-3z-XEN">
-                                <rect key="frame" x="27" y="575" width="144.5" height="34"/>
+                                <rect key="frame" x="27" y="575" width="321" height="34"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal">
@@ -333,23 +333,6 @@
                                     <action selector="savePlace:" destination="FyZ-fq-klw" eventType="touchUpInside" id="dFY-aF-ZXP"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dm2-B1-z0S">
-                                <rect key="frame" x="205" y="575" width="144.5" height="34"/>
-                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal">
-                                    <attributedString key="attributedTitle">
-                                        <fragment content="Cancel">
-                                            <attributes>
-                                                <font key="NSFont" metaFont="system" size="18"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
-                                </state>
-                                <connections>
-                                    <action selector="cancelAdd:" destination="FyZ-fq-klw" eventType="touchUpInside" id="wPW-hy-z7Z"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
@@ -359,29 +342,24 @@
                             <constraint firstItem="D4w-Cm-Fju" firstAttribute="centerX" secondItem="Abc-ve-x2N" secondAttribute="centerX" id="M1z-bx-EQM"/>
                             <constraint firstItem="P9g-dC-BW7" firstAttribute="top" secondItem="Wdb-sn-b1M" secondAttribute="bottom" constant="8" symbolic="YES" id="MDY-mE-YqV"/>
                             <constraint firstItem="1eS-8f-IY2" firstAttribute="top" secondItem="Abc-ve-x2N" secondAttribute="top" constant="10" id="QOk-1L-5an"/>
+                            <constraint firstItem="cny-3z-XEN" firstAttribute="leading" secondItem="D4w-Cm-Fju" secondAttribute="leading" id="QPd-ln-cXM"/>
                             <constraint firstItem="x8T-Oq-ZVd" firstAttribute="centerX" secondItem="Abc-ve-x2N" secondAttribute="centerX" id="SIc-nF-DGW"/>
                             <constraint firstItem="x8T-Oq-ZVd" firstAttribute="top" secondItem="P9g-dC-BW7" secondAttribute="bottom" constant="8" symbolic="YES" id="TYb-kc-Mor"/>
-                            <constraint firstItem="Dm2-B1-z0S" firstAttribute="top" secondItem="D4w-Cm-Fju" secondAttribute="bottom" constant="8" symbolic="YES" id="U9g-16-llD"/>
                             <constraint firstItem="ECu-j9-Prf" firstAttribute="width" secondItem="1eS-8f-IY2" secondAttribute="width" id="aBU-wS-DiO"/>
                             <constraint firstItem="P9g-dC-BW7" firstAttribute="centerX" secondItem="Abc-ve-x2N" secondAttribute="centerX" id="aCX-UV-VGm"/>
                             <constraint firstItem="D4w-Cm-Fju" firstAttribute="top" secondItem="x8T-Oq-ZVd" secondAttribute="bottom" constant="8" symbolic="YES" id="apQ-uJ-SSB"/>
                             <constraint firstItem="Wdb-sn-b1M" firstAttribute="width" secondItem="ECu-j9-Prf" secondAttribute="width" id="avb-ei-S08"/>
                             <constraint firstItem="Wdb-sn-b1M" firstAttribute="centerX" secondItem="Abc-ve-x2N" secondAttribute="centerX" id="cSJ-3S-H1k"/>
-                            <constraint firstItem="Dm2-B1-z0S" firstAttribute="width" secondItem="cny-3z-XEN" secondAttribute="width" id="e7p-AQ-Kp2"/>
-                            <constraint firstItem="Dm2-B1-z0S" firstAttribute="leading" secondItem="cny-3z-XEN" secondAttribute="trailing" constant="33.5" id="hdd-PC-GXw"/>
+                            <constraint firstItem="cny-3z-XEN" firstAttribute="trailing" secondItem="D4w-Cm-Fju" secondAttribute="trailing" id="go0-Sz-lWT"/>
                             <constraint firstItem="Abc-ve-x2N" firstAttribute="bottom" secondItem="D4w-Cm-Fju" secondAttribute="bottom" constant="100" id="jOk-sf-dGA"/>
-                            <constraint firstItem="cny-3z-XEN" firstAttribute="leading" secondItem="D4w-Cm-Fju" secondAttribute="leading" id="lcY-Dt-ag6"/>
                             <constraint firstItem="ECu-j9-Prf" firstAttribute="top" secondItem="1eS-8f-IY2" secondAttribute="bottom" constant="8" symbolic="YES" id="nP1-xg-nga"/>
+                            <constraint firstItem="cny-3z-XEN" firstAttribute="top" secondItem="D4w-Cm-Fju" secondAttribute="bottom" constant="8" symbolic="YES" id="rOr-W7-P12"/>
                             <constraint firstItem="Wdb-sn-b1M" firstAttribute="top" secondItem="ECu-j9-Prf" secondAttribute="bottom" constant="8" symbolic="YES" id="sas-mM-xR4"/>
-                            <constraint firstItem="cny-3z-XEN" firstAttribute="top" secondItem="D4w-Cm-Fju" secondAttribute="bottom" constant="8" symbolic="YES" id="vVE-Ca-HAJ"/>
                             <constraint firstItem="ECu-j9-Prf" firstAttribute="centerX" secondItem="Abc-ve-x2N" secondAttribute="centerX" constant="1" id="xG4-fD-pu5"/>
-                            <constraint firstItem="cny-3z-XEN" firstAttribute="width" secondItem="D4w-Cm-Fju" secondAttribute="width" multiplier="0.45" id="ykR-5b-oUM"/>
-                            <constraint firstItem="Abc-ve-x2N" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Dm2-B1-z0S" secondAttribute="trailing" constant="20" id="z22-tM-yDt"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Abc-ve-x2N"/>
                     </view>
                     <connections>
-                        <outlet property="cancelButton" destination="Dm2-B1-z0S" id="jhS-AR-d34"/>
                         <outlet property="descLabelPlace" destination="x8T-Oq-ZVd" id="lSO-H6-l2t"/>
                         <outlet property="descrEditPlace" destination="hNl-h6-O8F" id="qPp-Dr-QYE"/>
                         <outlet property="locationPlace" destination="1eS-8f-IY2" id="Lm3-Ba-Obg"/>
