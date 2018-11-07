@@ -10,9 +10,8 @@
 		3E0F03E821808B970093DBAD /* PlaceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0F03E721808B970093DBAD /* PlaceDetailViewController.swift */; };
 		3E25AB8C217E37570004101A /* PlacesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E25AB8B217E37570004101A /* PlacesTableViewController.swift */; };
 		3E25AB90217E44690004101A /* PlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E25AB8F217E44690004101A /* PlaceCell.swift */; };
-		3EA4E2062188EA94003C4EAD /* MyPlaceGlobalDeclarations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA4E2052188EA94003C4EAD /* MyPlaceGlobalDeclarations.swift */; };
+		3EA4E2062188EA94003C4EAD /* UIImage_extension_01.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA4E2052188EA94003C4EAD /* UIImage_extension_01.swift */; };
 		4002511F215E26790068AA4B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4002511E215E26790068AA4B /* AppDelegate.swift */; };
-		40025123215E26790068AA4B /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40025122215E26790068AA4B /* SecondViewController.swift */; };
 		40025126215E26790068AA4B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40025124215E26790068AA4B /* Main.storyboard */; };
 		40025128215E267A0068AA4B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40025127215E267A0068AA4B /* Assets.xcassets */; };
 		4002512B215E267A0068AA4B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40025129215E267A0068AA4B /* LaunchScreen.storyboard */; };
@@ -27,10 +26,9 @@
 		3E0F03E721808B970093DBAD /* PlaceDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailViewController.swift; sourceTree = "<group>"; };
 		3E25AB8B217E37570004101A /* PlacesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesTableViewController.swift; sourceTree = "<group>"; };
 		3E25AB8F217E44690004101A /* PlaceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceCell.swift; sourceTree = "<group>"; };
-		3EA4E2052188EA94003C4EAD /* MyPlaceGlobalDeclarations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPlaceGlobalDeclarations.swift; sourceTree = "<group>"; };
+		3EA4E2052188EA94003C4EAD /* UIImage_extension_01.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage_extension_01.swift; sourceTree = "<group>"; };
 		4002511B215E26790068AA4B /* MyPlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyPlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4002511E215E26790068AA4B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		40025122215E26790068AA4B /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		40025125215E26790068AA4B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		40025127215E267A0068AA4B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4002512A215E267A0068AA4B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -54,6 +52,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3E5E40782192FA30004F7386 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				3EA4E2052188EA94003C4EAD /* UIImage_extension_01.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		3E5E40792192FA73004F7386 /* Place */ = {
+			isa = PBXGroup;
+			children = (
+				40025132215E2DBE0068AA4B /* AddPlacelController.swift */,
+				3E25AB8B217E37570004101A /* PlacesTableViewController.swift */,
+				3E0F03E721808B970093DBAD /* PlaceDetailViewController.swift */,
+				3E25AB8F217E44690004101A /* PlaceCell.swift */,
+				40025137215E31DB0068AA4B /* Place.swift */,
+				40025139215E34630068AA4B /* PlaceTourist.swift */,
+				4002513B215E38AF0068AA4B /* PlaceManager.swift */,
+			);
+			path = Place;
+			sourceTree = "<group>";
+		};
+		3E5E407A21930341004F7386 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
 		40025112215E26790068AA4B = {
 			isa = PBXGroup;
 			children = (
@@ -74,20 +101,14 @@
 		4002511D215E26790068AA4B /* MyPlaces */ = {
 			isa = PBXGroup;
 			children = (
-				3EA4E2052188EA94003C4EAD /* MyPlaceGlobalDeclarations.swift */,
+				3E5E40782192FA30004F7386 /* Common */,
 				4002511E215E26790068AA4B /* AppDelegate.swift */,
-				40025132215E2DBE0068AA4B /* AddPlacelController.swift */,
-				3E25AB8B217E37570004101A /* PlacesTableViewController.swift */,
-				40025122215E26790068AA4B /* SecondViewController.swift */,
 				40025124215E26790068AA4B /* Main.storyboard */,
 				40025127215E267A0068AA4B /* Assets.xcassets */,
 				40025129215E267A0068AA4B /* LaunchScreen.storyboard */,
 				4002512C215E267A0068AA4B /* Info.plist */,
-				3E0F03E721808B970093DBAD /* PlaceDetailViewController.swift */,
-				3E25AB8F217E44690004101A /* PlaceCell.swift */,
-				40025137215E31DB0068AA4B /* Place.swift */,
-				40025139215E34630068AA4B /* PlaceTourist.swift */,
-				4002513B215E38AF0068AA4B /* PlaceManager.swift */,
+				3E5E40792192FA73004F7386 /* Place */,
+				3E5E407A21930341004F7386 /* Map */,
 			);
 			path = MyPlaces;
 			sourceTree = "<group>";
@@ -177,9 +198,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4002513A215E34630068AA4B /* PlaceTourist.swift in Sources */,
-				3EA4E2062188EA94003C4EAD /* MyPlaceGlobalDeclarations.swift in Sources */,
+				3EA4E2062188EA94003C4EAD /* UIImage_extension_01.swift in Sources */,
 				40025133215E2DBE0068AA4B /* AddPlacelController.swift in Sources */,
-				40025123215E26790068AA4B /* SecondViewController.swift in Sources */,
 				4002511F215E26790068AA4B /* AppDelegate.swift in Sources */,
 				4002513C215E38AF0068AA4B /* PlaceManager.swift in Sources */,
 				40025138215E31DB0068AA4B /* Place.swift in Sources */,

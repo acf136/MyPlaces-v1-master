@@ -8,15 +8,12 @@
 
 import MapKit
 
-//extension UIImage {
-//    func cropped(boundingBox: CGRect) -> UIImage? {
-//        guard let cgImage = self.cgImage?.cropping(to: boundingBox) else {
-//            return nil
-//        }
-//
-//        return UIImage(cgImage: cgImage)
-//    }
-//}
+// Place type enumeration with raw value Int
+enum PlaceType : Int {
+    case generic = 1
+    case touristic
+    case services
+}
 
 class Place {
     

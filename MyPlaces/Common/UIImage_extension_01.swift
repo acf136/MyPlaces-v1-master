@@ -20,9 +20,3 @@ extension UIImage {
     }
 }
 
-// Place type enumeration with raw value Int
-enum PlaceType : Int {
-    case generic = 1
-    case touristic
-    case services
-}
