@@ -31,7 +31,7 @@
         <scene sceneID="h4J-iP-Mv5">
             <objects>
                 <navigationController id="u6U-Mm-v5f" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Map" image="second" id="iE6-EO-Q2W"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="Maps" id="iE6-EO-Q2W"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Bp8-Ac-ASg">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -126,6 +126,7 @@
                                         <constraint firstAttribute="bottom" secondItem="KVK-A9-yzl" secondAttribute="bottom" constant="5" id="x5Q-rP-2uN"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <connections>
                                     <outlet property="backgroundImageView" destination="KVK-A9-yzl" id="LPv-SA-xKP"/>
                                     <outlet property="locationLabel" destination="fWn-4s-asJ" id="PBO-DM-5AL"/>
@@ -413,8 +414,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Maps" width="32" height="32"/>
         <image name="first" width="30" height="30"/>
-        <image name="second" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Hle-2g-Q4Q"/>
