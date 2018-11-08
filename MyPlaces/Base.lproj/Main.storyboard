@@ -31,7 +31,7 @@
         <scene sceneID="h4J-iP-Mv5">
             <objects>
                 <navigationController id="u6U-Mm-v5f" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Map" image="Maps" id="iE6-EO-Q2W"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="maps-32x32" id="iE6-EO-Q2W"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Bp8-Ac-ASg">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -392,8 +392,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Maps" width="32" height="32"/>
         <image name="first" width="30" height="30"/>
+        <image name="maps-32x32" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Hle-2g-Q4Q"/>
