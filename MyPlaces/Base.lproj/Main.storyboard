@@ -288,12 +288,6 @@
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="25"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="descLabelPlace" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x8T-Oq-ZVd">
-                                <rect key="frame" x="133.5" y="236" width="108" height="18"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cny-3z-XEN">
                                 <rect key="frame" x="27" y="575" width="321" height="32"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -315,10 +309,10 @@
                                 </connections>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D4w-Cm-Fju">
-                                <rect key="frame" x="27" y="262" width="321" height="305"/>
+                                <rect key="frame" x="27" y="236" width="321" height="331"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hNl-h6-O8F">
-                                        <rect key="frame" x="0.0" y="0.0" width="321" height="305"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="321" height="331"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -345,15 +339,13 @@
                             <constraint firstItem="D4w-Cm-Fju" firstAttribute="centerX" secondItem="Abc-ve-x2N" secondAttribute="centerX" id="M1z-bx-EQM"/>
                             <constraint firstItem="P9g-dC-BW7" firstAttribute="top" secondItem="Wdb-sn-b1M" secondAttribute="bottom" constant="8" symbolic="YES" id="MDY-mE-YqV"/>
                             <constraint firstItem="1eS-8f-IY2" firstAttribute="top" secondItem="Abc-ve-x2N" secondAttribute="top" constant="10" id="QOk-1L-5an"/>
-                            <constraint firstItem="x8T-Oq-ZVd" firstAttribute="centerX" secondItem="Abc-ve-x2N" secondAttribute="centerX" id="SIc-nF-DGW"/>
-                            <constraint firstItem="x8T-Oq-ZVd" firstAttribute="top" secondItem="P9g-dC-BW7" secondAttribute="bottom" constant="8" symbolic="YES" id="TYb-kc-Mor"/>
                             <constraint firstItem="Abc-ve-x2N" firstAttribute="bottom" secondItem="cny-3z-XEN" secondAttribute="bottom" constant="60" id="UR1-vd-4HA"/>
                             <constraint firstItem="ECu-j9-Prf" firstAttribute="width" secondItem="1eS-8f-IY2" secondAttribute="width" id="aBU-wS-DiO"/>
                             <constraint firstItem="P9g-dC-BW7" firstAttribute="centerX" secondItem="Abc-ve-x2N" secondAttribute="centerX" id="aCX-UV-VGm"/>
-                            <constraint firstItem="D4w-Cm-Fju" firstAttribute="top" secondItem="x8T-Oq-ZVd" secondAttribute="bottom" constant="8" symbolic="YES" id="apQ-uJ-SSB"/>
                             <constraint firstItem="Wdb-sn-b1M" firstAttribute="width" secondItem="ECu-j9-Prf" secondAttribute="width" id="avb-ei-S08"/>
                             <constraint firstItem="cny-3z-XEN" firstAttribute="top" secondItem="D4w-Cm-Fju" secondAttribute="bottom" constant="8" symbolic="YES" id="bU5-22-HrL"/>
                             <constraint firstItem="Wdb-sn-b1M" firstAttribute="centerX" secondItem="Abc-ve-x2N" secondAttribute="centerX" id="cSJ-3S-H1k"/>
+                            <constraint firstItem="D4w-Cm-Fju" firstAttribute="top" secondItem="P9g-dC-BW7" secondAttribute="bottom" constant="8" symbolic="YES" id="mIN-L3-GkV"/>
                             <constraint firstItem="ECu-j9-Prf" firstAttribute="top" secondItem="1eS-8f-IY2" secondAttribute="bottom" constant="8" symbolic="YES" id="nP1-xg-nga"/>
                             <constraint firstItem="Wdb-sn-b1M" firstAttribute="top" secondItem="ECu-j9-Prf" secondAttribute="bottom" constant="8" symbolic="YES" id="sas-mM-xR4"/>
                             <constraint firstItem="ECu-j9-Prf" firstAttribute="centerX" secondItem="Abc-ve-x2N" secondAttribute="centerX" constant="1" id="xG4-fD-pu5"/>
@@ -361,7 +353,6 @@
                         <viewLayoutGuide key="safeArea" id="Abc-ve-x2N"/>
                     </view>
                     <connections>
-                        <outlet property="descLabelPlace" destination="x8T-Oq-ZVd" id="lSO-H6-l2t"/>
                         <outlet property="descrEditPlace" destination="hNl-h6-O8F" id="qPp-Dr-QYE"/>
                         <outlet property="locationPlace" destination="1eS-8f-IY2" id="Lm3-Ba-Obg"/>
                         <outlet property="nameEditPlace" destination="P9g-dC-BW7" id="vCH-tL-l5t"/>
@@ -397,6 +388,6 @@
         <image name="maps-32x32" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Hle-2g-Q4Q"/>
+        <segue reference="uSF-Ww-qrO"/>
     </inferredMetricsTieBreakers>
 </document>

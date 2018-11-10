@@ -22,7 +22,6 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
     @IBOutlet weak var typeLabelPlace: UILabel!
     @IBOutlet weak var picktypePlace: UIPickerView!
     @IBOutlet weak var nameEditPlace: UITextField!
-    @IBOutlet weak var descLabelPlace: UILabel!
     @IBOutlet weak var descEditPlace: UITextField!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var descrEditPlace: UITextView!
@@ -57,7 +56,6 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
         picktypePlace.selectRow(0, inComponent: 0, animated: false)
         currenPickerValue = .generic
         nameEditPlace.text = "Enter a name"
-        descLabelPlace.text = "Description of place"
         descrEditPlace.text = "Enter a description"
         // post-processing of layout
         saveButton.layer.cornerRadius = 10
