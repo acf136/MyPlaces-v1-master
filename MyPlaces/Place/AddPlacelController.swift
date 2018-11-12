@@ -22,7 +22,7 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
     @IBOutlet weak var typeLabelPlace: UILabel!
     @IBOutlet weak var picktypePlace: UIPickerView!
     @IBOutlet weak var nameEditPlace: UITextField!
-    @IBOutlet weak var descEditPlace: UITextField!
+    @IBOutlet weak var importImageButton: UIButton!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var descrEditPlace: UITextView!
     
@@ -59,6 +59,7 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
         descrEditPlace.text = "Enter a description"
         // post-processing of layout
         saveButton.layer.cornerRadius = 10
+        //importImageButton.layer.cornerRadius = 10
     }
 
     // Button Save data to manager of places
