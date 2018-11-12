@@ -304,10 +304,10 @@
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KTq-mC-iEY" userLabel="importImageButton">
-                                                        <rect key="frame" x="0.0" y="185" width="375" height="50"/>
+                                                        <rect key="frame" x="0.0" y="185" width="375" height="51"/>
                                                         <color key="backgroundColor" red="0.0" green="0.50196078431372548" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="50" id="bRe-0x-yVu"/>
+                                                            <constraint firstAttribute="height" constant="51" id="bRe-0x-yVu"/>
                                                         </constraints>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal">
@@ -329,7 +329,7 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </button>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" image="BavarianChurchSnow1" translatesAutoresizingMaskIntoConstraints="NO" id="Jkp-rp-xhr">
-                                                        <rect key="frame" x="0.0" y="240" width="375" height="680"/>
+                                                        <rect key="frame" x="0.0" y="241" width="375" height="679"/>
                                                     </imageView>
                                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="300" translatesAutoresizingMaskIntoConstraints="NO" id="D4w-Cm-Fju" userLabel="ScrollViewDescription">
                                                         <rect key="frame" x="0.0" y="925" width="375" height="150"/>
