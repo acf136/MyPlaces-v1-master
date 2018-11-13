@@ -44,10 +44,10 @@
             </objects>
             <point key="canvasLocation" x="924" y="250"/>
         </scene>
-        <!--My Places-->
+        <!--My Map-->
         <scene sceneID="NHG-mJ-Aeu">
             <objects>
-                <viewController id="hxu-bW-Gym" sceneMemberID="viewController">
+                <viewController title="My Map" id="hxu-bW-Gym" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VnO-j5-aKp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -65,10 +65,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="sLi-bL-SIk"/>
                     </view>
-                    <navigationItem key="navigationItem" title="My Places" id="tDa-3o-Gc0">
+                    <navigationItem key="navigationItem" title="My Map" id="tDa-3o-Gc0">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="DYq-zQ-3nG">
                             <connections>
-                                <segue destination="FyZ-fq-klw" kind="showDetail" identifier="AddPlaceInMap" id="uSF-Ww-qrO"/>
+                                <segue destination="FyZ-fq-klw" kind="show" identifier="AddPlaceInMap" id="xEv-xD-vPt"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -143,7 +143,7 @@
                     <navigationItem key="navigationItem" title="My Places" id="2u8-j4-PkE">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="1fw-XA-iAh">
                             <connections>
-                                <segue destination="FyZ-fq-klw" kind="showDetail" identifier="AddPlaceInTable" id="Hle-2g-Q4Q"/>
+                                <segue destination="FyZ-fq-klw" kind="show" identifier="AddPlaceInTable" id="dvK-Hf-ykJ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -250,18 +250,18 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qDA-AZ-zWP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2545" y="-1016"/>
+            <point key="canvasLocation" x="2545" y="-1173"/>
         </scene>
-        <!--Add Place Controller-->
+        <!--Add Place-->
         <scene sceneID="cyh-b9-HD4">
             <objects>
-                <viewController id="FyZ-fq-klw" customClass="AddPlaceController" customModule="MyPlaces" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Add Place" id="FyZ-fq-klw" customClass="AddPlaceController" customModule="MyPlaces" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleAspectFit" id="5xG-GX-9CT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1155"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aPE-XB-Xyq">
-                                <rect key="frame" x="0.0" y="20" width="375" height="1135"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="1042"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aDS-kv-hmg">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="1130"/>
@@ -421,6 +421,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Abc-ve-x2N"/>
                     </view>
+                    <navigationItem key="navigationItem" id="pLe-TR-1xZ"/>
                     <size key="freeformSize" width="375" height="1155"/>
                     <connections>
                         <outlet property="descrEditPlace" destination="hNl-h6-O8F" id="qPp-Dr-QYE"/>
@@ -434,7 +435,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bRl-e6-qTH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2544.8000000000002" y="-107.94602698650675"/>
+            <point key="canvasLocation" x="2588" y="-103"/>
         </scene>
         <!--List-->
         <scene sceneID="ztT-TP-hMT">
@@ -460,6 +461,6 @@
         <image name="maps-32x32" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="uSF-Ww-qrO"/>
+        <segue reference="dvK-Hf-ykJ"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -47,6 +47,7 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
     // redraw view
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Add Place", style: .plain, target: nil, action: nil)
         // Connect data of UIPickerView delegated
         self.picktypePlace.delegate = self
         self.picktypePlace.dataSource = self
@@ -59,7 +60,6 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
         descrEditPlace.text = "Enter a description"
         // post-processing of layout
         saveButton.layer.cornerRadius = 10
-        //importImageButton.layer.cornerRadius = 10
     }
 
     // Button Save data to manager of places

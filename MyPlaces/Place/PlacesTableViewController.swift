@@ -37,8 +37,8 @@ class PlacesTableViewController: UITableViewController {
             pdvc.place = place
         }
         if segue.identifier == "AddPlaceInTable" {
-            let apvc = segue.destination as! AddPlaceController
-            apvc.tbv = tableView 
+            //let apvc = segue.destination as! AddPlaceController
+            //apvc.tbv = tableView
         }
     }
 }
