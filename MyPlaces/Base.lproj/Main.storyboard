@@ -185,7 +185,7 @@
                                         <rect key="frame" x="0.0" y="6.5" width="375" height="513.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="iev-gs-8lD">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="482"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="423"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="descrOfPlace" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z1H-FJ-L6W">
                                                         <rect key="frame" x="0.0" y="0.0" width="375" height="18"/>
@@ -193,8 +193,8 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OKQ-OL-RVg">
-                                                        <rect key="frame" x="0.0" y="23" width="375" height="459"/>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OKQ-OL-RVg">
+                                                        <rect key="frame" x="0.0" y="23" width="375" height="400"/>
                                                     </imageView>
                                                 </subviews>
                                                 <constraints>
@@ -250,24 +250,24 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qDA-AZ-zWP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2545" y="-1173"/>
+            <point key="canvasLocation" x="2538" y="-1012"/>
         </scene>
         <!--Add Place-->
         <scene sceneID="cyh-b9-HD4">
             <objects>
                 <viewController title="Add Place" id="FyZ-fq-klw" customClass="AddPlaceController" customModule="MyPlaces" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleAspectFit" id="5xG-GX-9CT">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="1155"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="850"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aPE-XB-Xyq">
-                                <rect key="frame" x="0.0" y="64" width="375" height="1042"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="786"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aDS-kv-hmg">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1130"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="776"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="O3C-Pd-4Qq">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="1130"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="776"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="locationOfPlace" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1eS-8f-IY2">
                                                         <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
@@ -327,19 +327,28 @@
                                                                 <real key="value" value="40"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="ImportImage:" destination="FyZ-fq-klw" eventType="touchUpInside" id="xOa-WV-B3s"/>
+                                                        </connections>
                                                     </button>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" image="BavarianChurchSnow1" translatesAutoresizingMaskIntoConstraints="NO" id="Jkp-rp-xhr">
-                                                        <rect key="frame" x="0.0" y="241" width="375" height="679"/>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="PutYourImageHere" translatesAutoresizingMaskIntoConstraints="NO" id="Jkp-rp-xhr">
+                                                        <rect key="frame" x="0.0" y="241" width="375" height="400"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="400" id="kzq-5q-sy8"/>
+                                                        </constraints>
                                                     </imageView>
                                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="300" translatesAutoresizingMaskIntoConstraints="NO" id="D4w-Cm-Fju" userLabel="ScrollViewDescription">
-                                                        <rect key="frame" x="0.0" y="925" width="375" height="150"/>
+                                                        <rect key="frame" x="0.0" y="646" width="375" height="75"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="300" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="2qH-Yi-Wx6">
-                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                                                 <subviews>
                                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="300" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hNl-h6-O8F">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="75" id="amO-6p-Drp"/>
+                                                                        </constraints>
                                                                         <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -358,7 +367,7 @@
                                                         </constraints>
                                                     </scrollView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cny-3z-XEN" userLabel="saveButton">
-                                                        <rect key="frame" x="0.0" y="1080" width="375" height="50"/>
+                                                        <rect key="frame" x="0.0" y="726" width="375" height="50"/>
                                                         <color key="backgroundColor" red="0.0" green="0.50196078431372548" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="z52-8L-Nxq"/>
@@ -396,7 +405,6 @@
                                             <constraint firstItem="O3C-Pd-4Qq" firstAttribute="leading" secondItem="aDS-kv-hmg" secondAttribute="leading" id="36o-s5-mts"/>
                                             <constraint firstAttribute="bottom" secondItem="O3C-Pd-4Qq" secondAttribute="bottom" id="95H-FA-Wod"/>
                                             <constraint firstAttribute="trailing" secondItem="O3C-Pd-4Qq" secondAttribute="trailing" id="9x8-kP-3GI"/>
-                                            <constraint firstAttribute="height" constant="1130" id="PmB-vL-NAE"/>
                                             <constraint firstItem="O3C-Pd-4Qq" firstAttribute="top" secondItem="aDS-kv-hmg" secondAttribute="top" id="Zkh-aQ-AiQ"/>
                                         </constraints>
                                     </stackView>
@@ -422,8 +430,10 @@
                         <viewLayoutGuide key="safeArea" id="Abc-ve-x2N"/>
                     </view>
                     <navigationItem key="navigationItem" id="pLe-TR-1xZ"/>
-                    <size key="freeformSize" width="375" height="1155"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <size key="freeformSize" width="375" height="850"/>
                     <connections>
+                        <outlet property="MyImageView" destination="Jkp-rp-xhr" id="pJv-ev-fn4"/>
                         <outlet property="descrEditPlace" destination="hNl-h6-O8F" id="qPp-Dr-QYE"/>
                         <outlet property="importImageButton" destination="KTq-mC-iEY" id="KcV-q5-2hB"/>
                         <outlet property="locationPlace" destination="1eS-8f-IY2" id="Lm3-Ba-Obg"/>
@@ -435,7 +445,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bRl-e6-qTH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2588" y="-103"/>
+            <point key="canvasLocation" x="2588" y="-103.89805097451276"/>
         </scene>
         <!--List-->
         <scene sceneID="ztT-TP-hMT">
@@ -456,7 +466,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="BavarianChurchSnow1" width="1023" height="680"/>
+        <image name="PutYourImageHere" width="205" height="307"/>
         <image name="first" width="30" height="30"/>
         <image name="maps-32x32" width="24" height="24"/>
     </resources>

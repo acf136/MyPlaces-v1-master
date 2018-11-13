@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerViewDataSource {
+class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     var place: Place?
     let locationNew = CLLocationCoordinate2D(latitude: Double.random(in: 1...360) - 90.0, longitude: Double.random(in: 1...360) - 180.0)
@@ -23,8 +23,32 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
     @IBOutlet weak var picktypePlace: UIPickerView!
     @IBOutlet weak var nameEditPlace: UITextField!
     @IBOutlet weak var importImageButton: UIButton!
-    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var MyImageView: UIImageView!
     @IBOutlet weak var descrEditPlace: UITextView!
+    @IBOutlet weak var saveButton: UIButton!
+    // Import Image into MyImageView UIImageView
+    @IBAction func ImportImage(_ sender: Any) {
+        let image = UIImagePickerController()
+        image.delegate = self
+        image.sourceType = 	UIImagePickerController.SourceType.photoLibrary
+        image.allowsEditing = false
+        self.present(image, animated: true)
+        {
+            // After it is completed
+            
+        }
+    }
+    // called when the user picks image
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        // Assign image
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            MyImageView.image = image
+        }
+        else {
+            // Error?
+        }
+        self.dismiss(animated: true, completion: nil)
+    }
     
     // Number of columns of data picker
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -68,6 +92,7 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
             place = Place(type: .generic ,name: nameEditPlace.text!, description: descrEditPlace.text! , image_in: nil , www: nil )
             place?.location = locationNew
             place?.type = currenPickerValue
+            place?.image = MyImageView.image
             manager.append(place!)
             tbv.reloadData()
             dismiss(animated: true, completion: nil)
