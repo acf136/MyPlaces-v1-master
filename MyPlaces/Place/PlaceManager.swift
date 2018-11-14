@@ -27,7 +27,7 @@ class PlaceManager {
     // You can learn more about this pattern in Swift in:
     // https://cocoacasts.com/what-is-a-singleton-and-how-to-create-one-in-swift
     static let shared = PlaceManager()
-    private init() { places = someTestPlaces }
+    private init() { }
     
     // MARK: - Class implementation
     
@@ -37,7 +37,7 @@ class PlaceManager {
     // below, but all instances in our project calling methods in PlaceManager won't be affected,
     // because using an array or something else is just a private detail.
     private var places = [Place]()
-    
+    private var fileJSON = "MyPlaces.JSON"
     // Inserts a new place into list of places managed by PlaceManager.
     func append(_ place: Place) {
         places.append(place)
@@ -85,23 +85,66 @@ class PlaceManager {
                                         UIColor(red:0.0,green:0.0,blue:1.0,alpha:1.0) )
         )
     }
+
+    //
+    //  JSON Management Methods
+    //
+    //
+    func nameOfFileJSON() -> String { return self.fileJSON }
+    // Write File "MyPlaces.JSON" with all the JSON info of places
+    func writeFileOfPlaces(file: String) {
+        let docsPath = FileManager.default.urls(for: .documentDirectory , in: .userDomainMask)[0]
+        let filePath = docsPath.appendingPathComponent(file)
+        if let jsonData =  jsonFrom(places: extractJSONFromPlaces()) {
+            do {
+                try jsonData.write(to: filePath)
+                print("File of MyPlaces SAVED")
+            } catch {
+                print("File of MyPlaces not saved")
+            }
+        }
+    }
+    //
+    // Returns an array with all JSON info from places : Excluding that which is not Codable, like an image
+    func extractJSONFromPlaces() -> [PlaceJSON] {
+        var placesJSON : [PlaceJSON] = []
+        for item in places {
+            let placeJSON = PlaceJSON(id: item.id, type: PlaceType(rawValue: item.type.rawValue)!, name: item.name,
+                                      description: item.description, location: item.location, www: item.www, image: item.image )
+            placesJSON.append( placeJSON )
+        }
+        return placesJSON
+    }
+    // JSON Encoder : Returns in a Data? all the JSON info of places
+    func jsonFrom(places: [PlaceJSON]) -> Data? {
+        var jsonData: Data? = nil
+        let jsonEncoder = JSONEncoder()
+        do {
+            jsonData = try jsonEncoder.encode(places)
+        } catch {
+            return nil
+        }
+        return jsonData
+    }
+    // JSON Decoder : Returns in a [PlaceJSON] all the JSON info of places retrieved from Data
+    func placesFrom(jsonData: Data) -> [PlaceJSON] {
+        var placesJSON : [PlaceJSON] = []
+        let jsonDecoder = JSONDecoder()
+        do {
+            placesJSON = try jsonDecoder.decode([PlaceJSON].self, from: jsonData)
+        } catch {
+            return []
+        }
+        return placesJSON
+    }
     
-    // MARK: - Only for demo purposes
-    let someTestPlaces = [
-        Place(name: "UOC 22@",
-              description: "Seu de la Universitat Oberta de Catalunya",
-              image_in: UIImage(named: "BavarianChurchSnow1") ),
-        Place(name: "Rostisseria Lolita",
-              description: "Els millors pollastres de Sant Cugat",
-              image_in: UIImage(named: "Beach-Ireland") ),
-        Place(name: "CIFO L'Hospitalet",
-              description: "Seu del Centre d'Innovació i Formació per a l'Ocupació. El Centre d'Innovació i Formació per a l'Ocupació (CIFO) de l'Hospitalet ofereix formació en les àrees d'Edició i de Disseny gràfic i Multimèdia, a treballadors",
-              image_in: UIImage(named: "Forest7")),
-        PlaceTourist(name: "CosmoCaixa",
-                     description: "Museu de la Ciència de Barcelona",
-                     discount_tourist: "50%", image_in: UIImage(named: "sea4") , www: "" ),
-        PlaceTourist(name: "Park Güell",
-                     description: "Obra d'Antoni Gaudí a Barcelona",
-                     discount_tourist: "10%", image_in: UIImage(named: "Tale2"), www: "") ,
-    ]
+    // Given  an array with all JSON info to add to places, insert it into places
+    func insertJSONIntoPlaces(placesJSON: [PlaceJSON]) {
+        for item in placesJSON {
+            let itemType = PlaceType(rawValue: item.type)!
+            let itemLocation : CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: item.location.latitude, longitude: item.location.longitude )
+            places.append( Place(id: item.id, type: itemType , name: item.name , description: item.description , location: itemLocation , www: item.www ) )
+        }
+    }
+
 }

@@ -15,13 +15,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        // We add some test places so the app can show some information when it loads. When we start
-        // creating our own real content we will need to remove this part, of course.
-//       let manager = PlaceManager.shared
-//        for place in manager.places{
-//            manager.append(place)
-//        }
+        // MyPlaces INITIALIZATION
+        let manager = PlaceManager.shared
+        // Look at file system for JSON files containing Places
+        let docsPath = FileManager.default.urls(for: .documentDirectory , in: .userDomainMask)[0]
+        let filePath = docsPath.appendingPathComponent(manager.nameOfFileJSON())  // This is the name of JSON file where we load/save the places in every session
         
+        // If JSON files containing Place's then append to manager
+        do {
+            let jsonData = try Data(contentsOf: filePath)
+            let placesJSON = manager.placesFrom(jsonData: jsonData)
+            manager.insertJSONIntoPlaces(placesJSON: placesJSON)
+            print("Loaded JSON data of Places")
+        } catch {
+        // else generate n random places and append to manager
+            manager.append( Place(name: "UOC 22@", description: "Seu de la Universitat Oberta de Catalunya",  image_in: UIImage(named: "BavarianChurchSnow1")) )
+            //manager.append( Place(name: "Rostisseria Lolita", description: "Els millors pollastres de Sant Cugat",  image_in: UIImage(named: "Beach-Ireland")) )
+            manager.append( Place(name: "CIFO L'Hospitalet",
+                                  description: "Seu del Centre d'Innovació i Formació per a l'Ocupació. El Centre d'Innovació i Formació per a l'Ocupació (CIFO) de l'Hospitalet ofereix formació en les àrees d'Edició i de Disseny gràfic i Multimèdia, a treballadors",
+                                  image_in: UIImage(named: "Forest7")) )
+            //manager.append( PlaceTourist(name: "CosmoCaixa", description: "Museu de la Ciència de Barcelona", discount_tourist: "50%", image_in: UIImage(named: "sea4") , www: "" )  )
+            manager.append( PlaceTourist(name: "Park Güell", description: "Obra d'Antoni Gaudí a Barcelona", discount_tourist: "10%", image_in: UIImage(named: "Tale2"), www: "") )
+            print("Generated JSON data of Places")
+        }
+    
         return true
     }
 

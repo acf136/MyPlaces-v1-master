@@ -94,6 +94,7 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
             place?.type = currenPickerValue
             place?.image = MyImageView.image
             manager.append(place!)
+            manager.writeFileOfPlaces(file: manager.nameOfFileJSON())
             tbv.reloadData()
             dismiss(animated: true, completion: nil)
         }

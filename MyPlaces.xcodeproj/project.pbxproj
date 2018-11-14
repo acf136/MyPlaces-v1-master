@@ -10,6 +10,7 @@
 		3E0F03E821808B970093DBAD /* PlaceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0F03E721808B970093DBAD /* PlaceDetailViewController.swift */; };
 		3E25AB8C217E37570004101A /* PlacesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E25AB8B217E37570004101A /* PlacesTableViewController.swift */; };
 		3E25AB90217E44690004101A /* PlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E25AB8F217E44690004101A /* PlaceCell.swift */; };
+		3E9076E7219C4CD60052920B /* Place+JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9076E6219C4CD60052920B /* Place+JSON.swift */; };
 		3EA4E2062188EA94003C4EAD /* UIImage_extension_01.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA4E2052188EA94003C4EAD /* UIImage_extension_01.swift */; };
 		3ECC33082199B4280013B349 /* UIButton_extension_01.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECC33072199B4280013B349 /* UIButton_extension_01.swift */; };
 		4002511F215E26790068AA4B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4002511E215E26790068AA4B /* AppDelegate.swift */; };
@@ -27,6 +28,7 @@
 		3E0F03E721808B970093DBAD /* PlaceDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailViewController.swift; sourceTree = "<group>"; };
 		3E25AB8B217E37570004101A /* PlacesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesTableViewController.swift; sourceTree = "<group>"; };
 		3E25AB8F217E44690004101A /* PlaceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceCell.swift; sourceTree = "<group>"; };
+		3E9076E6219C4CD60052920B /* Place+JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Place+JSON.swift"; sourceTree = "<group>"; };
 		3EA4E2052188EA94003C4EAD /* UIImage_extension_01.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage_extension_01.swift; sourceTree = "<group>"; };
 		3ECC33072199B4280013B349 /* UIButton_extension_01.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton_extension_01.swift; sourceTree = "<group>"; };
 		4002511B215E26790068AA4B /* MyPlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyPlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -59,6 +61,7 @@
 			children = (
 				3EA4E2052188EA94003C4EAD /* UIImage_extension_01.swift */,
 				3ECC33072199B4280013B349 /* UIButton_extension_01.swift */,
+				3E9076E6219C4CD60052920B /* Place+JSON.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -203,6 +206,7 @@
 				3ECC33082199B4280013B349 /* UIButton_extension_01.swift in Sources */,
 				4002513A215E34630068AA4B /* PlaceTourist.swift in Sources */,
 				3EA4E2062188EA94003C4EAD /* UIImage_extension_01.swift in Sources */,
+				3E9076E7219C4CD60052920B /* Place+JSON.swift in Sources */,
 				40025133215E2DBE0068AA4B /* AddPlacelController.swift in Sources */,
 				4002511F215E26790068AA4B /* AppDelegate.swift in Sources */,
 				4002513C215E38AF0068AA4B /* PlaceManager.swift in Sources */,

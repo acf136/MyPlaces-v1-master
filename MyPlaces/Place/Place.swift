@@ -15,6 +15,28 @@ enum PlaceType : Int {
     case services
 }
 
+// part of Place to serialize as JSON
+struct PlaceJSON : Codable { // Encodable, Decodable  {
+    var id : String
+    var type : Int //PlaceType
+    var name : String
+    var description : String
+    var location : 	CLLocationCoordinate2D!
+    var www : String
+    var myImage: UIImage?
+    
+    // default Constructor
+    init(id: String, type: PlaceType, name: String, description: String , location: CLLocationCoordinate2D , www: String?, image: UIImage?) {
+        self.id = id
+        self.type = type.rawValue
+        self.name = name
+        self.description = description
+        self.location = location
+        self.www = www ?? ""
+        self.myImage = image ?? nil
+    }
+}
+
 class Place {
     
     // We don't need to specify types when the compiler can infer them from context. That doesn't
@@ -25,8 +47,9 @@ class Place {
     var name = ""
     var description = ""
     var location: CLLocationCoordinate2D!
-    var image: UIImage?
     var www: String?
+//  Next info not Codable in JSON
+    var image: UIImage?
     	
     // We need to learn a bit more about initialization, but meanwhile we create some initializers.
     // This one has no information about name or description, so it creates an almost empty place.
@@ -59,6 +82,16 @@ class Place {
         // -90 < latitude < 90 , -180 < longitude < 180  [in degrees]
         self.location = CLLocationCoordinate2D(latitude: Double.random(in: 1...360) - 90.0, longitude: Double.random(in: 1...360) - 180.0)
         self.image = image_in
+        self.www = www
+    }
+    // Constructor needed to import JSON data
+    // These is why id is informed
+    init(id: String, type: PlaceType, name: String, description: String , location: CLLocationCoordinate2D , www: String?) {
+        self.id = id
+        self.type = type
+        self.name = name
+        self.description = description
+        self.location = location
         self.www = www
     }
     
