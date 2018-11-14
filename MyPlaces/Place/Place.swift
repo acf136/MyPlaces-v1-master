@@ -86,13 +86,14 @@ class Place {
     }
     // Constructor needed to import JSON data
     // These is why id is informed
-    init(id: String, type: PlaceType, name: String, description: String , location: CLLocationCoordinate2D , www: String?) {
+    init(id: String, type: PlaceType, name: String, description: String , location: CLLocationCoordinate2D , www: String?, image: UIImage?) {
         self.id = id
         self.type = type
         self.name = name
         self.description = description
         self.location = location
         self.www = www
+        self.image = image
     }
     
 }

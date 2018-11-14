@@ -143,7 +143,7 @@ class PlaceManager {
         for item in placesJSON {
             let itemType = PlaceType(rawValue: item.type)!
             let itemLocation : CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: item.location.latitude, longitude: item.location.longitude )
-            places.append( Place(id: item.id, type: itemType , name: item.name , description: item.description , location: itemLocation , www: item.www ) )
+            places.append( Place(id: item.id, type: itemType , name: item.name , description: item.description , location: itemLocation , www: item.www, image: item.myImage ) )
         }
     }
 

@@ -179,10 +179,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jKJ-Gp-9Mp">
-                                <rect key="frame" x="0.0" y="98" width="375" height="520"/>
+                                <rect key="frame" x="0.0" y="107.5" width="375" height="390.5"/>
                                 <subviews>
-                                    <scrollView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" indicatorStyle="black" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="60N-Z2-Ncr">
-                                        <rect key="frame" x="0.0" y="6.5" width="375" height="513.5"/>
+                                    <scrollView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="black" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="60N-Z2-Ncr">
+                                        <rect key="frame" x="0.0" y="-3" width="375" height="513.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="iev-gs-8lD">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="423"/>
@@ -216,7 +216,7 @@
                                 <constraints>
                                     <constraint firstItem="60N-Z2-Ncr" firstAttribute="width" secondItem="jKJ-Gp-9Mp" secondAttribute="width" id="HRg-yj-ImN"/>
                                     <constraint firstAttribute="trailing" secondItem="60N-Z2-Ncr" secondAttribute="trailing" id="I1G-lc-90W"/>
-                                    <constraint firstAttribute="bottom" secondItem="60N-Z2-Ncr" secondAttribute="bottom" id="dQb-vc-62K"/>
+                                    <constraint firstAttribute="bottom" secondItem="60N-Z2-Ncr" secondAttribute="bottom" constant="-120" id="dQb-vc-62K"/>
                                     <constraint firstItem="60N-Z2-Ncr" firstAttribute="leading" secondItem="jKJ-Gp-9Mp" secondAttribute="leading" id="odx-4P-UDb"/>
                                 </constraints>
                             </view>
@@ -225,7 +225,7 @@
                         <constraints>
                             <constraint firstItem="Uzy-4Z-xUq" firstAttribute="leading" secondItem="de4-S9-kZk" secondAttribute="leading" constant="5" id="4pF-7a-dsI"/>
                             <constraint firstItem="JgN-ku-11u" firstAttribute="leading" secondItem="Uzy-4Z-xUq" secondAttribute="trailing" constant="5" id="5Ey-I8-zDj"/>
-                            <constraint firstItem="jKJ-Gp-9Mp" firstAttribute="top" secondItem="Uzy-4Z-xUq" secondAttribute="bottom" constant="-1.5" id="7N4-M9-4nB"/>
+                            <constraint firstItem="jKJ-Gp-9Mp" firstAttribute="top" secondItem="Uzy-4Z-xUq" secondAttribute="bottom" constant="8" symbolic="YES" id="7N4-M9-4nB"/>
                             <constraint firstItem="60N-Z2-Ncr" firstAttribute="top" secondItem="Uzy-4Z-xUq" secondAttribute="bottom" constant="5" id="8x6-sB-5cg"/>
                             <constraint firstItem="JgN-ku-11u" firstAttribute="height" secondItem="Uzy-4Z-xUq" secondAttribute="height" id="FRC-pB-4rd"/>
                             <constraint firstItem="de4-S9-kZk" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="g7L-DP-cyy" secondAttribute="trailing" id="Fly-2R-hNl"/>
@@ -235,7 +235,7 @@
                             <constraint firstItem="Uzy-4Z-xUq" firstAttribute="top" secondItem="de4-S9-kZk" secondAttribute="top" constant="16" id="cp5-jT-c1G"/>
                             <constraint firstItem="g7L-DP-cyy" firstAttribute="leading" secondItem="de4-S9-kZk" secondAttribute="leading" constant="5" id="gNc-bC-cW9"/>
                             <constraint firstItem="g7L-DP-cyy" firstAttribute="top" secondItem="de4-S9-kZk" secondAttribute="top" constant="3" id="qCM-dk-BGX"/>
-                            <constraint firstItem="de4-S9-kZk" firstAttribute="bottom" secondItem="jKJ-Gp-9Mp" secondAttribute="bottom" id="v60-N6-XV0"/>
+                            <constraint firstItem="de4-S9-kZk" firstAttribute="bottom" secondItem="jKJ-Gp-9Mp" secondAttribute="bottom" constant="120" id="v60-N6-XV0"/>
                             <constraint firstItem="de4-S9-kZk" firstAttribute="trailing" secondItem="jKJ-Gp-9Mp" secondAttribute="trailing" id="w3g-1e-Pd0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="de4-S9-kZk" colorLabel="IBBuiltInLabel-Red"/>

@@ -36,7 +36,6 @@ extension  PlaceJSON  {
         let myImageString = try container.decode(String.self, forKey: .myImageString)
         let jpegData = Data(base64Encoded: myImageString)
         let myImage = UIImage(data: jpegData!)
-        //let myImage =  UIImage(named: "Forest7")
         
         self.init(id: id, type: PlaceType(rawValue: tipo)! , name: name, description: description, location: locationCoord2D, www: web, image: myImage)
     }
