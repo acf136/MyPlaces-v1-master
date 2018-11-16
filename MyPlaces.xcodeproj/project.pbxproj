@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E0DE387219F2B7200800752 /* PlaceMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0DE386219F2B7200800752 /* PlaceMapViewController.swift */; };
 		3E0F03E821808B970093DBAD /* PlaceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0F03E721808B970093DBAD /* PlaceDetailViewController.swift */; };
 		3E25AB8C217E37570004101A /* PlacesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E25AB8B217E37570004101A /* PlacesTableViewController.swift */; };
 		3E25AB90217E44690004101A /* PlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E25AB8F217E44690004101A /* PlaceCell.swift */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3E0DE386219F2B7200800752 /* PlaceMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceMapViewController.swift; sourceTree = "<group>"; };
 		3E0F03E721808B970093DBAD /* PlaceDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailViewController.swift; sourceTree = "<group>"; };
 		3E25AB8B217E37570004101A /* PlacesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesTableViewController.swift; sourceTree = "<group>"; };
 		3E25AB8F217E44690004101A /* PlaceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceCell.swift; sourceTree = "<group>"; };
@@ -56,12 +58,62 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3E1A8FBD219F2DF90031B176 /* M */ = {
+			isa = PBXGroup;
+			children = (
+				3E9076E6219C4CD60052920B /* Place+JSON.swift */,
+				40025137215E31DB0068AA4B /* Place.swift */,
+				40025139215E34630068AA4B /* PlaceTourist.swift */,
+			);
+			path = M;
+			sourceTree = "<group>";
+		};
+		3E1A8FBE219F2E040031B176 /* V */ = {
+			isa = PBXGroup;
+			children = (
+				3E25AB8F217E44690004101A /* PlaceCell.swift */,
+				4002513B215E38AF0068AA4B /* PlaceManager.swift */,
+			);
+			path = V;
+			sourceTree = "<group>";
+		};
+		3E1A8FBF219F2E0D0031B176 /* C */ = {
+			isa = PBXGroup;
+			children = (
+				40025132215E2DBE0068AA4B /* AddPlacelController.swift */,
+				3E25AB8B217E37570004101A /* PlacesTableViewController.swift */,
+				3E0F03E721808B970093DBAD /* PlaceDetailViewController.swift */,
+			);
+			path = C;
+			sourceTree = "<group>";
+		};
+		3E1A8FC0219F2E5E0031B176 /* C */ = {
+			isa = PBXGroup;
+			children = (
+				3E0DE386219F2B7200800752 /* PlaceMapViewController.swift */,
+			);
+			path = C;
+			sourceTree = "<group>";
+		};
+		3E1A8FC1219F2E6A0031B176 /* V */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = V;
+			sourceTree = "<group>";
+		};
+		3E1A8FC2219F2E740031B176 /* M */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = M;
+			sourceTree = "<group>";
+		};
 		3E5E40782192FA30004F7386 /* Common */ = {
 			isa = PBXGroup;
 			children = (
 				3EA4E2052188EA94003C4EAD /* UIImage_extension_01.swift */,
 				3ECC33072199B4280013B349 /* UIButton_extension_01.swift */,
-				3E9076E6219C4CD60052920B /* Place+JSON.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -69,13 +121,9 @@
 		3E5E40792192FA73004F7386 /* Place */ = {
 			isa = PBXGroup;
 			children = (
-				40025132215E2DBE0068AA4B /* AddPlacelController.swift */,
-				3E25AB8B217E37570004101A /* PlacesTableViewController.swift */,
-				3E0F03E721808B970093DBAD /* PlaceDetailViewController.swift */,
-				3E25AB8F217E44690004101A /* PlaceCell.swift */,
-				40025137215E31DB0068AA4B /* Place.swift */,
-				40025139215E34630068AA4B /* PlaceTourist.swift */,
-				4002513B215E38AF0068AA4B /* PlaceManager.swift */,
+				3E1A8FBD219F2DF90031B176 /* M */,
+				3E1A8FBE219F2E040031B176 /* V */,
+				3E1A8FBF219F2E0D0031B176 /* C */,
 			);
 			path = Place;
 			sourceTree = "<group>";
@@ -83,6 +131,9 @@
 		3E5E407A21930341004F7386 /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				3E1A8FC2219F2E740031B176 /* M */,
+				3E1A8FC1219F2E6A0031B176 /* V */,
+				3E1A8FC0219F2E5E0031B176 /* C */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -208,6 +259,7 @@
 				3EA4E2062188EA94003C4EAD /* UIImage_extension_01.swift in Sources */,
 				3E9076E7219C4CD60052920B /* Place+JSON.swift in Sources */,
 				40025133215E2DBE0068AA4B /* AddPlacelController.swift in Sources */,
+				3E0DE387219F2B7200800752 /* PlaceMapViewController.swift in Sources */,
 				4002511F215E26790068AA4B /* AppDelegate.swift in Sources */,
 				4002513C215E38AF0068AA4B /* PlaceManager.swift in Sources */,
 				40025138215E31DB0068AA4B /* Place.swift in Sources */,
