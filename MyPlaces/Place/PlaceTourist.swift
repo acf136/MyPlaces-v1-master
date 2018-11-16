@@ -24,8 +24,8 @@ class PlaceTourist : Place {
     
     // Please read more about initializers at:
     // https://docs.swift.org/swift-book/LanguageGuide/Initialization.html
-    init(name: String, description: String, discount_tourist: String, image_in: UIImage?, www: String?) {
-        super.init(type: .touristic, name: name, description: description, image_in:image_in, www: www)
+    init(locationName: String, myDescription: String, discount_tourist: String, image_in: UIImage?, www: String?) {
+        super.init(type: .touristic, locationName: locationName, myDescription: myDescription, image_in:image_in, www: www)
         self.discount_tourist = discount_tourist
     }
     

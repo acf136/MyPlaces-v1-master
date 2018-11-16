@@ -23,16 +23,16 @@ class PlaceDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = place.name
+        title = place.locationName
 
         idOfPlace.text = place.id
         typeOfPlace.text = "\(place.type)"
         typeOfPlace.textColor = manager.itemTypeColor(place.id) //UIColor(red: 0.0, green: 1.0, blue: 0.0, alpha: 1.0)
-        descrOfPlace.text = place.description
+        descrOfPlace.text = place.myDescription
         descrOfPlace.sizeToFit()
         
         imageOfPlace.image = place.image
-        locationOfPlace.text = String(format: "Latitude: %3.2f Longitude: %3.2f", arguments: [place.location.latitude, place.location.longitude])
+        locationOfPlace.text = String(format: "Latitude: %3.2f Longitude: %3.2f", arguments: [place.coordinate.latitude, place.coordinate.longitude])
     }
 
 }

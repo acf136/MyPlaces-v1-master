@@ -8,15 +8,18 @@
 
 import UIKit
 import MapKit
+import CoreLocation
 
-class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate, CLLocationManagerDelegate {
     
     var place: Place?
-    let locationNew = CLLocationCoordinate2D(latitude: Double.random(in: 1...360) - 90.0, longitude: Double.random(in: 1...360) - 180.0)
+    var locationNew = CLLocationCoordinate2D(latitude: Double.random(in: 1...360) - 90.0, longitude: Double.random(in: 1...360) - 180.0)
     let manager = PlaceManager.shared
     var tbv : UITableView!
     var pickerData: [PlaceType] = [.generic, .touristic, .services]
     var currenPickerValue : PlaceType = .generic
+    
+    var locationManager:CLLocationManager!
     
     @IBOutlet weak var locationPlace: UILabel!
     @IBOutlet weak var typeLabelPlace: UILabel!
@@ -71,6 +74,7 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
     // redraw view
     override func viewDidLoad() {
         super.viewDidLoad()
+        determineMyCurrentLocation()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Add Place", style: .plain, target: nil, action: nil)
         // Connect data of UIPickerView delegated
         self.picktypePlace.delegate = self
@@ -85,12 +89,36 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
         // post-processing of layout
         saveButton.layer.cornerRadius = 10
     }
+    
+    func determineMyCurrentLocation() {
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.startUpdatingLocation()
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let currentLocation: CLLocationCoordinate2D = manager.location?.coordinate else { return }
 
+        print("current latitude = \(currentLocation.latitude)")
+        self.locationNew.latitude = currentLocation.latitude
+        print("current longitude = \(currentLocation.longitude)")
+        self.locationNew.longitude = currentLocation.longitude
+        
+        // Call stopUpdatingLocation() to stop listening for location updates, otherwise this function will be called every time when user location changes.
+        // After first call I don't want to listen my location anymore
+        manager.stopUpdatingLocation()
+    }
+    
     // Button Save data to manager of places
     @IBAction func savePlace(_ sender: UIButton) {
         if sender.titleLabel?.text == "Save" {
-            place = Place(type: .generic ,name: nameEditPlace.text!, description: descrEditPlace.text! , image_in: nil , www: nil )
-            place?.location = locationNew
+            place = Place(type: .generic ,locationName: nameEditPlace.text!, myDescription: descrEditPlace.text! , image_in: nil , www: nil )
+            place?.coordinate = locationNew
             place?.type = currenPickerValue
             place?.image = MyImageView.image
             manager.append(place!)

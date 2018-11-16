@@ -109,8 +109,8 @@ class PlaceManager {
     func extractJSONFromPlaces() -> [PlaceJSON] {
         var placesJSON : [PlaceJSON] = []
         for item in places {
-            let placeJSON = PlaceJSON(id: item.id, type: PlaceType(rawValue: item.type.rawValue)!, name: item.name,
-                                      description: item.description, location: item.location, www: item.www, image: item.image )
+            let placeJSON = PlaceJSON(id: item.id, type: PlaceType(rawValue: item.type.rawValue)!, locationName: item.locationName,
+                                      myDescription: item.myDescription, coordinate: item.coordinate, www: item.www, image: item.image , title: item.title, discipline: item.discipline)
             placesJSON.append( placeJSON )
         }
         return placesJSON
@@ -142,8 +142,8 @@ class PlaceManager {
     func insertJSONIntoPlaces(placesJSON: [PlaceJSON]) {
         for item in placesJSON {
             let itemType = PlaceType(rawValue: item.type)!
-            let itemLocation : CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: item.location.latitude, longitude: item.location.longitude )
-            places.append( Place(id: item.id, type: itemType , name: item.name , description: item.description , location: itemLocation , www: item.www, image: item.myImage ) )
+            let itemLocation : CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: item.coordinate.latitude, longitude: item.coordinate.longitude )
+            places.append( Place(id: item.id, type: itemType , locationName: item.locationName , myDescription: item.myDescription , coordinate: itemLocation , www: item.www, image: item.myImage ) )
         }
     }
 
