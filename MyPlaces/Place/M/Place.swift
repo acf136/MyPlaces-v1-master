@@ -59,7 +59,8 @@ class Place : NSObject, MKAnnotation {
     var discipline: String?
 //  Next info not Codable in JSON
     var image: UIImage?
-    	
+
+    
     // We need to learn a bit more about initialization, but meanwhile we create some initializers.
     // This one has no information about name or description, so it creates an almost empty place.
     override init() {
@@ -108,7 +109,7 @@ class Place : NSObject, MKAnnotation {
     }
 
     
-    // MKAnnotation features
+    // MKAnnotation basic features
     //
     var subtitle: String? { return locationName }
     
