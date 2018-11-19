@@ -19,7 +19,7 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
     var pickerData: [PlaceType] = [.generic, .touristic, .services]
     var currenPickerValue : PlaceType = .generic
     
-    @IBOutlet weak var locationPlace: UILabel!
+    @IBOutlet weak var locationButton: UIButton!
     @IBOutlet weak var typeLabelPlace: UILabel!
     @IBOutlet weak var picktypePlace: UIPickerView!
     @IBOutlet weak var nameEditPlace: UITextField!
@@ -27,6 +27,10 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
     @IBOutlet weak var MyImageView: UIImageView!
     @IBOutlet weak var descrEditPlace: UITextView!
     @IBOutlet weak var saveButton: UIButton!
+    
+    @IBAction func editLocation(_ sender: Any) {
+        showInputDialogCoordinates(latitude: self.locationNew.latitude, longitude: self.locationNew.longitude)
+    }
     
     // Import Image into MyImageView UIImageView
     @IBAction func ImportImage(_ sender: Any) {
@@ -78,7 +82,8 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
         self.picktypePlace.delegate = self
         self.picktypePlace.dataSource = self
         // Initial values to show in the view
-        locationPlace.text = String(format: "Latitude: %3.2f Longitude: %3.2f", arguments: [(locationNew.latitude), (locationNew.longitude)])
+        let textLocation = String(format: "Latitude: %3.2f Longitude: %3.2f", arguments: [(locationNew.latitude), (locationNew.longitude)])
+        locationButton.setTitle(textLocation, for: .normal)
         typeLabelPlace.text = "Select Type of place"
         picktypePlace.selectRow(0, inComponent: 0, animated: false)
         currenPickerValue = .generic
@@ -99,6 +104,35 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
             tbv.reloadData()
             dismiss(animated: true, completion: nil)
         }
+    }
+    
+    
+    // Button to import custom GPS coordinates
+    func showInputDialogCoordinates(latitude: Double, longitude: Double) {
+        //Creating UIAlertController and
+        //Setting title and message for the alert dialog
+        let alertController = UIAlertController(title: "Enter GPS coordinates", message: "-90 < Long. < 270 | -180 < Lat. < 180", preferredStyle: .alert)
         
+        //the confirm action taking the inputs
+        let confirmAction = UIAlertAction(title: "Enter", style: .default) { (_) in
+            //getting the input values from user
+            let textLongitude = alertController.textFields?[0].text
+            let textLatitude = alertController.textFields?[1].text
+            
+            self.locationNew.latitude = Double(String(describing: textLatitude)) ?? 90
+            self.locationNew.longitude = Double(String(describing: textLongitude)) ?? 0
+        }
+        //the cancel action doing nothing
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
+        //adding textfields to our dialog box
+        alertController.addTextField { (textField) in textField.placeholder = "\(self.locationNew.latitude)" }
+        alertController.addTextField { (textField) in textField.placeholder = "\(self.locationNew.longitude)"  }
+        
+        //adding the action to dialogbox
+        alertController.addAction(confirmAction)
+        alertController.addAction(cancelAction)
+        
+        //finally presenting the dialog box
+        self.present(alertController, animated: true, completion: nil)
     }
 }

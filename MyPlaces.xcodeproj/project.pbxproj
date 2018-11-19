@@ -80,9 +80,9 @@
 		3E1A8FBF219F2E0D0031B176 /* C */ = {
 			isa = PBXGroup;
 			children = (
+				3E0F03E721808B970093DBAD /* PlaceDetailViewController.swift */,
 				40025132215E2DBE0068AA4B /* AddPlacelController.swift */,
 				3E25AB8B217E37570004101A /* PlacesTableViewController.swift */,
-				3E0F03E721808B970093DBAD /* PlaceDetailViewController.swift */,
 			);
 			path = C;
 			sourceTree = "<group>";
