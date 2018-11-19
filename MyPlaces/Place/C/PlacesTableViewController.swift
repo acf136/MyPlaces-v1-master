@@ -17,7 +17,7 @@ class PlacesTableViewController: UITableViewController, CLLocationManagerDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        determineMyCurrentLocation()
+        determineMyCurrentLocation() 
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Places", style: .plain, target: nil, action: nil)
     }
     
