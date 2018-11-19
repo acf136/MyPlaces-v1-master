@@ -95,7 +95,7 @@ class Place : NSObject, MKAnnotation {
     }
     // Constructor needed to import JSON data
     // These is why id is informed
-    init(id: String, type: PlaceType, locationName: String, myDescription: String , coordinate: CLLocationCoordinate2D , www: String?, image: UIImage?) {
+    init(id: String, type: PlaceType, locationName: String, myDescription: String , coordinate: CLLocationCoordinate2D , www: String?, image: UIImage?, title: String, discipline: String ) {
         self.id = id
         self.type = type
         self.locationName = locationName
@@ -103,7 +103,10 @@ class Place : NSObject, MKAnnotation {
         self.coordinate = coordinate
         self.www = www
         self.image = image
+        self.title = title
+        self.discipline = discipline
     }
+
     
     // MKAnnotation features
     //
@@ -116,3 +119,4 @@ class Place : NSObject, MKAnnotation {
         self.coordinate = coordinate
     }
 }
+

@@ -64,6 +64,7 @@
 				3E9076E6219C4CD60052920B /* Place+JSON.swift */,
 				40025137215E31DB0068AA4B /* Place.swift */,
 				40025139215E34630068AA4B /* PlaceTourist.swift */,
+				4002513B215E38AF0068AA4B /* PlaceManager.swift */,
 			);
 			path = M;
 			sourceTree = "<group>";
@@ -72,7 +73,6 @@
 			isa = PBXGroup;
 			children = (
 				3E25AB8F217E44690004101A /* PlaceCell.swift */,
-				4002513B215E38AF0068AA4B /* PlaceManager.swift */,
 			);
 			path = V;
 			sourceTree = "<group>";
