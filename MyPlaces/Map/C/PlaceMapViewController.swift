@@ -15,10 +15,10 @@ class PlaceMapViewController: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
     // MKAnnotation basic features
-    
     let regionRadius: CLLocationDistance = 1000 //meters
     
     func centerMapOnLocation(location: CLLocation) {
+        let regionRadius = manager.maxDistBtPlaces * 2
         let coordinateRegion = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
         mapView.setRegion(coordinateRegion, animated: true)
     }

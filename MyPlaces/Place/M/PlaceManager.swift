@@ -29,6 +29,9 @@ class PlaceManager {
     static let shared = PlaceManager()
     private init() { }
     
+    // Contains max. distance between all points in places in meters
+    var maxDistBtPlaces: Double = 0.0 // max. distance between places
+    
     // MARK: - Class implementation
     
     // This is how PlaceManager will track all places: using an array. We could have used some other
@@ -38,9 +41,27 @@ class PlaceManager {
     // because using an array or something else is just a private detail.
     private var places = [Place]()
     private var fileJSON = "MyPlaces.JSON"
+    
+    // Return max. distance between places in meters
+    func calcMaxDistBtPlaces() -> Double {
+        var maxdist = 0.0
+        var pos : Int = 0
+        if self.count() > 1 {
+            repeat {
+                let myFstCoord = self.itemAt(position: pos)?.coordinate
+                let mySecCoord = self.itemAt(position: pos+1)?.coordinate
+                let distance : CLLocationDistance = ( myFstCoord?.distance(from: mySecCoord!) )!
+                if distance > maxdist { maxdist = distance }
+                pos += 1
+            } while pos < (self.count() - 1)
+        }
+        
+        return maxdist
+    }
     // Inserts a new place into list of places managed by PlaceManager.
     func append(_ place: Place) {
         places.append(place)
+        maxDistBtPlaces = calcMaxDistBtPlaces()
     }
 
     // Returns number of places managed by PlaceManager.
@@ -85,7 +106,7 @@ class PlaceManager {
                                         UIColor(red:0.0,green:0.0,blue:1.0,alpha:1.0) )
         )
     }
-
+    
     //
     //  JSON Management Methods
     //
