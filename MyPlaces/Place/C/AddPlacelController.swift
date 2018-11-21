@@ -18,6 +18,8 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
     var tbv : UITableView!
     var pickerData: [PlaceType] = [.generic, .touristic, .services]
     var currenPickerValue : PlaceType = .generic
+    var previousScreen : UIViewController!
+    var lastImage: UIImage? = nil
     
     @IBOutlet weak var locationButton: UIButton!
     @IBOutlet weak var typeLabelPlace: UILabel!
@@ -26,7 +28,6 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
     @IBOutlet weak var importImageButton: UIButton!
     @IBOutlet weak var MyImageView: UIImageView!
     @IBOutlet weak var descrEditPlace: UITextView!
-    @IBOutlet weak var saveButton: UIButton!
     
     // Import Image into MyImageView UIImageView
     @IBAction func ImportImage(_ sender: Any) {
@@ -34,10 +35,10 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
         image.delegate = self
         image.sourceType = 	UIImagePickerController.SourceType.photoLibrary
         image.allowsEditing = false
+        self.lastImage = MyImageView.image
         self.present(image, animated: true)
-        {
-            // After it is completed
-            
+        {   // After it is presented
+  
         }
     }
     // called when the user picks image
@@ -74,6 +75,7 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Add Place", style: .plain, target: nil, action: nil)
+        self.lastImage = MyImageView.image  //named: "PutYourImageHere"
         // Connect data of UIPickerView delegated
         self.picktypePlace.delegate = self
         self.picktypePlace.dataSource = self
@@ -85,23 +87,35 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
         currenPickerValue = .generic
         nameEditPlace.text = "Enter a name"
         descrEditPlace.text = "Enter a description"
-        // post-processing of layout
-        saveButton.layer.cornerRadius = 10
     }
-    //TODO: Delete Save feature by doing it when user abandon this Add view
-    // Button saveButton to Save data to manager of places
-    @IBAction func savePlace(_ sender: UIButton) {
-        if sender.titleLabel?.text == "Save" {
-            place = Place(type: .generic ,locationName: nameEditPlace.text!, myDescription: descrEditPlace.text! , image_in: nil , www: nil )
-            place?.coordinate = locationNew
-            place?.type = currenPickerValue
-            place?.image = MyImageView.image
-            manager.append(place!)
-            manager.writeFileOfPlaces(file: manager.nameOfFileJSON())
-            tbv.reloadData()
-            dismiss(animated: true, completion: nil)
+    // View will disappear and being removed from the view hierarchy.
+    // Is the moment to save data in manager
+    override func viewWillDisappear(_ animated : Bool) {
+        super.viewWillDisappear(animated)
+        if self.isMovingFromParent {
+            if allRequiredDataIsFilled() {
+                place = Place(type: .generic ,locationName: nameEditPlace.text!, myDescription: descrEditPlace.text! , image_in: nil , www: nil )
+                place?.coordinate = locationNew
+                place?.type = currenPickerValue
+                place?.image = MyImageView.image
+                manager.append(place!)
+                manager.writeFileOfPlaces(file: manager.nameOfFileJSON())
+                tbv.reloadData()
+            } else {
+                let alert = UIAlertController(title: "Info", message: "Not all required data is filled: Data hasn't be saved", preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                previousScreen.present(alert, animated: true, completion: nil)
+            }
         }
     }
+    // Check all necessary place data is filled
+    func allRequiredDataIsFilled () -> Bool {
+        if nameEditPlace.text == "Enter a name" { return false }
+        if descrEditPlace.text == "Enter a description" { return false }
+        if self.lastImage === MyImageView.image { return false }
+        return true
+    }
+    
     //TODO: Delete Feature of Button locationButton to enter GPS coordinates in a Dialog :
     // Button locationButton to show/edit GPS coordinates
     @IBAction func editLocation(_ sender: Any) {
@@ -120,9 +134,6 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
     
     // Button to import custom GPS coordinates
     func showInputDialogCoordinates(latitude: Double, longitude: Double) {
-        //Creating UIAlertController and
-        //var alertController:UIAlertController
-
         //Setting title and message for the alert dialog
         let alertController = UIAlertController(title: "Enter GPS coordinates", message: "-90 < Lat. < 270 | -180 < Long. < 180", preferredStyle: .alert)
         

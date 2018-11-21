@@ -43,6 +43,7 @@ class PlacesTableViewController: UITableViewController, CLLocationManagerDelegat
         if segue.identifier == "AddPlaceInTable" {
             let apvc = segue.destination as! AddPlaceController
             apvc.tbv = tableView
+            apvc.previousScreen = self as UIViewController
             apvc.locationNew = self.locationNew
         }
     }

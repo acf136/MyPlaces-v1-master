@@ -260,17 +260,17 @@
             <objects>
                 <viewController title="Add Place" id="FyZ-fq-klw" customClass="AddPlaceController" customModule="MyPlaces" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleAspectFit" id="5xG-GX-9CT">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="900"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="850"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aPE-XB-Xyq">
-                                <rect key="frame" x="0.0" y="64" width="375" height="836"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="786"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aDS-kv-hmg">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="805"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="775"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="O3C-Pd-4Qq">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="805"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="775"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mLk-hh-SOm">
                                                         <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
@@ -356,16 +356,16 @@
                                                         </constraints>
                                                     </imageView>
                                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="300" translatesAutoresizingMaskIntoConstraints="NO" id="D4w-Cm-Fju" userLabel="ScrollViewDescription">
-                                                        <rect key="frame" x="0.0" y="675" width="375" height="75"/>
+                                                        <rect key="frame" x="0.0" y="675" width="375" height="100"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="300" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="2qH-Yi-Wx6">
-                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                                                                 <subviews>
                                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="300" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hNl-h6-O8F">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="height" constant="75" id="amO-6p-Drp"/>
+                                                                            <constraint firstAttribute="height" constant="100" id="amO-6p-Drp"/>
                                                                         </constraints>
                                                                         <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -384,26 +384,6 @@
                                                             <constraint firstItem="2qH-Yi-Wx6" firstAttribute="width" secondItem="D4w-Cm-Fju" secondAttribute="width" id="aPF-wJ-xGG"/>
                                                         </constraints>
                                                     </scrollView>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cny-3z-XEN" userLabel="saveButton">
-                                                        <rect key="frame" x="0.0" y="755" width="375" height="50"/>
-                                                        <color key="backgroundColor" red="0.0" green="0.50196078431372548" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="50" id="z52-8L-Nxq"/>
-                                                        </constraints>
-                                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal">
-                                                            <attributedString key="attributedTitle">
-                                                                <fragment content="Save">
-                                                                    <attributes>
-                                                                        <font key="NSFont" metaFont="system" size="18"/>
-                                                                    </attributes>
-                                                                </fragment>
-                                                            </attributedString>
-                                                        </state>
-                                                        <connections>
-                                                            <action selector="savePlace:" destination="FyZ-fq-klw" eventType="touchUpInside" id="dFY-aF-ZXP"/>
-                                                        </connections>
-                                                    </button>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
@@ -437,14 +417,13 @@
                     </view>
                     <navigationItem key="navigationItem" id="pLe-TR-1xZ"/>
                     <nil key="simulatedBottomBarMetrics"/>
-                    <size key="freeformSize" width="375" height="900"/>
+                    <size key="freeformSize" width="375" height="850"/>
                     <connections>
                         <outlet property="MyImageView" destination="Jkp-rp-xhr" id="pJv-ev-fn4"/>
                         <outlet property="descrEditPlace" destination="hNl-h6-O8F" id="qPp-Dr-QYE"/>
                         <outlet property="locationButton" destination="mLk-hh-SOm" id="GTY-cp-WeH"/>
                         <outlet property="nameEditPlace" destination="P9g-dC-BW7" id="vCH-tL-l5t"/>
                         <outlet property="picktypePlace" destination="Wdb-sn-b1M" id="QUP-nk-5Dy"/>
-                        <outlet property="saveButton" destination="cny-3z-XEN" id="9bl-Wr-zLt"/>
                         <outlet property="typeLabelPlace" destination="ECu-j9-Prf" id="8f6-SR-nx2"/>
                     </connections>
                 </viewController>
