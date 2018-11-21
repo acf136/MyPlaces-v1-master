@@ -105,45 +105,63 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
     @IBAction func editLocation(_ sender: Any) {
         
         
-//        showInputDialogCoordinates(latitude: self.locationNew.latitude, longitude: self.locationNew.longitude)
+        showInputDialogCoordinates(latitude: self.locationNew.latitude, longitude: self.locationNew.longitude)
         // Advice to user of not suitable coordinates if more than 10 times the distance from the places
-        //        let myNewCoord = CLLocationCoordinate2D(latitude: self.locationNew.latitude, longitude: self.locationNew.longitude)
-        //        let mySecCoord = manager.itemAt(position: 0)?.coordinate  // TODO: we consider places[0] the center of places, by now
-        //        let actualDistance = myNewCoord.distance(from: mySecCoord!)
-        //        if actualDistance > (manager.maxDistBtPlaces * 10) {
-        //            let alert = UIAlertController(title: "Warning", message: "These coordinates are far from current places. The map range will be expanded and current places will be represented too narrow. Consider to change the coordinates", preferredStyle: UIAlertController.Style.alert)
-        //            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
-        //            self.present(alert, animated: true, completion: nil)
-        //        }
+        let myNewCoord = CLLocationCoordinate2D(latitude: self.locationNew.latitude, longitude: self.locationNew.longitude)
+        let mySecCoord = manager.itemAt(position: 0)?.coordinate  // TODO: we consider places[0] the center of places, by now
+        let actualDistance = myNewCoord.distance(from: mySecCoord!)
+        if actualDistance > (manager.maxDistBtPlaces * 10) {
+            let alert = UIAlertController(title: "Warning", message: "These coordinates are far from current places. The map range will be expanded and current places will be represented too narrow. Consider to change the coordinates", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
 
         //self.view.reloadInputViews()
-//    }
+    }
     
     // Button to import custom GPS coordinates
-//    func showInputDialogCoordinates(latitude: Double, longitude: Double) {
+    func showInputDialogCoordinates(latitude: Double, longitude: Double) {
         //Creating UIAlertController and
         //var alertController:UIAlertController
 
         //Setting title and message for the alert dialog
-        let alertController = UIAlertController(title: "Enter GPS coordinates", message: "-90 < Long. < 270 | -180 < Lat. < 180", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Enter GPS coordinates", message: "-90 < Lat. < 270 | -180 < Long. < 180", preferredStyle: .alert)
         
         //the cancel action doing nothing
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
         //the confirm action taking the inputs
-        let confirmAction = UIAlertAction(title: "Enter",
-                                          style: UIAlertAction.Style.default,
-                                   handler: {[weak self]
-                                    (paramAction:UIAlertAction!) in
-                                    if let textFields = alertController.textFields {
-                                        let theTextFields = textFields as [UITextField]
-                                        let textLatitude = theTextFields[0].text
-                                        self?.locationNew.latitude = Double(String(describing: textLatitude)) ?? 90
-                                        let textLongitude = theTextFields[1].text
-                                        self?.locationNew.longitude = Double(String(describing: textLongitude)) ?? 0
-                                        let textLocation = String(format: "Latitude: %3.2f Longitude: %3.2f", arguments: [((self?.locationNew.latitude)!), ((self?.locationNew.longitude)!)])
-                                        self?.locationButton.setTitle(textLocation, for: .normal)
-                                    }
-        })
+        let confirmAction = UIAlertAction(title: "Enter",   style: UIAlertAction.Style.default,
+           handler:
+            { [weak self]
+                (paramAction:UIAlertAction!) in
+                if let textFields = alertController.textFields {
+                    let textLatitude = textFields[0].text
+                    let proposedLatitude = Double(textLatitude!) ?? 90
+                    let textLongitude = textFields[1].text
+                    let proposedLongitude = Double(textLongitude!) ?? 0
+                    if  -90 > proposedLatitude || proposedLatitude > 270 || -180 > proposedLongitude || proposedLongitude > 180
+                    {
+                        let alert = UIAlertController(title: "Error", message: "These coordinates are not in the correct range.", preferredStyle: UIAlertController.Style.alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                        self?.present(alert, animated: true, completion: nil)
+                    }
+                    else {
+                        self?.locationNew.latitude = proposedLatitude
+                        self?.locationNew.longitude = proposedLongitude
+                        let textLocation = String(format: "Latitude: %3.2f Longitude: %3.2f", arguments: [proposedLatitude, proposedLongitude])
+                        self?.locationButton.setTitle(textLocation, for: .normal)
+                        // Advice to user of not suitable coordinates if more than 10 times the distance from the places
+                        let myNewCoord = CLLocationCoordinate2D(latitude: (self?.locationNew.latitude)!, longitude: (self?.locationNew.longitude)!)
+                        let mySecCoord = self?.manager.itemAt(position: 0)?.coordinate  // TODO: we consider places[0] the center of places, by now
+                        let actualDistance = Double((myNewCoord.distance(from: mySecCoord!)))
+                        if actualDistance > ( (self?.manager.maxDistBtPlaces)! * 10 )  {
+                            let alert = UIAlertController(title: "Warning", message: "These coordinates are far from current places. The map range will be expanded and current places will be represented too narrow. Consider to change the coordinates", preferredStyle: UIAlertController.Style.alert)
+                            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                            self?.present(alert, animated: true, completion: nil)
+                            }
+                    }
+                }
+            })
         
         //adding textfields to our dialog box
         alertController.addTextField { (textField) in textField.placeholder = "\(self.locationNew.latitude)" }

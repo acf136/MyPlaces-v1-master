@@ -35,7 +35,7 @@ class PlaceMapViewController: UIViewController {
     // MKAnnotation management
     func showPlacesOnMap() {
         var position = 0
-        while position < 2 { // manager.count() { //TODO:Until we can introduce GPS coordinates in editing Place
+        while position < manager.count() { //TODO:Until we can introduce GPS coordinates in editing Place
             let place = manager.itemAt(position: position)
             mapView.addAnnotation(place!)
             position += 1
