@@ -88,7 +88,8 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
         // post-processing of layout
         saveButton.layer.cornerRadius = 10
     }
-    // Button Save data to manager of places
+    //TODO: Delete Save feature by doing it when user abandon this Add view
+    // Button saveButton to Save data to manager of places
     @IBAction func savePlace(_ sender: UIButton) {
         if sender.titleLabel?.text == "Save" {
             place = Place(type: .generic ,locationName: nameEditPlace.text!, myDescription: descrEditPlace.text! , image_in: nil , www: nil )
@@ -101,9 +102,9 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
             dismiss(animated: true, completion: nil)
         }
     }
-    
+    //TODO: Delete Feature of Button locationButton to enter GPS coordinates in a Dialog :
+    // Button locationButton to show/edit GPS coordinates
     @IBAction func editLocation(_ sender: Any) {
-        
         
         showInputDialogCoordinates(latitude: self.locationNew.latitude, longitude: self.locationNew.longitude)
         // Advice to user of not suitable coordinates if more than 10 times the distance from the places
@@ -115,8 +116,6 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
-
-        //self.view.reloadInputViews()
     }
     
     // Button to import custom GPS coordinates
@@ -151,7 +150,7 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
                         let textLocation = String(format: "Latitude: %3.2f Longitude: %3.2f", arguments: [proposedLatitude, proposedLongitude])
                         self?.locationButton.setTitle(textLocation, for: .normal)
                         // Advice to user of not suitable coordinates if more than 10 times the distance from the places
-                        let myNewCoord = CLLocationCoordinate2D(latitude: (self?.locationNew.latitude)!, longitude: (self?.locationNew.longitude)!)
+                        let myNewCoord = CLLocationCoordinate2D(latitude: proposedLatitude, longitude: proposedLongitude)
                         let mySecCoord = self?.manager.itemAt(position: 0)?.coordinate  // TODO: we consider places[0] the center of places, by now
                         let actualDistance = Double((myNewCoord.distance(from: mySecCoord!)))
                         if actualDistance > ( (self?.manager.maxDistBtPlaces)! * 10 )  {

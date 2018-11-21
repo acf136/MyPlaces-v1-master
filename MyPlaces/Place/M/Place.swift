@@ -77,6 +77,7 @@ class Place : NSObject, MKAnnotation {
         self.myDescription = myDescription
         // -90 < latitude < 90 , -180 < longitude < 180  [in degrees]
         self.coordinate = CLLocationCoordinate2D(latitude: Double.random(in: 1...360) - 90.0, longitude: Double.random(in: 1...360) - 180.0)
+        self.title = locationName
         self.image = image_in
     }
     
@@ -91,6 +92,7 @@ class Place : NSObject, MKAnnotation {
         self.myDescription = myDescription
         // -90 < latitude < 90 , -180 < longitude < 180  [in degrees]
         self.coordinate = CLLocationCoordinate2D(latitude: Double.random(in: 1...360) - 90.0, longitude: Double.random(in: 1...360) - 180.0)
+        self.title = locationName
         self.image = image_in
         self.www = www
     }

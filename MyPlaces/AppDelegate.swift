@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let docsPath = FileManager.default.urls(for: .documentDirectory , in: .userDomainMask)[0]
         let filePath = docsPath.appendingPathComponent(manager.nameOfFileJSON())  // This is the name of JSON file where we load/save the places in every session
         
-        // //If JSON files containing Place's then append to manager
+         //If JSON files containing Place's then append to manager
         do {
             let jsonData = try Data(contentsOf: filePath)
             let placesJSON = manager.placesFrom(jsonData: jsonData)

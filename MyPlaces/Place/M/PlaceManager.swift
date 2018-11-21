@@ -27,7 +27,7 @@ class PlaceManager {
     // You can learn more about this pattern in Swift in:
     // https://cocoacasts.com/what-is-a-singleton-and-how-to-create-one-in-swift
     static let shared = PlaceManager()
-    private init() { }
+    private init() {   }
     
     // Contains max. distance between all points in places in meters
     var maxDistBtPlaces: Double = 0.0 // max. distance between places
@@ -61,7 +61,7 @@ class PlaceManager {
     // Inserts a new place into list of places managed by PlaceManager.
     func append(_ place: Place) {
         places.append(place)
-        maxDistBtPlaces = calcMaxDistBtPlaces()
+        self.maxDistBtPlaces = calcMaxDistBtPlaces()
     }
 
     // Returns number of places managed by PlaceManager.
@@ -166,6 +166,7 @@ class PlaceManager {
             let itemLocation : CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: item.coordinate.latitude, longitude: item.coordinate.longitude )
             places.append( Place(id: item.id, type: itemType , locationName: item.locationName , myDescription: item.myDescription , coordinate: itemLocation , www: item.www, image: item.myImage, title: item.title!, discipline: item.discipline ) )
         }
+        self.maxDistBtPlaces = calcMaxDistBtPlaces()
     }
 
 }
