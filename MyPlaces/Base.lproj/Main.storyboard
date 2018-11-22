@@ -247,7 +247,7 @@
         <!--Add Place-->
         <scene sceneID="cyh-b9-HD4">
             <objects>
-                <viewController title="Add Place" id="FyZ-fq-klw" customClass="AddPlaceController" customModule="MyPlaces" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Add Place" useStoryboardIdentifierAsRestorationIdentifier="YES" id="FyZ-fq-klw" customClass="AddPlaceController" customModule="MyPlaces" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleAspectFit" id="5xG-GX-9CT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="850"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -417,6 +417,13 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bRl-e6-qTH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationBar contentMode="scaleToFill" id="2Fi-Af-dyX">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <items>
+                        <navigationItem title="Title" id="Ucg-O1-z5Y"/>
+                    </items>
+                </navigationBar>
             </objects>
             <point key="canvasLocation" x="2588" y="-103.89805097451276"/>
         </scene>

@@ -74,7 +74,6 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
     // redraw view
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Add Place", style: .plain, target: nil, action: nil)
         self.lastImage = MyImageView.image  //named: "PutYourImageHere"
         // Connect data of UIPickerView delegated
         self.picktypePlace.delegate = self

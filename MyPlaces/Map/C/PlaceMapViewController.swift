@@ -26,12 +26,14 @@ class PlaceMapViewController: UIViewController , CLLocationManagerDelegate {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Map", style: .plain, target: nil, action: nil)
         determineMyCurrentLocation()
         mapView.delegate = self     // delegating for "marker" views
         // set initial location at "Plaza Cataluña 1, Barcelona 08001, Spain"
         let initialLocation = CLLocation(latitude: 41.381760, longitude: 2.167330)
         centerMapOnLocation(location: initialLocation)
         showPlacesOnMap()
+        
     }
     
     // MKAnnotation basic features

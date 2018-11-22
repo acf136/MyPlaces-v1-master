@@ -33,6 +33,15 @@ class PlaceDetailViewController: UIViewController {
         
         imageOfPlace.image = place.image
         locationOfPlace.text = String(format: "Latitude: %3.2f Longitude: %3.2f", arguments: [place.coordinate.latitude, place.coordinate.longitude])
+        // Edit Button Programmatically - pending of forum answer
+        //self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self,                                                                 action: #selector(PlaceDetailViewController.goToEditWithCurrentPlace) )
+    }
+    // go to Edit with Current Place
+    @objc func goToEditWithCurrentPlace() {
+        // go to edit screen
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "AddPlaceControllerSBID") as! AddPlaceController
+        self.present(newViewController, animated: true, completion: nil)
     }
 
 }

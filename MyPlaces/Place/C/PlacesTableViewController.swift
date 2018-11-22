@@ -17,8 +17,8 @@ class PlacesTableViewController: UITableViewController, CLLocationManagerDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        determineMyCurrentLocation() 
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Places", style: .plain, target: nil, action: nil)
+        determineMyCurrentLocation()
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Places", style: .plain, target: nil, action: nil)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -59,16 +59,4 @@ class PlacesTableViewController: UITableViewController, CLLocationManagerDelegat
         }
     }
     
-//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        guard let currentLocation: CLLocationCoordinate2D = manager.location?.coordinate else { return }
-//
-//        self.locationNew.latitude = currentLocation.latitude
-//        print("current latitude = \(currentLocation.latitude)")
-//        self.locationNew.longitude = currentLocation.longitude
-//        print("current longitude = \(currentLocation.longitude)")
-//
-//        // Call stopUpdatingLocation() to stop listening for location updates, otherwise this function will be called every time when user location changes.
-//        // After first call I don't want to listen my location anymore
-//        manager.stopUpdatingLocation()
-//    }
 }
