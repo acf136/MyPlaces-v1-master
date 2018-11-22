@@ -100,7 +100,7 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
                 place?.image = MyImageView.image
                 manager.append(place!)
                 manager.writeFileOfPlaces(file: manager.nameOfFileJSON())
-                tbv.reloadData()
+                if tbv != nil  { tbv.reloadData() }
             } else {
                 let alert = UIAlertController(title: "Info", message: "Not all required data is filled: Data hasn't be saved", preferredStyle: UIAlertController.Style.alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))

@@ -9,11 +9,31 @@
 import UIKit
 import MapKit
 
-class PlaceMapViewController: UIViewController {
+class PlaceMapViewController: UIViewController , CLLocationManagerDelegate {
 
     let manager = PlaceManager.shared
+    var locationNew = CLLocationCoordinate2D(latitude: Double.random(in: 1...360) - 90.0, longitude: Double.random(in: 1...360) - 180.0)
+    var locationManager:CLLocationManager!
     
     @IBOutlet weak var mapView: MKMapView!
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "AddPlaceInMap" {
+            let apvc = segue.destination as! AddPlaceController
+            apvc.previousScreen = self as UIViewController
+            apvc.locationNew = self.locationNew
+        }
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        determineMyCurrentLocation()
+        mapView.delegate = self     // delegating for "marker" views
+        // set initial location at "Plaza Cataluña 1, Barcelona 08001, Spain"
+        let initialLocation = CLLocation(latitude: 41.381760, longitude: 2.167330)
+        centerMapOnLocation(location: initialLocation)
+        showPlacesOnMap()
+    }
+    
     // MKAnnotation basic features
     let regionRadius: CLLocationDistance = 1000 //meters
     
@@ -21,15 +41,6 @@ class PlaceMapViewController: UIViewController {
         let regionRadius = manager.maxDistBtPlaces * 2
         let coordinateRegion = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
         mapView.setRegion(coordinateRegion, animated: true)
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        mapView.delegate = self     // delegating for "marker" views
-        // set initial location at "Plaza Cataluña 1, Barcelona 08001, Spain"
-        let initialLocation = CLLocation(latitude: 41.381760, longitude: 2.167330)
-        centerMapOnLocation(location: initialLocation)
-        showPlacesOnMap()
     }
     
     // MKAnnotation management
@@ -41,8 +52,19 @@ class PlaceMapViewController: UIViewController {
             position += 1
         }
     }
-    
+    //
+    func determineMyCurrentLocation() {
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.startUpdatingLocation()
+        }
+    }
 }
+
 
 // Extension for PlaceMapViewController - To set PopUp markers behaviour of our type PlaceMarkerView
 extension PlaceMapViewController: MKMapViewDelegate {
