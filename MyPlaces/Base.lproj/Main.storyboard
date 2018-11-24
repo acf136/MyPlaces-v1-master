@@ -25,7 +25,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="0.0" y="0.0"/>
+            <point key="canvasLocation" x="2" y="-101"/>
         </scene>
         <!--Map-->
         <scene sceneID="h4J-iP-Mv5">
@@ -68,7 +68,7 @@
                     <navigationItem key="navigationItem" title="My Map" id="tDa-3o-Gc0">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="DYq-zQ-3nG">
                             <connections>
-                                <segue destination="FyZ-fq-klw" kind="show" identifier="AddPlaceInMap" id="xEv-xD-vPt"/>
+                                <segue destination="2hU-qk-c5W" kind="show" identifier="AddPlaceInMapSegue" id="qdv-JO-w7i"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -83,7 +83,7 @@
         <!--My Places-->
         <scene sceneID="n0q-RC-CwO">
             <objects>
-                <tableViewController id="1D2-y7-V8O" customClass="PlacesTableViewController" customModule="MyPlaces" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="PlacesTableViewControllerSBID" id="1D2-y7-V8O" customClass="PlacesTableViewController" customModule="MyPlaces" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="8BI-8V-Qnc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -97,7 +97,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KVK-A9-yzl">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KVK-A9-yzl">
                                             <rect key="frame" x="5" y="5" width="365" height="89.5"/>
                                         </imageView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ASr-p4-MT7">
@@ -134,7 +134,7 @@
                                     <outlet property="backgroundImageView" destination="KVK-A9-yzl" id="LPv-SA-xKP"/>
                                     <outlet property="locationLabel" destination="fWn-4s-asJ" id="PBO-DM-5AL"/>
                                     <outlet property="nameLabel" destination="C2d-FV-xcr" id="cFj-Nx-nxG"/>
-                                    <segue destination="gPA-iC-MXY" kind="show" identifier="ShowPlace" id="nmq-AO-eHl"/>
+                                    <segue destination="OVa-Em-TiA" kind="show" identifier="ShowPlaceSegue" id="nmq-AO-eHl"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -146,7 +146,7 @@
                     <navigationItem key="navigationItem" title="My Places" id="2u8-j4-PkE">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="1fw-XA-iAh">
                             <connections>
-                                <segue destination="FyZ-fq-klw" kind="show" identifier="AddPlaceInTable" id="dvK-Hf-ykJ"/>
+                                <segue destination="2hU-qk-c5W" kind="show" identifier="AddPlaceInTableSegue" id="rgO-Mb-NUo"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -155,7 +155,7 @@
             </objects>
             <point key="canvasLocation" x="1733.5999999999999" y="-640.02998500749629"/>
         </scene>
-        <!--Place Detail View Controller-->
+        <!--Place Detail-->
         <scene sceneID="xsO-ia-c4a">
             <objects>
                 <viewController id="gPA-iC-MXY" customClass="PlaceDetailViewController" customModule="MyPlaces" customModuleProvider="target" sceneMemberID="viewController">
@@ -232,6 +232,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="de4-S9-kZk" colorLabel="IBBuiltInLabel-Red"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Place Detail" id="KoH-xf-ZQv">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="W2u-8r-I2r">
+                            <connections>
+                                <segue destination="2hU-qk-c5W" kind="show" identifier="EditPlaceSegue" id="rvX-hA-uQf"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="descrOfPlace" destination="Z1H-FJ-L6W" id="PsQ-7P-FLg"/>
                         <outlet property="idOfPlace" destination="g7L-DP-cyy" id="Tqd-Gy-CiQ"/>
@@ -242,12 +249,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qDA-AZ-zWP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2538" y="-1012"/>
+            <point key="canvasLocation" x="3508" y="-640"/>
         </scene>
         <!--Add Place-->
         <scene sceneID="cyh-b9-HD4">
             <objects>
-                <viewController title="Add Place" useStoryboardIdentifierAsRestorationIdentifier="YES" id="FyZ-fq-klw" customClass="AddPlaceController" customModule="MyPlaces" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddPlaceControllerSBID" title="Add Place" useStoryboardIdentifierAsRestorationIdentifier="YES" id="FyZ-fq-klw" customClass="AddPlaceController" customModule="MyPlaces" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleAspectFit" id="5xG-GX-9CT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="850"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -404,7 +411,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Abc-ve-x2N"/>
                     </view>
-                    <navigationItem key="navigationItem" id="pLe-TR-1xZ"/>
+                    <navigationItem key="navigationItem" title="Add/Edit Place" id="pLe-TR-1xZ"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <size key="freeformSize" width="375" height="850"/>
                     <connections>
@@ -425,7 +432,7 @@
                     </items>
                 </navigationBar>
             </objects>
-            <point key="canvasLocation" x="2588" y="-103.89805097451276"/>
+            <point key="canvasLocation" x="3575" y="249"/>
         </scene>
         <!--List-->
         <scene sceneID="ztT-TP-hMT">
@@ -444,6 +451,43 @@
             </objects>
             <point key="canvasLocation" x="924" y="-640"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="bDL-x2-x5D">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="OVa-Em-TiA" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="cgv-cS-PkX">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="gPA-iC-MXY" kind="relationship" relationship="rootViewController" id="Wry-2K-9Dm"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1Wl-5s-Zxw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationItem title="Title" id="07i-sp-AMa"/>
+            </objects>
+            <point key="canvasLocation" x="2636" y="-640"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="S53-Ov-VKF">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2hU-qk-c5W" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="XUY-hc-Mbk">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="FyZ-fq-klw" kind="relationship" relationship="rootViewController" id="A4d-PV-wld"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AfU-nx-A1U" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2636" y="249"/>
+        </scene>
     </scenes>
     <resources>
         <image name="List" width="32" height="32"/>
@@ -451,6 +495,6 @@
         <image name="maps-32x32" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="dvK-Hf-ykJ"/>
+        <segue reference="rgO-Mb-NUo"/>
     </inferredMetricsTieBreakers>
 </document>

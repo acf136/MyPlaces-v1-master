@@ -12,15 +12,24 @@ import CoreLocation
 
 class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
-    var place: Place?
+    // Data to comunicate with previous controllers
+    var previousScreen : UIViewController!
+    var inputPlace : Place! , newPlace : Place!
     var locationNew = CLLocationCoordinate2D(latitude: Double.random(in: 1...360) - 90.0, longitude: Double.random(in: 1...360) - 180.0)
-    let manager = PlaceManager.shared
     var tbv : UITableView!
+    var mpv : MKMapView!
+    var pdv : UIView!
+    // Own Outlets initialitzation
     var pickerData: [PlaceType] = [.generic, .touristic, .services]
     var currenPickerValue : PlaceType = .generic
-    var previousScreen : UIViewController!
+    // Data for own management
+    let manager = PlaceManager.shared
     var lastImage: UIImage? = nil
-    
+    // Data to delegate
+    // ...
+
+    // Outlets
+    //
     @IBOutlet weak var locationButton: UIButton!
     @IBOutlet weak var typeLabelPlace: UILabel!
     @IBOutlet weak var picktypePlace: UIPickerView!
@@ -29,7 +38,10 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
     @IBOutlet weak var MyImageView: UIImageView!
     @IBOutlet weak var descrEditPlace: UITextView!
     
-    // Import Image into MyImageView UIImageView
+    // Actions
+    //
+    
+    //  Button importImageButton to import image into MyImageView
     @IBAction func ImportImage(_ sender: Any) {
         let image = UIImagePickerController()
         image.delegate = self
@@ -41,6 +53,90 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
   
         }
     }
+    
+    //TODO: Delete Feature of Button locationButton to enter GPS coordinates in a Dialog :
+    // Button locationButton to show/edit GPS coordinates
+    @IBAction func editLocation(_ sender: Any) {
+        showInputDialogCoordinates(latitude: self.locationNew.latitude, longitude: self.locationNew.longitude)
+        // Advice to user of not suitable coordinates if more than 10 times the distance from the places
+        let myNewCoord = CLLocationCoordinate2D(latitude: self.locationNew.latitude, longitude: self.locationNew.longitude)
+        let mySecCoord = manager.itemAt(position: 0)?.coordinate  // TODO: we consider places[0] the center of places, by now
+        let actualDistance = myNewCoord.distance(from: mySecCoord!)
+        if actualDistance > (manager.maxDistBtPlaces * 10) {
+            let alert = UIAlertController(title: "Warning", message: "These coordinates are far from current places. The map range will be expanded and current places will be represented too narrow. Consider to change the coordinates", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+
+    
+    // Overrided members of UIViewController
+    //
+    // Previous to redraw, reload
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.lastImage = MyImageView.image  //named: "PutYourImageHere"
+        // Initial State
+        if tbv != nil || mpv != nil {     // Add from Table  or  // Add from Map
+            newPlace = Place(id: UUID().uuidString , type: .generic ,locationName: "Enter a name", myDescription: "Enter a description", coordinate: locationNew, www: nil , image:  MyImageView.image , title : "title" , discipline: "")
+        } else {                        // Edit from Detail
+            newPlace = inputPlace
+        }
+        // Connect data of UIPickerView delegated
+        self.picktypePlace.delegate = self
+        self.picktypePlace.dataSource = self
+        // Initial values to show in the view
+        typeLabelPlace.text = "Select Type of place"
+        if tbv != nil  || mpv != nil {     // Add from Table  or  // Add from Map
+            locationButton.setTitle(String(format: "Latitude: %3.2f Longitude: %3.2f", arguments: [(newPlace.coordinate.latitude), (newPlace.coordinate.longitude)]), for: .normal)
+            picktypePlace.selectRow(0, inComponent: 0, animated: false)
+            currenPickerValue = newPlace.type
+            nameEditPlace.text = newPlace.locationName
+            descrEditPlace.text = newPlace.myDescription
+        } else { // Edit from Detail
+            locationButton.setTitle(String(format: "Latitude: %3.2f Longitude: %3.2f", arguments: [(inputPlace.coordinate.latitude), (inputPlace.coordinate.longitude)]), for: .normal)
+            currenPickerValue = inputPlace.type
+            var rowPickerIndex = 0
+            for item in pickerData  {
+                if item == currenPickerValue { break }
+                rowPickerIndex += 1
+            }
+            picktypePlace.selectRow(rowPickerIndex, inComponent: 0, animated: false)
+            MyImageView.image = inputPlace.image
+            nameEditPlace.text = inputPlace.locationName
+            descrEditPlace.text = inputPlace.myDescription
+        }
+        // Back Button Programmatically
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self,                                                                 action: #selector(AddPlaceController.goBack) )
+    }
+    // View will disappear and being removed from the view hierarchy.
+    override func viewWillDisappear(_ animated : Bool) {
+        super.viewWillDisappear(animated)
+        //
+        if (tbv != nil || mpv != nil) {         // Add from Table  or  // Add from Map
+            if !allRequiredDataIsFilled() {
+                let alert = UIAlertController(title: "Info", message: "Not all required data is filled: Data will not be saved", preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                self.previousScreen.present(alert, animated: true, completion: nil)
+                }
+        }
+        // Redraw Views from Origin
+        if tbv != nil  {                        // Add from Table
+            tbv.reloadData()
+        } else {
+            if mpv != nil  {                    // Add from Map
+                let prevMapCtrl = previousScreen as! PlaceMapViewController
+                prevMapCtrl.centerMapOnLocation( location: CLLocation(latitude: locationNew.latitude, longitude: locationNew.longitude) )
+                prevMapCtrl.showPlacesOnMap()
+            } else {                            // Edit from Detail
+                previousScreen.viewDidLoad()
+            }
+        }
+    
+    }
+    
+    // UIImagePicker implementation
+    //
     // called when the user picks image
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         // Assign image
@@ -52,7 +148,8 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
         }
         self.dismiss(animated: true, completion: nil)
     }
-    
+    // UIPickerView implementation
+    //
     // Number of columns of data picker
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -71,68 +168,63 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
         // The parameter named row and component represents what was selected.
         currenPickerValue = pickerData[picktypePlace.selectedRow(inComponent: component)]
     }
-    // redraw view
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.lastImage = MyImageView.image  //named: "PutYourImageHere"
-        // Connect data of UIPickerView delegated
-        self.picktypePlace.delegate = self
-        self.picktypePlace.dataSource = self
-        // Initial values to show in the view
-        let textLocation = String(format: "Latitude: %3.2f Longitude: %3.2f", arguments: [(locationNew.latitude), (locationNew.longitude)])
-        locationButton.setTitle(textLocation, for: .normal)
-        typeLabelPlace.text = "Select Type of place"
-        picktypePlace.selectRow(0, inComponent: 0, animated: false)
-        currenPickerValue = .generic
-        nameEditPlace.text = "Enter a name"
-        descrEditPlace.text = "Enter a description"
-    }
-    // View will disappear and being removed from the view hierarchy.
+    
+    //
+    // Private Functions of AddPlaceController
+    //
+    
+    //  go back
     // Is the moment to save data in manager
-    override func viewWillDisappear(_ animated : Bool) {
-        super.viewWillDisappear(animated)
-        if self.isMovingFromParent {
+    @objc private func goBack() {
+        // if Add from Table or Add from Map
+        //      if allRequiredDataIsFilled() -> change data
+        if (tbv != nil || mpv != nil) {
             if allRequiredDataIsFilled() {
-                place = Place(type: .generic ,locationName: nameEditPlace.text!, myDescription: descrEditPlace.text! , image_in: nil , www: nil )
-                place?.coordinate = locationNew
-                place?.type = currenPickerValue
-                place?.image = MyImageView.image
-                manager.append(place!)
+                let newId = UUID().uuidString
+                let newPlace = Place(id: newId , type: currenPickerValue ,locationName: nameEditPlace.text!, myDescription: descrEditPlace.text!, coordinate: locationNew, www: nil , image:  MyImageView.image , title : nameEditPlace.text! , discipline: "")
+                manager.append(newPlace)
                 manager.writeFileOfPlaces(file: manager.nameOfFileJSON())
-                if tbv != nil  { tbv.reloadData() }
-            } else {
-                let alert = UIAlertController(title: "Info", message: "Not all required data is filled: Data hasn't be saved", preferredStyle: UIAlertController.Style.alert)
-                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
-                previousScreen.present(alert, animated: true, completion: nil)
+            }
+        // if Edit from Detail
+        //      if anyDataChanged  ->  change data
+        } else {
+            if anyDataChanged() {
+                let oldId = inputPlace.id   // preserve id
+                let oldPosition = manager.indexOf(manager.itemWithId(oldId)!)
+                manager.remove(manager.itemWithId(oldId)!)
+                let newPlace = Place(id: oldId , type: currenPickerValue ,locationName: nameEditPlace.text!, myDescription: descrEditPlace.text!, coordinate: locationNew, www: nil , image:  MyImageView.image , title : nameEditPlace.text! , discipline: "")
+                manager.InsertAt(position: oldPosition, Place: newPlace)
+                manager.writeFileOfPlaces(file: manager.nameOfFileJSON())
             }
         }
-    }
-    // Check all necessary place data is filled
-    func allRequiredDataIsFilled () -> Bool {
-        if nameEditPlace.text == "Enter a name" { return false }
-        if descrEditPlace.text == "Enter a description" { return false }
-        if self.lastImage === MyImageView.image { return false }
-        return true
+
+        // go to previous screen
+        dismiss(animated: true, completion: nil)
     }
     
-    //TODO: Delete Feature of Button locationButton to enter GPS coordinates in a Dialog :
-    // Button locationButton to show/edit GPS coordinates
-    @IBAction func editLocation(_ sender: Any) {
-        
-        showInputDialogCoordinates(latitude: self.locationNew.latitude, longitude: self.locationNew.longitude)
-        // Advice to user of not suitable coordinates if more than 10 times the distance from the places
-        let myNewCoord = CLLocationCoordinate2D(latitude: self.locationNew.latitude, longitude: self.locationNew.longitude)
-        let mySecCoord = manager.itemAt(position: 0)?.coordinate  // TODO: we consider places[0] the center of places, by now
-        let actualDistance = myNewCoord.distance(from: mySecCoord!)
-        if actualDistance > (manager.maxDistBtPlaces * 10) {
-            let alert = UIAlertController(title: "Warning", message: "These coordinates are far from current places. The map range will be expanded and current places will be represented too narrow. Consider to change the coordinates", preferredStyle: UIAlertController.Style.alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+    // Check all necessary place data is filled
+    private func allRequiredDataIsFilled () -> Bool {
+        if nameEditPlace.text == "Enter a name" { return false }
+        if descrEditPlace.text == "Enter a description" { return false }
+        if MyImageView.image == UIImage(named: "PutYourImageHere") { return false }
+        return true
+    }
+    // Check if any data has changed
+    private func anyDataChanged() -> Bool {
+        if tbv != nil || mpv != nil {     // Add from Table  or  // Add from Map
+            if  currenPickerValue != newPlace.type ||
+                newPlace.locationName != nameEditPlace.text || newPlace.myDescription != descrEditPlace.text ||
+                newPlace.coordinate.latitude != locationNew.latitude || newPlace.coordinate.longitude != locationNew.longitude ||
+                newPlace.image != MyImageView.image
+            {   return true }
+        } else {                        // Edit from Detail
+            if newPlace != inputPlace || currenPickerValue != inputPlace.type { return true }
         }
+        return false
     }
     
     // Button to import custom GPS coordinates
-    func showInputDialogCoordinates(latitude: Double, longitude: Double) {
+    private func showInputDialogCoordinates(latitude: Double, longitude: Double) {
         //Setting title and message for the alert dialog
         let alertController = UIAlertController(title: "Enter GPS coordinates", message: "-90 < Lat. < 270 | -180 < Long. < 180", preferredStyle: .alert)
         

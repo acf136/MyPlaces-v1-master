@@ -11,14 +11,21 @@ import MapKit
 
 class PlacesTableViewController: UITableViewController, CLLocationManagerDelegate {
 
-    let manager = PlaceManager.shared
+    // Data to comunicate with previous controllers
+    // ...
+    // Data for own management
     var locationNew = CLLocationCoordinate2D(latitude: Double.random(in: 1...360) - 90.0, longitude: Double.random(in: 1...360) - 180.0)
+    let manager = PlaceManager.shared
+    // Data to delegate
     var locationManager:CLLocationManager!
     
+    // Overrided members of UITableViewController
+    //
+    
+    // Previous to redraw, reload
     override func viewDidLoad() {
         super.viewDidLoad()
         determineMyCurrentLocation()
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Places", style: .plain, target: nil, action: nil)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -31,22 +38,27 @@ class PlacesTableViewController: UITableViewController, CLLocationManagerDelegat
         cell.bind(place: place)
         return cell
     }
-
+    
+    // Previous to go to other screen
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ShowPlace" {
+        if segue.identifier == "ShowPlaceSegue" {
             let cell = sender as! PlaceCell
             let index = tableView.indexPath(for: cell)!.row
             let place = manager.itemAt(position: index)
-            let pdvc = segue.destination as! PlaceDetailViewController
+            let pdnvc = segue.destination as! UINavigationController
+            let pdvc = pdnvc.topViewController as! PlaceDetailViewController
             pdvc.place = place
         }
-        if segue.identifier == "AddPlaceInTable" {
-            let apvc = segue.destination as! AddPlaceController
+        if segue.identifier == "AddPlaceInTableSegue" {
+            let apnvc = segue.destination as! UINavigationController
+            let apvc = apnvc.topViewController as! AddPlaceController
             apvc.tbv = tableView
             apvc.previousScreen = self as UIViewController
             apvc.locationNew = self.locationNew
         }
     }
+    
+    // Delegated members of CLLocationManagerDelegate
     //
     func determineMyCurrentLocation() {
         locationManager = CLLocationManager()

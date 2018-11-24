@@ -97,6 +97,15 @@ class PlaceManager {
         // we want to remove and then assign the filtered array to same places variable.
         places = places.filter {$0.id != place.id}
     }
+    // Return index on places of Place
+    func indexOf(_ Place : Place)  -> Int {
+        return places.firstIndex(of: Place) ?? -1
+    }
+    
+    // Insert a place at a given position
+    func InsertAt(position: Int, Place: Place) {
+        if position < places.count + 1 { places.insert(Place, at: position) }
+    }
     
     // Returns a color UIColor for the given place with id calculated in function of the type of place
     func itemTypeColor(_ id: String) -> UIColor {

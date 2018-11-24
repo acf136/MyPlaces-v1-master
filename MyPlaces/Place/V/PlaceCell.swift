@@ -25,6 +25,6 @@ class PlaceCell: UITableViewCell {
         locationLabel.text = String(format: "Latitude: %3.2f Longitude: %3.2f", arguments: [(place?.coordinate.latitude)!, (place?.coordinate.longitude)!] )
         nameLabel.text = place?.locationName
         // Crop image from left-top corner to adapt to table cell bounds
-        backgroundImageView.image = place?.image?.cropped(boundingBox : self.bounds )
+        backgroundImageView.image = place?.image?.cropped(boundingBox :  self.backgroundImageView.bounds )
     }
 }

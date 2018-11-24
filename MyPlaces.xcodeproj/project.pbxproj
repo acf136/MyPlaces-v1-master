@@ -14,8 +14,8 @@
 		3E4D749B21A4246B003AFB5C /* CLLocationCoordinate2D_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4D749A21A4246B003AFB5C /* CLLocationCoordinate2D_extension.swift */; };
 		3E9076E7219C4CD60052920B /* Place+JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9076E6219C4CD60052920B /* Place+JSON.swift */; };
 		3EA4E2062188EA94003C4EAD /* UIImage_extension_01.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA4E2052188EA94003C4EAD /* UIImage_extension_01.swift */; };
-		3EAD215421A6247500935918 /* ViewController_extension_01.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAD215321A6247500935918 /* ViewController_extension_01.swift */; };
 		3ECC33082199B4280013B349 /* UIButton_extension_01.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECC33072199B4280013B349 /* UIButton_extension_01.swift */; };
+		3EEE617721A840F500BC3671 /* OwnViewController_extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEE617621A840F500BC3671 /* OwnViewController_extensions.swift */; };
 		4002511F215E26790068AA4B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4002511E215E26790068AA4B /* AppDelegate.swift */; };
 		40025126215E26790068AA4B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40025124215E26790068AA4B /* Main.storyboard */; };
 		40025128215E267A0068AA4B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40025127215E267A0068AA4B /* Assets.xcassets */; };
@@ -35,8 +35,8 @@
 		3E4D749A21A4246B003AFB5C /* CLLocationCoordinate2D_extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLocationCoordinate2D_extension.swift; sourceTree = "<group>"; };
 		3E9076E6219C4CD60052920B /* Place+JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Place+JSON.swift"; sourceTree = "<group>"; };
 		3EA4E2052188EA94003C4EAD /* UIImage_extension_01.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage_extension_01.swift; sourceTree = "<group>"; };
-		3EAD215321A6247500935918 /* ViewController_extension_01.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController_extension_01.swift; sourceTree = "<group>"; };
 		3ECC33072199B4280013B349 /* UIButton_extension_01.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton_extension_01.swift; sourceTree = "<group>"; };
+		3EEE617621A840F500BC3671 /* OwnViewController_extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnViewController_extensions.swift; sourceTree = "<group>"; };
 		4002511B215E26790068AA4B /* MyPlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyPlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4002511E215E26790068AA4B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		40025125215E26790068AA4B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -119,7 +119,7 @@
 				3EA4E2052188EA94003C4EAD /* UIImage_extension_01.swift */,
 				3ECC33072199B4280013B349 /* UIButton_extension_01.swift */,
 				3E4D749A21A4246B003AFB5C /* CLLocationCoordinate2D_extension.swift */,
-				3EAD215321A6247500935918 /* ViewController_extension_01.swift */,
+				3EEE617621A840F500BC3671 /* OwnViewController_extensions.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -261,7 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3ECC33082199B4280013B349 /* UIButton_extension_01.swift in Sources */,
-				3EAD215421A6247500935918 /* ViewController_extension_01.swift in Sources */,
+				3EEE617721A840F500BC3671 /* OwnViewController_extensions.swift in Sources */,
 				4002513A215E34630068AA4B /* PlaceTourist.swift in Sources */,
 				3EA4E2062188EA94003C4EAD /* UIImage_extension_01.swift in Sources */,
 				3E9076E7219C4CD60052920B /* Place+JSON.swift in Sources */,
