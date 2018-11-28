@@ -218,7 +218,12 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
                 newPlace.image != MyImageView.image
             {   return true }
         } else {                        // Edit from Detail
-            if newPlace != inputPlace || currenPickerValue != inputPlace.type { return true }
+            if  currenPickerValue != inputPlace.type ||
+                inputPlace.locationName != nameEditPlace.text || inputPlace.myDescription != descrEditPlace.text ||
+                inputPlace.coordinate.latitude != locationNew.latitude || inputPlace.coordinate.longitude != locationNew.longitude ||
+                inputPlace.image != MyImageView.image
+            { return true }
+            
         }
         return false
     }

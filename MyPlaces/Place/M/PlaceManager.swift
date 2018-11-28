@@ -17,7 +17,7 @@ import MapKit
 // Click on the last element and you will get a drop down list from which you can navigate to any
 // method in current file. Those MARK lines let you specify some sections to group related methods.
 
-class PlaceManager {
+class PlaceManager : NSObject {
     
     // MARK: - Singleton
     
@@ -27,7 +27,7 @@ class PlaceManager {
     // You can learn more about this pattern in Swift in:
     // https://cocoacasts.com/what-is-a-singleton-and-how-to-create-one-in-swift
     static let shared = PlaceManager()
-    private init() {   }
+    private override init() {   }
     
     // Contains max. distance between all points in places in meters
     var maxDistBtPlaces: Double = 0.0 // max. distance between places
@@ -41,7 +41,15 @@ class PlaceManager {
     // because using an array or something else is just a private detail.
     private var places = [Place]()
     private var fileJSON = "MyPlaces.JSON"
+    // KVO observers
     
+    func setObservers(place: Place) {
+        // observer for myDescription
+        place.myDescription_observer = place.observe(\Place.myDescription, options: [.old,.new] ) { place, change in
+            print("\(place.id), My description old: \(change.oldValue!) change to new: \" \(change.newValue!)\"")
+        }
+        //observer for ...
+    }
     // Return max. distance between places in meters
     func calcMaxDistBtPlaces() -> Double {
         var maxdist = 0.0
@@ -62,6 +70,7 @@ class PlaceManager {
     func append(_ place: Place) {
         places.append(place)
         self.maxDistBtPlaces = calcMaxDistBtPlaces()
+        self.setObservers(place: place)
     }
 
     // Returns number of places managed by PlaceManager.
@@ -165,7 +174,7 @@ class PlaceManager {
         } catch {
             return []
         }
-        return placesJSON
+      	  return placesJSON
     }
     
     // Given  an array with all JSON info to add to places, insert it into places
@@ -175,6 +184,7 @@ class PlaceManager {
             let itemLocation : CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: item.coordinate.latitude, longitude: item.coordinate.longitude )
             places.append( Place(id: item.id, type: itemType , locationName: item.locationName , myDescription: item.myDescription , coordinate: itemLocation , www: item.www, image: item.myImage, title: item.title!, discipline: item.discipline ) )
         }
+        for item in places { self.setObservers(place: item) }
         self.maxDistBtPlaces = calcMaxDistBtPlaces()
     }
 

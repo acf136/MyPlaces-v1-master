@@ -43,7 +43,7 @@ struct PlaceJSON : Codable { // Encodable, Decodable  {
     }
 }
 
-class Place : NSObject, MKAnnotation {
+@objc class Place : NSObject, MKAnnotation {
     
     // We don't need to specify types when the compiler can infer them from context. That doesn't
     // mean id or name have no type or can have different types at different moments. No way. Both
@@ -51,7 +51,7 @@ class Place : NSObject, MKAnnotation {
     var id = ""
     var type = PlaceType.generic
     var locationName = ""    // reused for MKAnnotation
-    var myDescription = ""  // can't override inmutable property NSOBject.description
+    @objc dynamic var myDescription = ""  // can't override inmutable property NSOBject.description
     var coordinate: CLLocationCoordinate2D    // reused for MKAnnotation
     var www: String?
 //  Info for MKAnnotation
@@ -60,6 +60,8 @@ class Place : NSObject, MKAnnotation {
 //  Next info not Codable in JSON
     var image: UIImage?
 
+    // KVO variables
+    var myDescription_observer: NSKeyValueObservation?
     
     // We need to learn a bit more about initialization, but meanwhile we create some initializers.
     // This one has no information about name or description, so it creates an almost empty place.
