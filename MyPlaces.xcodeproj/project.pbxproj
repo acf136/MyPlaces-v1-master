@@ -15,7 +15,7 @@
 		3E9076E7219C4CD60052920B /* Place+JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9076E6219C4CD60052920B /* Place+JSON.swift */; };
 		3EA4E2062188EA94003C4EAD /* UIImage_extension_01.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA4E2052188EA94003C4EAD /* UIImage_extension_01.swift */; };
 		3ECC33082199B4280013B349 /* UIButton_extension_01.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECC33072199B4280013B349 /* UIButton_extension_01.swift */; };
-		3EEE617721A840F500BC3671 /* OwnViewController_extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEE617621A840F500BC3671 /* OwnViewController_extensions.swift */; };
+		3ED8125121B08B62005ED2CE /* OwnViewController_extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED8125021B08B62005ED2CE /* OwnViewController_extensions.swift */; };
 		4002511F215E26790068AA4B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4002511E215E26790068AA4B /* AppDelegate.swift */; };
 		40025126215E26790068AA4B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40025124215E26790068AA4B /* Main.storyboard */; };
 		40025128215E267A0068AA4B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40025127215E267A0068AA4B /* Assets.xcassets */; };
@@ -36,7 +36,7 @@
 		3E9076E6219C4CD60052920B /* Place+JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Place+JSON.swift"; sourceTree = "<group>"; };
 		3EA4E2052188EA94003C4EAD /* UIImage_extension_01.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage_extension_01.swift; sourceTree = "<group>"; };
 		3ECC33072199B4280013B349 /* UIButton_extension_01.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton_extension_01.swift; sourceTree = "<group>"; };
-		3EEE617621A840F500BC3671 /* OwnViewController_extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnViewController_extensions.swift; sourceTree = "<group>"; };
+		3ED8125021B08B62005ED2CE /* OwnViewController_extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnViewController_extensions.swift; sourceTree = "<group>"; };
 		4002511B215E26790068AA4B /* MyPlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyPlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4002511E215E26790068AA4B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		40025125215E26790068AA4B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -62,7 +62,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3E1A8FBD219F2DF90031B176 /* M */ = {
+		3E5E40782192FA30004F7386 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				3EA4E2052188EA94003C4EAD /* UIImage_extension_01.swift */,
+				3ECC33072199B4280013B349 /* UIButton_extension_01.swift */,
+				3E4D749A21A4246B003AFB5C /* CLLocationCoordinate2D_extension.swift */,
+				3ED8125021B08B62005ED2CE /* OwnViewController_extensions.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		3ED8125221B08C04005ED2CE /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				3E9076E6219C4CD60052920B /* Place+JSON.swift */,
@@ -70,78 +81,26 @@
 				40025139215E34630068AA4B /* PlaceTourist.swift */,
 				4002513B215E38AF0068AA4B /* PlaceManager.swift */,
 			);
-			path = M;
+			path = Model;
 			sourceTree = "<group>";
 		};
-		3E1A8FBE219F2E040031B176 /* V */ = {
+		3ED8125321B08C2F005ED2CE /* View */ = {
 			isa = PBXGroup;
 			children = (
 				3E25AB8F217E44690004101A /* PlaceCell.swift */,
 			);
-			path = V;
+			path = View;
 			sourceTree = "<group>";
 		};
-		3E1A8FBF219F2E0D0031B176 /* C */ = {
+		3ED8125421B08C41005ED2CE /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				3E0DE386219F2B7200800752 /* PlaceMapViewController.swift */,
 				3E0F03E721808B970093DBAD /* PlaceDetailViewController.swift */,
 				40025132215E2DBE0068AA4B /* AddPlacelController.swift */,
 				3E25AB8B217E37570004101A /* PlacesTableViewController.swift */,
 			);
-			path = C;
-			sourceTree = "<group>";
-		};
-		3E1A8FC0219F2E5E0031B176 /* C */ = {
-			isa = PBXGroup;
-			children = (
-				3E0DE386219F2B7200800752 /* PlaceMapViewController.swift */,
-			);
-			path = C;
-			sourceTree = "<group>";
-		};
-		3E1A8FC1219F2E6A0031B176 /* V */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = V;
-			sourceTree = "<group>";
-		};
-		3E1A8FC2219F2E740031B176 /* M */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = M;
-			sourceTree = "<group>";
-		};
-		3E5E40782192FA30004F7386 /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				3EA4E2052188EA94003C4EAD /* UIImage_extension_01.swift */,
-				3ECC33072199B4280013B349 /* UIButton_extension_01.swift */,
-				3E4D749A21A4246B003AFB5C /* CLLocationCoordinate2D_extension.swift */,
-				3EEE617621A840F500BC3671 /* OwnViewController_extensions.swift */,
-			);
-			path = Common;
-			sourceTree = "<group>";
-		};
-		3E5E40792192FA73004F7386 /* Place */ = {
-			isa = PBXGroup;
-			children = (
-				3E1A8FBD219F2DF90031B176 /* M */,
-				3E1A8FBE219F2E040031B176 /* V */,
-				3E1A8FBF219F2E0D0031B176 /* C */,
-			);
-			path = Place;
-			sourceTree = "<group>";
-		};
-		3E5E407A21930341004F7386 /* Map */ = {
-			isa = PBXGroup;
-			children = (
-				3E1A8FC2219F2E740031B176 /* M */,
-				3E1A8FC1219F2E6A0031B176 /* V */,
-				3E1A8FC0219F2E5E0031B176 /* C */,
-			);
-			path = Map;
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		40025112215E26790068AA4B = {
@@ -170,8 +129,9 @@
 				40025127215E267A0068AA4B /* Assets.xcassets */,
 				40025129215E267A0068AA4B /* LaunchScreen.storyboard */,
 				4002512C215E267A0068AA4B /* Info.plist */,
-				3E5E40792192FA73004F7386 /* Place */,
-				3E5E407A21930341004F7386 /* Map */,
+				3ED8125221B08C04005ED2CE /* Model */,
+				3ED8125321B08C2F005ED2CE /* View */,
+				3ED8125421B08C41005ED2CE /* Controller */,
 			);
 			path = MyPlaces;
 			sourceTree = "<group>";
@@ -261,7 +221,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3ECC33082199B4280013B349 /* UIButton_extension_01.swift in Sources */,
-				3EEE617721A840F500BC3671 /* OwnViewController_extensions.swift in Sources */,
 				4002513A215E34630068AA4B /* PlaceTourist.swift in Sources */,
 				3EA4E2062188EA94003C4EAD /* UIImage_extension_01.swift in Sources */,
 				3E9076E7219C4CD60052920B /* Place+JSON.swift in Sources */,
@@ -274,6 +233,7 @@
 				3E25AB8C217E37570004101A /* PlacesTableViewController.swift in Sources */,
 				3E25AB90217E44690004101A /* PlaceCell.swift in Sources */,
 				3E4D749B21A4246B003AFB5C /* CLLocationCoordinate2D_extension.swift in Sources */,
+				3ED8125121B08B62005ED2CE /* OwnViewController_extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
