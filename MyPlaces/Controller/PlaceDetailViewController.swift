@@ -12,9 +12,11 @@ import MapKit
 class PlaceDetailViewController: UIViewController {
 
     // Data to comunicate with other controllers
+    var previousScreen : UITableViewController!
     var place : Place!
+    // initial status
     var waitingForEditPlace = false
-    var dataChangedOnEdit: Bool = false
+    var dataChangedOnEdit = false
     // Own Outlets initialitzation
     // ...
     // Data for own management
@@ -36,7 +38,7 @@ class PlaceDetailViewController: UIViewController {
     // Is a func shared with others VControllers tha go to AddPlaceController screen
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
         print("PlaceDetailViewController: prepareForUnwind")
-        // if data chenged on Edit
+        // if data changed on Edit
         if dataChangedOnEdit {
             reloadDataOfView()
             self.view.setNeedsLayout()
@@ -58,8 +60,8 @@ class PlaceDetailViewController: UIViewController {
     // Manage/allow unwind from Edit
     override func canPerformUnwindSegueAction(_ action: Selector, from fromViewController: UIViewController, withSender sender: Any) -> Bool {
         print("PlaceDetailViewController: canPerformUnwindSegueAction")
-        if self.waitingForEditPlace {
-            self.waitingForEditPlace = false
+        if waitingForEditPlace {
+            waitingForEditPlace = false
             return true
         } else {
             return false
@@ -70,10 +72,9 @@ class PlaceDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         reloadDataOfView()
-        
-        // Back Button Programmatically
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self,                                                                 action: #selector(PlaceDetailViewController.goBack) )
-        
+        // initial status
+        waitingForEditPlace = false
+        dataChangedOnEdit = false
     }
 
     // Previous to go to other screen
@@ -86,6 +87,9 @@ class PlaceDetailViewController: UIViewController {
             apvc.previousScreen = self as UIViewController
             apvc.locationNew = CLLocationCoordinate2D(latitude: place.coordinate.latitude,longitude: place.coordinate.longitude)
             waitingForEditPlace = true
+        }
+        if segue.identifier == "unwindFromPlaceDetail" {
+            if  dataChangedOnEdit { let prevVC = previousScreen as! PlacesTableViewController ; prevVC.dataChangedOnDetail = true }
         }
     }
 
@@ -116,14 +120,5 @@ class PlaceDetailViewController: UIViewController {
     //
     // Private Functions of PlaceDetailViewController
     //
-    
-    //  go back
-    @objc private func goBack() {
-        //        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        //        let newViewController = storyBoard.instantiateViewController(withIdentifier: "PlacesTableViewControllerSBID") as! PlacesTableViewController
-        //        self.present(newViewController, animated: true, completion: nil)
-        // go to previous screen
-        dismiss(animated: true, completion: nil)
-    }
 
 }

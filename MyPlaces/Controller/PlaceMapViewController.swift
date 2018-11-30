@@ -12,8 +12,10 @@ import MapKit
 class PlaceMapViewController: UIViewController , CLLocationManagerDelegate {
 
     // Data to comunicate with other controllers
+    // ...
+    // initial status
     var waitingForAddPlace = false
-    var dataChangedOnAdd: Bool = false
+    var dataChangedOnAdd = false
     // Own Outlets initialitzation
     // ...
     // Data for own management
@@ -38,6 +40,7 @@ class PlaceMapViewController: UIViewController , CLLocationManagerDelegate {
         print("PlaceMapViewController: prepareForUnwind")
         if dataChangedOnAdd {
             self.refreshMap()
+            // falta refrescar PlacesTableViewController
         } else {
             displayAdvice = true
         }
@@ -75,6 +78,9 @@ class PlaceMapViewController: UIViewController , CLLocationManagerDelegate {
         //let initialLocation = CLLocation(latitude: locationNew.latitude, longitude: locationNew.longitude)
         centerMapOnLocation(location: initialLocation)
         showPlacesOnMap()
+        // initial status
+        waitingForAddPlace = false
+        dataChangedOnAdd = false
     }
     
     // Previous to go to other screen

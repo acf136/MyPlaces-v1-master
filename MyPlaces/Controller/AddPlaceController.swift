@@ -74,9 +74,9 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
     // Overrided members of UIViewController
     //
     
-    // Avoid return in case of add new and not filled all required data
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        if identifier == "prepareForUnwind" {
+    // save the data before unwind
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "prepareForUnwind" {
             // if Add from Table or Add from Map
             //      if allRequiredDataIsFilled() -> change data
             if (tbv != nil || mpv != nil) {
@@ -105,7 +105,7 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
                 }
             }
         }
-        return true
+
     }
     
     // Previous to redraw, reload
