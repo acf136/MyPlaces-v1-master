@@ -11,16 +11,43 @@ import MapKit
 
 class PlacesTableViewController: UITableViewController, CLLocationManagerDelegate {
 
-    // Data to comunicate with previous controllers
+    // Data to comunicate with other controllers
+    var waitingForAddPlace = false
+    // Own Outlets initialitzation
     // ...
     // Data for own management
     var locationNew = CLLocationCoordinate2D(latitude: Double.random(in: 1...360) - 90.0, longitude: Double.random(in: 1...360) - 180.0)
     let manager = PlaceManager.shared
     // Data to delegate
     var locationManager:CLLocationManager!
+
+    
+    // Outlets
+    //
+    
+    // Actions
+    //
+    
+    // Called from AddPlaceController: must exist, even if empty
+    // Is a func shared with others VControllers tha go to AddPlaceController screen
+    @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
+        print("PlacesTableViewController: prepareForUnwind")
+        self.tableView.reloadData()
+    }
     
     // Overrided members of UITableViewController
     //
+    
+    // Manage/allow unwind from Add
+    override func canPerformUnwindSegueAction(_ action: Selector, from fromViewController: UIViewController, withSender sender: Any) -> Bool {
+        print("PlaceTableViewController: canPerformUnwindSegueAction")
+        if self.waitingForAddPlace {
+            self.waitingForAddPlace = false
+            return true
+        } else {
+            return false
+        }
+    }
     
     // Previous to redraw, reload
     override func viewDidLoad() {
@@ -55,8 +82,17 @@ class PlacesTableViewController: UITableViewController, CLLocationManagerDelegat
             apvc.tbv = tableView
             apvc.previousScreen = self as UIViewController
             apvc.locationNew = self.locationNew
+            self.waitingForAddPlace = true
         }
     }
+    
+    //
+    // Public Functions of PlacesTableViewController
+    //
+    
+    //
+    // Private Functions of PlacesTableViewController
+    //
     
     // Delegated members of CLLocationManagerDelegate
     //

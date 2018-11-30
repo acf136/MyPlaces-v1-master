@@ -411,7 +411,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Abc-ve-x2N"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Add/Edit Place" id="pLe-TR-1xZ"/>
+                    <navigationItem key="navigationItem" title="Add/Edit Place" id="pLe-TR-1xZ">
+                        <barButtonItem key="leftBarButtonItem" title="Done" style="done" id="1ih-vZ-9yu">
+                            <connections>
+                                <segue destination="mhT-QS-Hv7" kind="unwind" identifier="prepareForUnwind" unwindAction="prepareForUnwindWithSegue:" id="6h3-ah-IER"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
                     <size key="freeformSize" width="375" height="850"/>
                     <connections>
@@ -424,6 +430,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bRl-e6-qTH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="mhT-QS-Hv7" userLabel="Exit" sceneMemberID="exit"/>
                 <navigationBar contentMode="scaleToFill" id="2Fi-Af-dyX">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -495,6 +502,6 @@
         <image name="maps-32x32" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="rgO-Mb-NUo"/>
+        <segue reference="rvX-hA-uQf"/>
     </inferredMetricsTieBreakers>
 </document>

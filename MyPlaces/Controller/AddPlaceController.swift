@@ -5,7 +5,7 @@
 //  Created by Albert Mata Guerra on 28/09/2018.
 //  Copyright © 2018 Albert Mata Guerra. All rights reserved.
 //
-
+import Foundation
 import UIKit
 import MapKit
 import CoreLocation
@@ -41,6 +41,7 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
     // Actions
     //
     
+    
     //  Button importImageButton to import image into MyImageView
     @IBAction func ImportImage(_ sender: Any) {
         let image = UIImagePickerController()
@@ -69,9 +70,48 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
         }
     }
 
-    
+    //
     // Overrided members of UIViewController
     //
+    
+    // Avoid return in case of add new and not filled all required data
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == "prepareForUnwind" {
+            // if Add from Table or Add from Map
+            //      if allRequiredDataIsFilled() -> change data
+            if (tbv != nil || mpv != nil) {
+                if allRequiredDataIsFilled() {
+                    let newId = UUID().uuidString
+                    let newPlace = Place(id: newId , type: currenPickerValue ,locationName: nameEditPlace.text!, myDescription: descrEditPlace.text!, coordinate: locationNew, www: nil , image:  MyImageView.image , title : nameEditPlace.text! , discipline: "")
+                    manager.append(newPlace)
+                    manager.writeFileOfPlaces(file: manager.nameOfFileJSON())
+                } else {
+                    let alert = UIAlertController(title: "Info", message: "Please fill all data required", preferredStyle: UIAlertController.Style.alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+
+                    return false // abort unwindSegue
+                }
+                
+                // if Edit from Detail
+                //      if anyDataChanged  ->  change data
+            } else {
+                if anyDataChanged() {
+                    let oldId = inputPlace.id   // preserve id
+                    let oldPosition = manager.indexOf(manager.itemWithId(oldId)!)
+                    manager.remove(manager.itemWithId(oldId)!)
+                    let newPlace = Place(id: oldId , type: currenPickerValue ,locationName: nameEditPlace.text!, myDescription: descrEditPlace.text!, coordinate: locationNew, www: nil , image:  MyImageView.image , title : nameEditPlace.text! , discipline: "")
+                    manager.InsertAt(position: oldPosition, Place: newPlace)
+                    manager.writeFileOfPlaces(file: manager.nameOfFileJSON())
+                    // change data on PlaceDetailViewController
+                    let pdvc = self.previousScreen as! PlaceDetailViewController
+                    pdvc.place = newPlace
+                }
+            }
+        }
+        return true
+    }
+    
     // Previous to redraw, reload
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -106,34 +146,8 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
             nameEditPlace.text = inputPlace.locationName
             descrEditPlace.text = inputPlace.myDescription
         }
-        // Back Button Programmatically
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self,                                                                 action: #selector(AddPlaceController.goBack) )
     }
-    // View will disappear and being removed from the view hierarchy.
-    override func viewWillDisappear(_ animated : Bool) {
-        super.viewWillDisappear(animated)
-        //
-        if (tbv != nil || mpv != nil) {         // Add from Table  or  // Add from Map
-            if !allRequiredDataIsFilled() {
-                let alert = UIAlertController(title: "Info", message: "Not all required data is filled: Data will not be saved", preferredStyle: UIAlertController.Style.alert)
-                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
-                self.previousScreen.present(alert, animated: true, completion: nil)
-                }
-        }
-        // Redraw Views from Origin
-        if tbv != nil  {                        // Add from Table
-            tbv.reloadData()
-        } else {
-            if mpv != nil  {                    // Add from Map
-                let prevMapCtrl = previousScreen as! PlaceMapViewController
-                prevMapCtrl.centerMapOnLocation( location: CLLocation(latitude: locationNew.latitude, longitude: locationNew.longitude) )
-                prevMapCtrl.showPlacesOnMap()
-            } else {                            // Edit from Detail
-                previousScreen.viewDidLoad()
-            }
-        }
     
-    }
     
     // UIImagePicker implementation
     //
@@ -170,37 +184,12 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
     }
     
     //
-    // Private Functions of AddPlaceController
+    // Public Functions of AddPlaceController
     //
     
-    //  go back
-    // Is the moment to save data in manager
-    @objc private func goBack() {
-        // if Add from Table or Add from Map
-        //      if allRequiredDataIsFilled() -> change data
-        if (tbv != nil || mpv != nil) {
-            if allRequiredDataIsFilled() {
-                let newId = UUID().uuidString
-                let newPlace = Place(id: newId , type: currenPickerValue ,locationName: nameEditPlace.text!, myDescription: descrEditPlace.text!, coordinate: locationNew, www: nil , image:  MyImageView.image , title : nameEditPlace.text! , discipline: "")
-                manager.append(newPlace)
-                manager.writeFileOfPlaces(file: manager.nameOfFileJSON())
-            }
-        // if Edit from Detail
-        //      if anyDataChanged  ->  change data
-        } else {
-            if anyDataChanged() {
-                let oldId = inputPlace.id   // preserve id
-                let oldPosition = manager.indexOf(manager.itemWithId(oldId)!)
-                manager.remove(manager.itemWithId(oldId)!)
-                let newPlace = Place(id: oldId , type: currenPickerValue ,locationName: nameEditPlace.text!, myDescription: descrEditPlace.text!, coordinate: locationNew, www: nil , image:  MyImageView.image , title : nameEditPlace.text! , discipline: "")
-                manager.InsertAt(position: oldPosition, Place: newPlace)
-                manager.writeFileOfPlaces(file: manager.nameOfFileJSON())
-            }
-        }
-
-        // go to previous screen
-        dismiss(animated: true, completion: nil)
-    }
+    //
+    // Private Functions of AddPlaceController
+    //
     
     // Check all necessary place data is filled
     private func allRequiredDataIsFilled () -> Bool {

@@ -11,8 +11,8 @@ import MapKit
 
 class PlaceMapViewController: UIViewController , CLLocationManagerDelegate {
 
-    // Data to comunicate with previous controllers
-    // ...
+    // Data to comunicate with other controllers
+    var waitingForAddPlace = false
     // Own Outlets initialitzation
     // ...
     // Data for own management
@@ -29,9 +29,27 @@ class PlaceMapViewController: UIViewController , CLLocationManagerDelegate {
     
     // Actions
     //
+    
+    // Called from AddPlaceController: must exist, even if empty
+    // Is a func shared with others VControllers tha go to AddPlaceController screen
+    @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
+        print("PlaceMapViewController: prepareForUnwind")
+        self.refreshMap()
+    }
 
     // Overrided members of UIViewController
     //
+    
+    // Manage/allow unwind from Add
+    override func canPerformUnwindSegueAction(_ action: Selector, from fromViewController: UIViewController, withSender sender: Any) -> Bool {
+        print("PlaceMapViewController: canPerformUnwindSegueAction")
+        if self.waitingForAddPlace {
+            self.waitingForAddPlace = false
+            return true
+        } else {
+            return false
+        }
+    }
     
     // Previous to redraw, reload
     override func viewDidLoad() {
@@ -54,21 +72,39 @@ class PlaceMapViewController: UIViewController , CLLocationManagerDelegate {
             apvc.mpv = mapView
             apvc.previousScreen = self as UIViewController
             apvc.locationNew = self.locationNew
+            self.waitingForAddPlace = true
         }
     }
 
+    //
+    // Public Functions of PlaceMapViewController
+    //
+    
+    // Refresh map, called when unwind
+    public func refreshMap() {
+        print("Received Notification")
+        let initialLocation = CLLocation(latitude: 41.381760, longitude: 2.167330)
+        //let initialLocation = CLLocation(latitude: locationNew.latitude, longitude: locationNew.longitude)
+        centerMapOnLocation(location: initialLocation)
+        showPlacesOnMap()
+    }
+    
+    //
+    // Public Functions of PlaceMapViewController
+    //
+    
     //
     // Private Functions of PlaceMapViewController
     //
     
     // Basic feature to center mapView
-    public func centerMapOnLocation(location: CLLocation) {
+    private func centerMapOnLocation(location: CLLocation) {
         let regionRadius = manager.maxDistBtPlaces * 2
         let coordinateRegion = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
         self.mapView.setRegion(coordinateRegion, animated: true)
     }
     // Show the places of manager as MKAnnotations in mapView
-    public func showPlacesOnMap() {
+    private func showPlacesOnMap() {
         var position = 0
         while position < manager.count() { //TODO:Until we can introduce GPS coordinates in editing Place
             let place = manager.itemAt(position: position)
@@ -76,10 +112,6 @@ class PlaceMapViewController: UIViewController , CLLocationManagerDelegate {
             position += 1
         }
     }
-
-    //
-    // Private Functions of PlaceMapViewController
-    //
     
     // Delegated members of CLLocationManagerDelegate
     //
