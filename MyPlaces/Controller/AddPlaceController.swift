@@ -85,17 +85,13 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
                     let newPlace = Place(id: newId , type: currenPickerValue ,locationName: nameEditPlace.text!, myDescription: descrEditPlace.text!, coordinate: locationNew, www: nil , image:  MyImageView.image , title : nameEditPlace.text! , discipline: "")
                     manager.append(newPlace)
                     manager.writeFileOfPlaces(file: manager.nameOfFileJSON())
-                } else {
-                    let alert = UIAlertController(title: "Info", message: "Please fill all data required", preferredStyle: UIAlertController.Style.alert)
-                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
-
-                    return false // abort unwindSegue
+                    if tbv != nil { let prevVC = previousScreen as! PlacesTableViewController ; prevVC.dataChangedOnAdd = true }
+                    if mpv != nil { let prevVC = previousScreen as! PlaceMapViewController ; prevVC.dataChangedOnAdd = true }
                 }
-                
                 // if Edit from Detail
                 //      if anyDataChanged  ->  change data
             } else {
+                let prevVC = self.previousScreen as! PlaceDetailViewController
                 if anyDataChanged() {
                     let oldId = inputPlace.id   // preserve id
                     let oldPosition = manager.indexOf(manager.itemWithId(oldId)!)
@@ -104,8 +100,8 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
                     manager.InsertAt(position: oldPosition, Place: newPlace)
                     manager.writeFileOfPlaces(file: manager.nameOfFileJSON())
                     // change data on PlaceDetailViewController
-                    let pdvc = self.previousScreen as! PlaceDetailViewController
-                    pdvc.place = newPlace
+                    prevVC.place = newPlace
+                    prevVC.dataChangedOnEdit = true
                 }
             }
         }
@@ -186,6 +182,8 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
     //
     // Public Functions of AddPlaceController
     //
+    
+
     
     //
     // Private Functions of AddPlaceController

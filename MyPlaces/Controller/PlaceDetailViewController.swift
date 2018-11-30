@@ -14,10 +14,12 @@ class PlaceDetailViewController: UIViewController {
     // Data to comunicate with other controllers
     var place : Place!
     var waitingForEditPlace = false
+    var dataChangedOnEdit: Bool = false
     // Own Outlets initialitzation
     // ...
     // Data for own management
     let manager = PlaceManager.shared
+    var displayAdvice = false
     
     // Outlets
     //
@@ -34,14 +36,24 @@ class PlaceDetailViewController: UIViewController {
     // Is a func shared with others VControllers tha go to AddPlaceController screen
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
         print("PlaceDetailViewController: prepareForUnwind")
-        //self.view.draw(self.view.bounds)
-        reloadDataOfView()
-        self.view.setNeedsLayout()
-        //self.view.layoutIfNeeded()
+        // if data chenged on Edit
+        if dataChangedOnEdit {
+            reloadDataOfView()
+            self.view.setNeedsLayout()
+        } else {
+            displayAdvice = true
+        }
     }
 
     // Overrided members of UIViewController
     //
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if displayAdvice {
+            self.adviceNotEnoughData(message: "Data has not been changed")
+        }
+    }
     
     // Manage/allow unwind from Edit
     override func canPerformUnwindSegueAction(_ action: Selector, from fromViewController: UIViewController, withSender sender: Any) -> Bool {
@@ -91,6 +103,14 @@ class PlaceDetailViewController: UIViewController {
         
         imageOfPlace.image = place.image
         locationOfPlace.text = String(format: "Latitude: %3.2f Longitude: %3.2f", arguments: [place.coordinate.latitude, place.coordinate.longitude])
+    }
+    
+    //  alert that nothing has been added/updated
+    public func adviceNotEnoughData(message: String) {
+        let alert = UIAlertController(title: "Info", message: message, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+        self.displayAdvice = false // one time only
     }
     
     //
