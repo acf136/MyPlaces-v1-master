@@ -18,7 +18,7 @@ class PlacesTableViewController: UITableViewController, CLLocationManagerDelegat
     var waitingForPlaceDetail = false
     var dataChangedOnAdd = false
     var dataChangedOnDetail = false
-
+    var deletedPlace = false
     // Own Outlets initialitzation
     // ...
     // Data for own management
@@ -88,6 +88,7 @@ class PlacesTableViewController: UITableViewController, CLLocationManagerDelegat
         waitingForPlaceDetail = false
         dataChangedOnAdd = false
         dataChangedOnDetail = false
+        deletedPlace = false
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

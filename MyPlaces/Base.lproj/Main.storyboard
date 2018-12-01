@@ -144,7 +144,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="My Places" id="2u8-j4-PkE">
-                        <barButtonItem key="leftBarButtonItem" title="Del" id="pGC-bn-lMi"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="1fw-XA-iAh">
                             <connections>
                                 <segue destination="2hU-qk-c5W" kind="show" identifier="AddPlaceInTableSegue" id="rgO-Mb-NUo"/>
@@ -424,11 +423,17 @@
                                 <segue destination="mhT-QS-Hv7" kind="unwind" identifier="prepareForUnwind" unwindAction="prepareForUnwindWithSegue:" id="6h3-ah-IER"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="trash-32x32" id="Hee-86-mv4">
+                            <connections>
+                                <action selector="deletePlace:" destination="FyZ-fq-klw" id="Bx4-QM-oV8"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
                     <size key="freeformSize" width="375" height="850"/>
                     <connections>
                         <outlet property="MyImageView" destination="Jkp-rp-xhr" id="pJv-ev-fn4"/>
+                        <outlet property="deleteButton" destination="Hee-86-mv4" id="URF-6M-0mK"/>
                         <outlet property="descrEditPlace" destination="hNl-h6-O8F" id="qPp-Dr-QYE"/>
                         <outlet property="locationButton" destination="mLk-hh-SOm" id="GTY-cp-WeH"/>
                         <outlet property="nameEditPlace" destination="P9g-dC-BW7" id="vCH-tL-l5t"/>
@@ -507,6 +512,7 @@
         <image name="List" width="32" height="32"/>
         <image name="PutYourImageHere" width="205" height="307"/>
         <image name="maps-32x32" width="32" height="32"/>
+        <image name="trash-32x32" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="rgO-Mb-NUo"/>

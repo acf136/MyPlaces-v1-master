@@ -16,6 +16,7 @@ class PlaceMapViewController: UIViewController , CLLocationManagerDelegate {
     // initial status
     var waitingForAddPlace = false
     var dataChangedOnAdd = false
+    var deletedPlace = false
     // Own Outlets initialitzation
     // ...
     // Data for own management
@@ -81,6 +82,7 @@ class PlaceMapViewController: UIViewController , CLLocationManagerDelegate {
         // initial status
         waitingForAddPlace = false
         dataChangedOnAdd = false
+        deletedPlace = false
     }
     
     // Previous to go to other screen

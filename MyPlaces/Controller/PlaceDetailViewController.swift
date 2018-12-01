@@ -17,6 +17,7 @@ class PlaceDetailViewController: UIViewController {
     // initial status
     var waitingForEditPlace = false
     var dataChangedOnEdit = false
+    var deletedPlace = false
     // Own Outlets initialitzation
     // ...
     // Data for own management
@@ -51,9 +52,15 @@ class PlaceDetailViewController: UIViewController {
     //
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        if displayAdvice {
-            self.adviceNotEnoughData(message: "Data has not been changed")
+        if self.deletedPlace {
+            let previousVC = previousScreen as! PlacesTableViewController 
+            previousVC.dataChangedOnDetail = true
+            performSegue(withIdentifier: "unwindFromPlaceDetail", sender: nil)
+        } else {
+            super.viewWillAppear(animated)
+            if displayAdvice {
+                self.adviceNotEnoughData(message: "Data has not been changed")
+            }
         }
     }
     
@@ -75,6 +82,7 @@ class PlaceDetailViewController: UIViewController {
         // initial status
         waitingForEditPlace = false
         dataChangedOnEdit = false
+        deletedPlace = false
     }
 
     // Previous to go to other screen
@@ -89,7 +97,7 @@ class PlaceDetailViewController: UIViewController {
             waitingForEditPlace = true
         }
         if segue.identifier == "unwindFromPlaceDetail" {
-            if  dataChangedOnEdit { let prevVC = previousScreen as! PlacesTableViewController ; prevVC.dataChangedOnDetail = true }
+            if  dataChangedOnEdit { let previousVC = previousScreen as! PlacesTableViewController ; previousVC.dataChangedOnDetail = true }
         }
     }
 

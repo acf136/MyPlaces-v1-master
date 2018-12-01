@@ -38,9 +38,32 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
     @IBOutlet weak var MyImageView: UIImageView!
     @IBOutlet weak var descrEditPlace: UITextView!
     
+    @IBOutlet weak var deleteButton: UIBarButtonItem!
+    
     // Actions
     //
     
+    // Button DELETE
+    @IBAction func deletePlace(_ sender: Any) {
+        // SHOW Alert message
+        let dialogMessage = UIAlertController(title: "Confirm", message: "Are you SURE you want to DELETE this?", preferredStyle: .alert)
+        // Create OK button with action handler and Cancel w/o
+        let ok = UIAlertAction(title: "OK", style: .default, handler: { [self]  (paramAction:UIAlertAction!) in
+            print("deletePlace: Ok button tapped")
+            if self.pdv != nil {
+                let previousVC = self.previousScreen as! PlaceDetailViewController
+                let oldId = self.inputPlace.id   // preserve id
+                self.manager.remove(self.manager.itemWithId(oldId)!)
+                self.manager.writeFileOfPlaces(file: self.manager.nameOfFileJSON())
+                previousVC.deletedPlace = true
+                self.dismiss(animated: false, completion: nil )
+            }
+        })
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        dialogMessage.addAction(ok)
+        dialogMessage.addAction(cancel)
+        self.present(dialogMessage, animated: true, completion: nil)
+    }
     
     //  Button importImageButton to import image into MyImageView
     @IBAction func ImportImage(_ sender: Any) {
@@ -69,6 +92,8 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
             self.present(alert, animated: true, completion: nil)
         }
     }
+    
+    
 
     //
     // Overrided members of UIViewController
@@ -85,13 +110,13 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
                     let newPlace = Place(id: newId , type: currenPickerValue ,locationName: nameEditPlace.text!, myDescription: descrEditPlace.text!, coordinate: locationNew, www: nil , image:  MyImageView.image , title : nameEditPlace.text! , discipline: "")
                     manager.append(newPlace)
                     manager.writeFileOfPlaces(file: manager.nameOfFileJSON())
-                    if tbv != nil { let prevVC = previousScreen as! PlacesTableViewController ; prevVC.dataChangedOnAdd = true }
-                    if mpv != nil { let prevVC = previousScreen as! PlaceMapViewController ; prevVC.dataChangedOnAdd = true }
+                    if tbv != nil { let previousVC = previousScreen as! PlacesTableViewController ; previousVC.dataChangedOnAdd = true }
+                    if mpv != nil { let previousVC = previousScreen as! PlaceMapViewController ; previousVC.dataChangedOnAdd = true }
                 }
                 // if Edit from Detail
                 //      if anyDataChanged  ->  change data
             } else {
-                let prevVC = self.previousScreen as! PlaceDetailViewController
+                let previousVC = self.previousScreen as! PlaceDetailViewController
                 if anyDataChanged() {
                     let oldId = inputPlace.id   // preserve id
                     let oldPosition = manager.indexOf(manager.itemWithId(oldId)!)
@@ -100,8 +125,8 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
                     manager.InsertAt(position: oldPosition, Place: newPlace)
                     manager.writeFileOfPlaces(file: manager.nameOfFileJSON())
                     // change data on PlaceDetailViewController
-                    prevVC.place = newPlace
-                    prevVC.dataChangedOnEdit = true
+                    previousVC.place = newPlace
+                    previousVC.dataChangedOnEdit = true
                 }
             }
         }
@@ -129,6 +154,8 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
             currenPickerValue = newPlace.type
             nameEditPlace.text = newPlace.locationName
             descrEditPlace.text = newPlace.myDescription
+            // Hide delete button
+            deleteButton.image = nil
         } else { // Edit from Detail
             locationButton.setTitle(String(format: "Latitude: %3.2f Longitude: %3.2f", arguments: [(inputPlace.coordinate.latitude), (inputPlace.coordinate.longitude)]), for: .normal)
             currenPickerValue = inputPlace.type
@@ -182,8 +209,6 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
     //
     // Public Functions of AddPlaceController
     //
-    
-
     
     //
     // Private Functions of AddPlaceController
