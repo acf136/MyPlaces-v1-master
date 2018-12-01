@@ -24,7 +24,7 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
     var currenPickerValue : PlaceType = .generic
     // Data for own management
     let manager = PlaceManager.shared
-    var lastImage: UIImage? = nil
+    var keyboardPresent = false
     // Data to delegate
     // ...
 
@@ -71,7 +71,6 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
         image.delegate = self
         image.sourceType = 	UIImagePickerController.SourceType.photoLibrary
         image.allowsEditing = false
-        self.lastImage = MyImageView.image
         self.present(image, animated: true)
         {   // After it is presented
   
@@ -136,7 +135,6 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
     // Previous to redraw, reload
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.lastImage = MyImageView.image  //named: "PutYourImageHere"
         // Initial State
         if tbv != nil || mpv != nil {     // Add from Table  or  // Add from Map
             newPlace = Place(id: UUID().uuidString , type: .generic ,locationName: "Enter a name", myDescription: "Enter a description", coordinate: locationNew, www: nil , image:  MyImageView.image , title : "title" , discipline: "")
@@ -169,6 +167,10 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
             nameEditPlace.text = inputPlace.locationName
             descrEditPlace.text = inputPlace.myDescription
         }
+        // Prevent self.view to be hidden by the keyboard
+        keyboardPresent = false
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     
@@ -209,6 +211,29 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
     //
     // Public Functions of AddPlaceController
     //
+    
+    // If kbd is shown Move origin of view up
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if !keyboardPresent {
+            if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+                if self.view.frame.origin.y == 0{
+                    self.view.frame.origin.y -= keyboardSize.height
+                    keyboardPresent = true
+                }
+            }
+        }
+    }
+    // If kbd is hidden Move origin of view down
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if keyboardPresent {
+            if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+                if self.view.frame.origin.y != 0{
+                    self.view.frame.origin.y += keyboardSize.height
+                     keyboardPresent = false
+                }
+            }
+        }
+    }
     
     //
     // Private Functions of AddPlaceController
