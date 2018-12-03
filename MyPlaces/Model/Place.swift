@@ -14,6 +14,18 @@ enum PlaceType : Int {
     case touristic
     case services
 }
+// Place properties to be observed by KVO in Class MyObserver
+enum PropertyKVO : Int {
+    case id = 1
+    case type
+    case locationName
+    case myDescription
+    case coordinate
+    case www
+    case title
+    case discipline
+    case image
+}
 
 // part of Place to serialize as JSON
 struct PlaceJSON : Codable { // Encodable, Decodable  {
@@ -59,9 +71,6 @@ struct PlaceJSON : Codable { // Encodable, Decodable  {
     var discipline: String?
 //  Next info not Codable in JSON
     var image: UIImage?
-
-    // KVO variables
-    var myDescription_observer: NSKeyValueObservation?
     
     // We need to learn a bit more about initialization, but meanwhile we create some initializers.
     // This one has no information about name or description, so it creates an almost empty place.

@@ -41,15 +41,18 @@ class PlaceManager : NSObject {
     // because using an array or something else is just a private detail.
     private var places = [Place]()
     private var fileJSON = "MyPlaces.JSON"
+
     // KVO observers
+    var myObservers : [MyObserver] = []
     
+    //  Set myObservers : [MyObserver]
     func setObservers(place: Place) {
         // observer for myDescription
-        place.myDescription_observer = place.observe(\Place.myDescription, options: [.old,.new] ) { place, change in
-            print("\(place.id), My description old: \(change.oldValue!) change to new: \" \(change.newValue!)\"")
-        }
-        //observer for ...
+        myObservers.append(MyObserver(object: place, property: .myDescription ))
+        // observer for image
+        myObservers.append(MyObserver(object: place, property: .image ))
     }
+    
     // Return max. distance between places in meters
     func calcMaxDistBtPlaces() -> Double {
         var maxdist = 0.0
@@ -72,7 +75,38 @@ class PlaceManager : NSObject {
         self.maxDistBtPlaces = calcMaxDistBtPlaces()
         self.setObservers(place: place)
     }
-
+    // Modify a Place with Id with the given observable properties of a new object Place passed by parameter
+    func modify(properties: [PropertyKVO] ,Id: String , placeNew: Place ) {
+        let posToModify = self.indexOf(self.itemWithId(Id)!)
+        if posToModify < self.count() {
+            for item in properties {
+                switch item {
+                case .id :
+                    places[posToModify].id = placeNew.id
+                case .type :
+                    places[posToModify].type = placeNew.type
+                case .locationName :
+                    places[posToModify].locationName = placeNew.locationName
+                case .myDescription :
+                    places[posToModify].myDescription = placeNew.myDescription
+                case .coordinate :
+                    places[posToModify].coordinate = placeNew.coordinate
+                case .www :
+                    places[posToModify].www = placeNew.www
+                case .title :
+                    places[posToModify].title = placeNew.title
+                case .discipline :
+                    places[posToModify].discipline = placeNew.discipline
+                case .image :
+                    places[posToModify].image = placeNew.image
+                }
+            }
+            
+        }
+        else {
+            return
+        }
+    }
     // Returns number of places managed by PlaceManager.
     func count() -> Int {
         return places.count

@@ -117,14 +117,11 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
             } else {
                 let previousVC = self.previousScreen as! PlaceDetailViewController
                 if anyDataChanged() {
-                    let oldId = inputPlace.id   // preserve id
-                    let oldPosition = manager.indexOf(manager.itemWithId(oldId)!)
-                    manager.remove(manager.itemWithId(oldId)!)
-                    let newPlace = Place(id: oldId , type: currenPickerValue ,locationName: nameEditPlace.text!, myDescription: descrEditPlace.text!, coordinate: locationNew, www: nil , image:  MyImageView.image , title : nameEditPlace.text! , discipline: "")
-                    manager.InsertAt(position: oldPosition, Place: newPlace)
+                    let newId = inputPlace.id
+                    let newPlace = Place(id: newId , type: currenPickerValue ,locationName: nameEditPlace.text!, myDescription: descrEditPlace.text!, coordinate: locationNew, www: nil , image:  MyImageView.image , title : nameEditPlace.text! , discipline: "")
+                    manager.modify(properties: [.type, .locationName, .myDescription, .coordinate, .title, .image], Id : newId, placeNew: newPlace)
                     manager.writeFileOfPlaces(file: manager.nameOfFileJSON())
-                    // change data on PlaceDetailViewController
-                    previousVC.place = newPlace
+                    previousVC.place = manager.itemWithId(newId)!
                     previousVC.dataChangedOnEdit = true
                 }
             }
