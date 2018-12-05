@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,6 +18,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         // MyPlaces INITIALIZATION
+        
+        // Initialization: Firebase
+        FirebaseApp.configure()
+        // End Of Initialization: Firebase
+
+        // Initializaion: Places
         let manager = PlaceManager.shared
         // Look at file system for JSON files containing Places
         let docsPath = FileManager.default.urls(for: .documentDirectory , in: .userDomainMask)[0]
@@ -36,7 +43,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Generated minimal JSON data of Places")
             manager.writeFileOfPlaces(file: manager.nameOfFileJSON())
         }
-    
+        // End Of Initializaion: Places
+        
         return true
     }
 
