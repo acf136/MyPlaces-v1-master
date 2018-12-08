@@ -117,10 +117,11 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
             } else {
                 let previousVC = self.previousScreen as! PlaceDetailViewController
                 if anyDataChanged() {
-                    let newId = inputPlace.id
-                    let newPlace = Place(id: newId , type: currenPickerValue ,locationName: nameEditPlace.text!, myDescription: descrEditPlace.text!, coordinate: locationNew, www: nil , image:  MyImageView.image , title : nameEditPlace.text! , discipline: "")
-                    manager.modify(properties: [.type, .locationName, .myDescription, .coordinate, .title, .image], Id : newId, placeNew: newPlace)
-                    previousVC.place = manager.itemWithId(newId)!
+                    let modifId = inputPlace.id
+                    let modifPlace = Place(id: modifId , type: currenPickerValue ,locationName: nameEditPlace.text!, myDescription: descrEditPlace.text!, coordinate: locationNew, www: nil , image:  MyImageView.image , title : nameEditPlace.text! , discipline: "")
+                    manager.modify(properties: [.type, .locationName, .myDescription, .coordinate, .title, .image], Id : modifId, placeNew: modifPlace)
+                    manager.modifyPlaceIntoFirebase(item : modifPlace)
+                    previousVC.place = manager.itemWithId(modifId)!
                     previousVC.dataChangedOnEdit = true
                 }
             }

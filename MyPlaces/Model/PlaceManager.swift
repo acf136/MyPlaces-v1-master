@@ -226,18 +226,32 @@ class PlaceManager : NSObject {
         self.maxDistBtPlaces = calcMaxDistBtPlaces()
     }
 
-    // Given a place item, insert it into a Firebase reference and path - Called at manager.append
-    func insertPlaceIntoFirebase(item: Place , atPath: String = "" ) {
+    // Given a place item, insert it into a Firebase reference and path
+    func makeStringJSON(from item: Place) -> String {
         // Make a PlaceJSON and encode into String
         let placeJSON = PlaceJSON(id: item.id, type: PlaceType(rawValue: item.type.rawValue)!, locationName: item.locationName,
                                   myDescription: item.myDescription, coordinate: item.coordinate, www: item.www, image: item.image , title: item.title, discipline: item.discipline)
-        let stringJSON  = placeJSON.parseJSON()
+        return placeJSON.parseJSON()
+    }
+    
+    // Given a place item, insert it into a Firebase reference and path
+    func insertPlaceIntoFirebase(item: Place) {
+        let stringJSON = makeStringJSON(from: item)
         // Insert in Firebase
         let itemFirebase = ItemFirebase(key: item.id, name: item.locationName, placeJSON: stringJSON,
-                                        addedByUser: "TestImg64base", //self.user.email ,
-                                      completed: false)
+                                        addedByUser: "TestUser", //self.user.email ,
+                                        completed: false)
         let ItemFirebaseRef = self.refDB.child(item.id.lowercased())
         ItemFirebaseRef.setValue(itemFirebase.toAnyObject())
+    }
+    
+    // Given a place item, modify into a Firebase reference and path
+    func modifyPlaceIntoFirebase(item: Place , addedByUser user: String = "TestUser" , completed: Bool = false) {
+        let stringJSON = makeStringJSON(from: item)
+        // Modify in Firebase by key
+        let ItemFirebaseRef = self.refDB.child(item.id.lowercased())
+        ItemFirebaseRef.updateChildValues(["name": item.locationName as Any , "placeJSON": stringJSON as Any,
+                                           "addedByUser": user as Any, "completed": completed as Any] )
     }
     
     // Given a stringJSON representing a PlaceJSON converts to PlaceJSON

@@ -11,7 +11,7 @@ import Firebase
 
 struct ItemFirebase {
     
-    let ref: DatabaseReference?
+    //let ref: DatabaseReference?
     let key: String
     let name: String
     let placeJSON: String
@@ -19,7 +19,7 @@ struct ItemFirebase {
     var completed: Bool
     
     init(key: String, name: String, placeJSON: String, addedByUser: String? , completed: Bool) {
-        self.ref = nil
+//        self.ref = nil
         self.key = key
         self.name = name
         self.placeJSON = placeJSON
@@ -37,7 +37,7 @@ struct ItemFirebase {
                 return nil
         }
         
-        self.ref = snapshot.ref
+//        self.ref = snapshot.ref
         self.key = snapshot.key
         self.name = name
         self.placeJSON = placeJSON
