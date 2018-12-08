@@ -18,8 +18,8 @@ extension  PlaceJSON  {
         case myDescription = "myDescription"
         case latitude = "latitude"
         case longitude = "longitude"
-        case www = "site"
-        case myImageString = "imageJPGString"
+        case www = "www"
+        case myImageString = "myImage"
         case title = "title"
         case discipline = "discipline"
     }

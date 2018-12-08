@@ -53,6 +53,17 @@ struct PlaceJSON : Codable { // Encodable, Decodable  {
         self.title = title ?? ""
         self.discipline = discipline ?? ""
     }
+    
+    func parseJSON() -> String {
+        var encodedString = ""
+        if self.myImage != nil {
+            let jpegData = myImage!.jpegData(compressionQuality: 1.0)
+            encodedString = jpegData!.base64EncodedString()
+        }
+        let myJSON = "{\"id\" : \"\(self.id)\",\"type\" : \(self.type),\"locationName\" : \"\(self.locationName)\",\"myDescription\" : \"\(self.myDescription)\",\"latitude\" : \(self.coordinate.latitude),\"longitude\" : \(self.coordinate.longitude),\"www\" : \"\(self.www)\",\"myImage\" : \"\(encodedString)\",\"title\" : \"\(self.title ?? "")\",\"discipline\" : \"\(self.discipline)\"}"
+        return myJSON
+    }
+    
 }
 
 @objc class Place : NSObject, MKAnnotation {

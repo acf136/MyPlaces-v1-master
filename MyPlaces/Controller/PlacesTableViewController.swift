@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import Firebase
 
 class PlacesTableViewController: UITableViewController, CLLocationManagerDelegate {
 
@@ -27,13 +28,13 @@ class PlacesTableViewController: UITableViewController, CLLocationManagerDelegat
     var displayAdvice = false
     // Data to delegate
     var locationManager:CLLocationManager!
-
     
     // Outlets
     //
     
     // Actions
     //
+    
     
     // Called from PlaceDetailViewController: must exist, even if empty
     @IBAction func unwindFromPlaceDetail(for unwindSegue: UIStoryboardSegue, towards subsequentVC: UIViewController) {
@@ -89,6 +90,27 @@ class PlacesTableViewController: UITableViewController, CLLocationManagerDelegat
         dataChangedOnAdd = false
         dataChangedOnDetail = false
         deletedPlace = false
+        // Refresh from Firebase with a Listener
+        // 1
+        manager.refDB.observe(.value, with: { snapshot in
+            // 1 - //TODO: Comment print
+            //print(snapshot.value as Any)
+            // 2
+            for child in snapshot.children {
+                if let snapshot = child as? DataSnapshot, let itemFB = ItemFirebase(snapshot: snapshot) {
+                    if let newPlace = self.manager.convert(itemFirebase: itemFB) {
+                        // look for a place with the same id and delete to avoid repetition
+                        if let item = self.manager.itemWithId(newPlace.id) {
+                            self.manager.remove(item)
+                        }
+                        // append new
+                        self.manager.append(newPlace)
+                    }
+                }
+            }
+            // Reload
+            self.tableView.reloadData()
+        })
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

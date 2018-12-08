@@ -14,6 +14,7 @@ import Firebase
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var manager = PlaceManager.shared
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
@@ -24,10 +25,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // End Of Initialization: Firebase
 
         // Initializaion: Places
-        let manager = PlaceManager.shared
+        manager.refDB = Database.database().reference(withPath: "MyPlaces") // Asynchronous call
+
         // Look at file system for JSON files containing Places
         let docsPath = FileManager.default.urls(for: .documentDirectory , in: .userDomainMask)[0]
-        let filePath = docsPath.appendingPathComponent(manager.nameOfFileJSON())  // This is the name of JSON file where we load/save the places in every session
+        // This is the name of JSON file where we load/save the places in every session at the device where app is executed
+        let filePath = docsPath.appendingPathComponent(manager.nameOfFileJSON())
         
          //If JSON files containing Place's then append to manager
         do {
@@ -43,9 +46,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Generated minimal JSON data of Places")
             manager.writeFileOfPlaces(file: manager.nameOfFileJSON())
         }
+
         // End Of Initializaion: Places
         
         return true
+    }
+    
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        manager.writeFileOfPlaces(file: manager.nameOfFileJSON())
+    }
+    func applicationWillTerminate(_ application: UIApplication) {
+        manager.writeFileOfPlaces(file: manager.nameOfFileJSON())
     }
 
 }

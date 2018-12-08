@@ -25,7 +25,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2" y="-101"/>
+            <point key="canvasLocation" x="983.20000000000005" y="-101.19940029985008"/>
         </scene>
         <!--Map-->
         <scene sceneID="h4J-iP-Mv5">
@@ -42,7 +42,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BEo-vb-Wl1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="924" y="250"/>
+            <point key="canvasLocation" x="1863.2" y="249.62518740629687"/>
         </scene>
         <!--My Map-->
         <scene sceneID="NHG-mJ-Aeu">
@@ -78,7 +78,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jVd-Bv-b87" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1734" y="250"/>
+            <point key="canvasLocation" x="2672.8000000000002" y="249.62518740629687"/>
         </scene>
         <!--My Places-->
         <scene sceneID="n0q-RC-CwO">
@@ -153,7 +153,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ud1-Gq-xE9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1733.5999999999999" y="-640.02998500749629"/>
+            <point key="canvasLocation" x="2672.8000000000002" y="-640.02998500749629"/>
         </scene>
         <!--Place Detail-->
         <scene sceneID="xsO-ia-c4a">
@@ -255,7 +255,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qDA-AZ-zWP" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="LxH-27-TYb" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3508" y="-640"/>
+            <point key="canvasLocation" x="4447.1999999999998" y="-640.02998500749629"/>
         </scene>
         <!--Add Place-->
         <scene sceneID="cyh-b9-HD4">
@@ -451,7 +451,7 @@
                     </items>
                 </navigationBar>
             </objects>
-            <point key="canvasLocation" x="3575" y="249"/>
+            <point key="canvasLocation" x="4512.8000000000002" y="248.27586206896552"/>
         </scene>
         <!--List-->
         <scene sceneID="ztT-TP-hMT">
@@ -468,7 +468,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pai-wr-uuR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="924" y="-640"/>
+            <point key="canvasLocation" x="1863.2" y="-640.02998500749629"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="bDL-x2-x5D">
@@ -487,7 +487,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Wl-5s-Zxw" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationItem title="Title" id="07i-sp-AMa"/>
             </objects>
-            <point key="canvasLocation" x="2636" y="-640"/>
+            <point key="canvasLocation" x="3575.1999999999998" y="-640.02998500749629"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="S53-Ov-VKF">
@@ -505,7 +505,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AfU-nx-A1U" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2636" y="249"/>
+            <point key="canvasLocation" x="3575.1999999999998" y="248.72563718140933"/>
         </scene>
     </scenes>
     <resources>
@@ -515,6 +515,6 @@
         <image name="trash-32x32" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="rvX-hA-uQf"/>
+        <segue reference="rgO-Mb-NUo"/>
     </inferredMetricsTieBreakers>
 </document>

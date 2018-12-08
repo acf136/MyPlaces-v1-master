@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import MapKit
+import Firebase
 
 // Do you see those MARK lines there in the code? They do nothing (of course, they are comments
 // after all). But that special syntax let you define some nice sections in the header. Have a look
@@ -27,7 +28,7 @@ class PlaceManager : NSObject {
     // You can learn more about this pattern in Swift in:
     // https://cocoacasts.com/what-is-a-singleton-and-how-to-create-one-in-swift
     static let shared = PlaceManager()
-    private override init() {   }
+    private override init() { }
     
     // Contains max. distance between all points in places in meters
     var maxDistBtPlaces: Double = 0.0 // max. distance between places
@@ -45,12 +46,16 @@ class PlaceManager : NSObject {
     // KVO observers
     var myObservers : [MyObserver] = []
     
+    // Firebase
+    var refDB : DatabaseReference!
+    var user: User!
+    
     //  Set myObservers : [MyObserver]
     func setObservers(place: Place) {
         // observer for myDescription
         myObservers.append(MyObserver(object: place, property: .myDescription ))
         // observer for image
-        myObservers.append(MyObserver(object: place, property: .image ))
+        //myObservers.append(MyObserver(object: place, property: .image ))
     }
     
     // Return max. distance between places in meters
@@ -69,7 +74,7 @@ class PlaceManager : NSObject {
         
         return maxdist
     }
-    // Inserts a new place into list of places managed by PlaceManager.
+    // Inserts a new place into list of places managed by PlaceManager and recalculate the metrics
     func append(_ place: Place) {
         places.append(place)
         self.maxDistBtPlaces = calcMaxDistBtPlaces()
@@ -178,7 +183,7 @@ class PlaceManager : NSObject {
         }
     }
     //
-    // Returns an array with all JSON info from places : Excluding that which is not Codable, like an image
+    // Returns an array with all JSON info from places : Excluding that which is not Codable, like an image if not converted
     func extractJSONFromPlaces() -> [PlaceJSON] {
         var placesJSON : [PlaceJSON] = []
         for item in places {
@@ -211,15 +216,52 @@ class PlaceManager : NSObject {
       	  return placesJSON
     }
     
-    // Given  an array with all JSON info to add to places, insert it into places
+    // Given  an array with all JSON info to add to places, insert it into places - Called at Init in AppDelegate
     func insertJSONIntoPlaces(placesJSON: [PlaceJSON]) {
         for item in placesJSON {
             let itemType = PlaceType(rawValue: item.type)!
             let itemLocation : CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: item.coordinate.latitude, longitude: item.coordinate.longitude )
             places.append( Place(id: item.id, type: itemType , locationName: item.locationName , myDescription: item.myDescription , coordinate: itemLocation , www: item.www, image: item.myImage, title: item.title!, discipline: item.discipline ) )
         }
-        for item in places { self.setObservers(place: item) }
         self.maxDistBtPlaces = calcMaxDistBtPlaces()
     }
 
+    // Given a place item, insert it into a Firebase reference and path - Called at manager.append
+    func insertPlaceIntoFirebase(item: Place , atPath: String = "" ) {
+        // Make a PlaceJSON and encode into String
+        let placeJSON = PlaceJSON(id: item.id, type: PlaceType(rawValue: item.type.rawValue)!, locationName: item.locationName,
+                                  myDescription: item.myDescription, coordinate: item.coordinate, www: item.www, image: item.image , title: item.title, discipline: item.discipline)
+        let stringJSON  = placeJSON.parseJSON()
+        // Insert in Firebase
+        let itemFirebase = ItemFirebase(key: item.id, name: item.locationName, placeJSON: stringJSON,
+                                        addedByUser: "TestImg64base", //self.user.email ,
+                                      completed: false)
+        let ItemFirebaseRef = self.refDB.child(item.id.lowercased())
+        ItemFirebaseRef.setValue(itemFirebase.toAnyObject())
+    }
+    
+    // Given a stringJSON representing a PlaceJSON converts to PlaceJSON
+    func convert(stringPlaceJSON: String) -> PlaceJSON? {
+        var placeJSON : PlaceJSON
+        if let myData = stringPlaceJSON.data(using: .utf8) {
+            let jsonDecoder = JSONDecoder()
+            do {
+                placeJSON = try jsonDecoder.decode(PlaceJSON.self, from: myData)
+            } catch {
+                return nil
+            }
+        } else {
+            return nil
+        }
+        return placeJSON
+    }
+    // Given an ItemFirebase converts to Place
+    func convert(itemFirebase: ItemFirebase) -> Place? {
+        if let placeJSON = self.convert(stringPlaceJSON: itemFirebase.placeJSON) {
+            return Place(id: placeJSON.id, type: PlaceType(rawValue: placeJSON.type)!, locationName: placeJSON.locationName, myDescription: placeJSON.myDescription, coordinate: placeJSON.coordinate, www: placeJSON.www, image: placeJSON.myImage, title: placeJSON.title!, discipline: placeJSON.discipline)
+        } else {
+            return nil
+        }
+    }
+    
 }

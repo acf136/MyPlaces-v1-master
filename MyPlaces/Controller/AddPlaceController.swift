@@ -54,7 +54,9 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
                 let previousVC = self.previousScreen as! PlaceDetailViewController
                 let oldId = self.inputPlace.id   // preserve id
                 self.manager.remove(self.manager.itemWithId(oldId)!)
-                self.manager.writeFileOfPlaces(file: self.manager.nameOfFileJSON())
+                if let ItemFirebaseRef = self.manager.refDB?.child(oldId.lowercased()) {
+                    ItemFirebaseRef.removeValue()
+                }
                 previousVC.deletedPlace = true
                 self.dismiss(animated: false, completion: nil )
             }
@@ -91,8 +93,6 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
             self.present(alert, animated: true, completion: nil)
         }
     }
-    
-    
 
     //
     // Overrided members of UIViewController
@@ -108,7 +108,7 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
                     let newId = UUID().uuidString
                     let newPlace = Place(id: newId , type: currenPickerValue ,locationName: nameEditPlace.text!, myDescription: descrEditPlace.text!, coordinate: locationNew, www: nil , image:  MyImageView.image , title : nameEditPlace.text! , discipline: "")
                     manager.append(newPlace)
-                    manager.writeFileOfPlaces(file: manager.nameOfFileJSON())
+                    manager.insertPlaceIntoFirebase(item: newPlace)
                     if tbv != nil { let previousVC = previousScreen as! PlacesTableViewController ; previousVC.dataChangedOnAdd = true }
                     if mpv != nil { let previousVC = previousScreen as! PlaceMapViewController ; previousVC.dataChangedOnAdd = true }
                 }
@@ -120,7 +120,6 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
                     let newId = inputPlace.id
                     let newPlace = Place(id: newId , type: currenPickerValue ,locationName: nameEditPlace.text!, myDescription: descrEditPlace.text!, coordinate: locationNew, www: nil , image:  MyImageView.image , title : nameEditPlace.text! , discipline: "")
                     manager.modify(properties: [.type, .locationName, .myDescription, .coordinate, .title, .image], Id : newId, placeNew: newPlace)
-                    manager.writeFileOfPlaces(file: manager.nameOfFileJSON())
                     previousVC.place = manager.itemWithId(newId)!
                     previousVC.dataChangedOnEdit = true
                 }

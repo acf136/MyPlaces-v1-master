@@ -35,7 +35,8 @@ class MyObserver: NSObject {
 //        case .discipline :
 //        case .image :
         default:
-            print("Observer not added")
+//            print("KVO: No Property for Observer")
+            let emptyStatement = true
         }
 
     }
