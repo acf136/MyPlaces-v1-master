@@ -25,6 +25,7 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
     // Data for own management
     let manager = PlaceManager.shared
     var keyboardPresent = false
+    var observeChanges: NSKeyValueObservation?
     // Data to delegate
     // ...
 
@@ -129,6 +130,7 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
 
     }
     
+    
     // Previous to redraw, reload
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -168,6 +170,11 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
         keyboardPresent = false
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        //
+        observeChanges = nameEditPlace.observe(\.text) { object, change in
+            self.navigationItem.leftBarButtonItem?.title = "Save"
+        }
+        
     }
     
     
