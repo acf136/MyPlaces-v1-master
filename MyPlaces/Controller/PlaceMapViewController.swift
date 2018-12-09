@@ -21,7 +21,6 @@ class PlaceMapViewController: UIViewController , CLLocationManagerDelegate {
     // ...
     // Data for own management
     let manager = PlaceManager.shared
-    var displayAdvice = false
     var locationNew = CLLocationCoordinate2D(latitude: Double.random(in: 1...360) - 90.0, longitude: Double.random(in: 1...360) - 180.0)
     let regionRadius: CLLocationDistance = 1000 //meters
     // Data to delegate
@@ -41,21 +40,11 @@ class PlaceMapViewController: UIViewController , CLLocationManagerDelegate {
         print("PlaceMapViewController: prepareForUnwind")
         if dataChangedOnAdd {
             self.refreshMap()
-            // falta refrescar PlacesTableViewController
-        } else {
-            displayAdvice = true
         }
     }
 
     // Overrided members of UIViewController
     //
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        if displayAdvice {
-            self.adviceNotEnoughData(message: "No all Data supplied to add a place")
-        }
-    }
     
     // Manage/allow unwind from Add
     override func canPerformUnwindSegueAction(_ action: Selector, from fromViewController: UIViewController, withSender sender: Any) -> Bool {
@@ -113,15 +102,7 @@ class PlaceMapViewController: UIViewController , CLLocationManagerDelegate {
     //
     // Public Functions of PlaceMapViewController
     //
-    
-    //  alert that nothing has been added/updated
-    public func adviceNotEnoughData(message: String) {
-        let alert = UIAlertController(title: "Info", message: message, preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-        self.displayAdvice = false // one time only
-    }
-    
+
     //
     // Private Functions of PlaceMapViewController
     //

@@ -22,7 +22,6 @@ class PlaceDetailViewController: UIViewController {
     // ...
     // Data for own management
     let manager = PlaceManager.shared
-    var displayAdvice = false
     
     // Outlets
     //
@@ -43,8 +42,6 @@ class PlaceDetailViewController: UIViewController {
         if dataChangedOnEdit {
             reloadDataOfView()
             self.view.setNeedsLayout()
-        } else {
-            displayAdvice = true
         }
     }
 
@@ -58,9 +55,6 @@ class PlaceDetailViewController: UIViewController {
             performSegue(withIdentifier: "unwindFromPlaceDetail", sender: nil)
         } else {
             super.viewWillAppear(animated)
-            if displayAdvice {
-                self.adviceNotEnoughData(message: "Data has not been changed")
-            }
         }
     }
     
@@ -115,14 +109,6 @@ class PlaceDetailViewController: UIViewController {
         
         imageOfPlace.image = place.image
         locationOfPlace.text = String(format: "Latitude: %3.2f Longitude: %3.2f", arguments: [place.coordinate.latitude, place.coordinate.longitude])
-    }
-    
-    //  alert that nothing has been added/updated
-    public func adviceNotEnoughData(message: String) {
-        let alert = UIAlertController(title: "Info", message: message, preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-        self.displayAdvice = false // one time only
     }
     
     //

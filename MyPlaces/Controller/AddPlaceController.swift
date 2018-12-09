@@ -28,7 +28,7 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
     // KVO
     var observeChangesOfName: NSKeyValueObservation?
     var observeChangesOfDescription: NSKeyValueObservation?
-    var observeChangesOfType: NSKeyValueObservation?
+    //var observeChangesOfType: NSKeyValueObservation?
     var observeChangesOfImage: NSKeyValueObservation?
     // Data to delegate
     // ...
@@ -47,6 +47,8 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
     
     // Actions
     //
+    
+    
     
     // Button DELETE
     @IBAction func deletePlace(_ sender: Any) {
