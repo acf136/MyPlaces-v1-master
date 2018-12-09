@@ -175,22 +175,10 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         // KVO for change of leftBarButton
-        observeChangesOfName = nameEditPlace.observe(\.text) { object, change in
-            self.navigationItem.leftBarButtonItem?.title = "Save"
-            self.navigationItem.leftBarButtonItem?.tintColor = UIColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 0.9)
-        }
-        observeChangesOfDescription = descrEditPlace.observe(\.text) { object, change in
-            self.navigationItem.leftBarButtonItem?.title = "Save"
-            self.navigationItem.leftBarButtonItem?.tintColor = UIColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 0.9)
-        }
-        observeChangesOfType = picktypePlace.observe(\.inputView) { object, change in
-            self.navigationItem.leftBarButtonItem?.title = "Save"
-            self.navigationItem.leftBarButtonItem?.tintColor = UIColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 0.9)
-        }
-        observeChangesOfImage = MyImageView.observe(\.image) { object, change in
-            self.navigationItem.leftBarButtonItem?.title = "Save"
-            self.navigationItem.leftBarButtonItem?.tintColor = UIColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 0.9)
-        }
+        observeChangesOfName = nameEditPlace.observe(\.text) { object, change in  self.switchLeftBarButton() }
+        observeChangesOfDescription = descrEditPlace.observe(\.text) { object, change in  self.switchLeftBarButton() }
+        //observeChangesOfType = picktypePlace.observe(\.inputView) { object, change in  self.switchLeftBarButton() } //using delegate method of
+        observeChangesOfImage = MyImageView.observe(\.image) { object, change in  self.switchLeftBarButton() }
     }
     
     
@@ -226,6 +214,7 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
         // This method is triggered whenever the user makes a change to the picker selection.
         // The parameter named row and component represents what was selected.
         currenPickerValue = pickerData[picktypePlace.selectedRow(inComponent: component)]
+        self.switchLeftBarButton()
     }
     
     //
@@ -258,6 +247,12 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
     //
     // Private Functions of AddPlaceController
     //
+    
+    // Switch self.navigationItem.leftBarButtonItem when changes observed
+    private func switchLeftBarButton() {
+        self.navigationItem.leftBarButtonItem?.title = "Save"
+        self.navigationItem.leftBarButtonItem?.tintColor = UIColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 0.9)
+    }
     
     // Check all necessary place data is filled
     private func allRequiredDataIsFilled () -> Bool {
