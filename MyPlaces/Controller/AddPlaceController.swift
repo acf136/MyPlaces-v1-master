@@ -25,7 +25,11 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
     // Data for own management
     let manager = PlaceManager.shared
     var keyboardPresent = false
-    var observeChanges: NSKeyValueObservation?
+    // KVO
+    var observeChangesOfName: NSKeyValueObservation?
+    var observeChangesOfDescription: NSKeyValueObservation?
+    var observeChangesOfType: NSKeyValueObservation?
+    var observeChangesOfImage: NSKeyValueObservation?
     // Data to delegate
     // ...
 
@@ -170,11 +174,23 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
         keyboardPresent = false
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        //
-        observeChanges = nameEditPlace.observe(\.text) { object, change in
+        // KVO for change of leftBarButton
+        observeChangesOfName = nameEditPlace.observe(\.text) { object, change in
             self.navigationItem.leftBarButtonItem?.title = "Save"
+            self.navigationItem.leftBarButtonItem?.tintColor = UIColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 0.9)
         }
-        
+        observeChangesOfDescription = descrEditPlace.observe(\.text) { object, change in
+            self.navigationItem.leftBarButtonItem?.title = "Save"
+            self.navigationItem.leftBarButtonItem?.tintColor = UIColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 0.9)
+        }
+        observeChangesOfType = picktypePlace.observe(\.inputView) { object, change in
+            self.navigationItem.leftBarButtonItem?.title = "Save"
+            self.navigationItem.leftBarButtonItem?.tintColor = UIColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 0.9)
+        }
+        observeChangesOfImage = MyImageView.observe(\.image) { object, change in
+            self.navigationItem.leftBarButtonItem?.title = "Save"
+            self.navigationItem.leftBarButtonItem?.tintColor = UIColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 0.9)
+        }
     }
     
     
