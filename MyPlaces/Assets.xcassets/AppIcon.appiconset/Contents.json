@@ -33,7 +33,7 @@
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "MyPlace-Icons-120x120.png",
+      "filename" : "icons8-map-marker-120x120.png",
       "scale" : "2x"
     },
     {
@@ -79,19 +79,19 @@
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "MyPlace-Icons-152x152.png",
+      "filename" : "icons8-map-marker-152x152.png",
       "scale" : "2x"
     },
     {
       "size" : "83.5x83.5",
       "idiom" : "ipad",
-      "filename" : "MyPlace-Icons-167x167.png",
+      "filename" : "icons8-map-marker-167x167.png",
       "scale" : "2x"
     },
     {
       "size" : "1024x1024",
       "idiom" : "ios-marketing",
-      "filename" : "MyPlace-Icons-1024x1024.png",
+      "filename" : "icons8-map-marker-1024x1024.png",
       "scale" : "1x"
     }
   ],

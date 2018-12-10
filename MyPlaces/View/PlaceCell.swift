@@ -9,7 +9,9 @@
 import UIKit
 
 class PlaceCell: UITableViewCell {
-
+    // Data for own management
+    let manager = PlaceManager.shared
+    
     //@IBOutlet weak var idLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
@@ -18,6 +20,8 @@ class PlaceCell: UITableViewCell {
             backgroundImageView.layer.cornerRadius = 20
         }
     }
+    @IBOutlet weak var colorOfType: UIImageView!
+    
     
     // Set data of the place in the cell IBOutlets
     func bind(place: Place?) {
@@ -25,6 +29,8 @@ class PlaceCell: UITableViewCell {
         locationLabel.text = String(format: "Latitude: %3.2f Longitude: %3.2f", arguments: [(place?.coordinate.latitude)!, (place?.coordinate.longitude)!] )
         nameLabel.text = place?.locationName
         // Crop image from left-top corner to adapt to table cell bounds
-        backgroundImageView.image = place?.image?.cropped(boundingBox :  self.backgroundImageView.bounds )
+//        backgroundImageView.image = place?.image?.cropped(boundingBox :  self.backgroundImageView.bounds )
+        backgroundImageView.image = place?.image?.centerHorizontally(height: self.backgroundImageView.bounds.height)
+        colorOfType.backgroundColor = manager.itemTypeColor((place?.id)!)
     }
 }

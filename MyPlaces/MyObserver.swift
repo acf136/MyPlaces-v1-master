@@ -36,7 +36,7 @@ class MyObserver: NSObject {
 //        case .image :
         default:
 //            print("KVO: No Property for Observer")
-            let emptyStatement = true
+            observation = observe( \.objectToObserve , options: [.old, .new] ) { object, value in return }
         }
 
     }
