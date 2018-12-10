@@ -30,7 +30,7 @@ class PlaceDetailViewController: UIViewController {
     @IBOutlet weak var descrOfPlace: UILabel!
     @IBOutlet weak var imageOfPlace: UIImageView!
     @IBOutlet weak var locationOfPlace: UILabel!
-
+    
     // Actions
     //
 

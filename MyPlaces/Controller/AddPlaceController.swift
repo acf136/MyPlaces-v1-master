@@ -42,65 +42,10 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
     @IBOutlet weak var importImageButton: UIButton!
     @IBOutlet weak var MyImageView: UIImageView!
     @IBOutlet weak var descrEditPlace: UITextView!
+
     
     @IBOutlet weak var deleteButton: UIBarButtonItem!
     
-    // Actions
-    //
-    
-    
-    
-    // Button DELETE
-    @IBAction func deletePlace(_ sender: Any) {
-        // SHOW Alert message
-        let dialogMessage = UIAlertController(title: "Confirm", message: "Are you SURE you want to DELETE this?", preferredStyle: .alert)
-        // Create OK button with action handler and Cancel w/o
-        let ok = UIAlertAction(title: "OK", style: .default, handler: { [self]  (paramAction:UIAlertAction!) in
-            print("deletePlace: Ok button tapped")
-            if self.pdv != nil {
-                let previousVC = self.previousScreen as! PlaceDetailViewController
-                let oldId = self.inputPlace.id   // preserve id
-                self.manager.remove(self.manager.itemWithId(oldId)!)
-                if let ItemFirebaseRef = self.manager.refDB?.child(oldId.lowercased()) {
-                    ItemFirebaseRef.removeValue()
-                }
-                previousVC.deletedPlace = true
-                self.dismiss(animated: false, completion: nil )
-            }
-        })
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        dialogMessage.addAction(ok)
-        dialogMessage.addAction(cancel)
-        self.present(dialogMessage, animated: true, completion: nil)
-    }
-    
-    //  Button importImageButton to import image into MyImageView
-    @IBAction func ImportImage(_ sender: Any) {
-        let image = UIImagePickerController()
-        image.delegate = self
-        image.sourceType = 	UIImagePickerController.SourceType.photoLibrary
-        image.allowsEditing = false
-        self.present(image, animated: true)
-        {   // After it is presented
-  
-        }
-    }
-    
-    //TODO: Delete Feature of Button locationButton to enter GPS coordinates in a Dialog :
-    // Button locationButton to show/edit GPS coordinates
-    @IBAction func editLocation(_ sender: Any) {
-        showInputDialogCoordinates(latitude: self.locationNew.latitude, longitude: self.locationNew.longitude)
-        // Advice to user of not suitable coordinates if more than 10 times the distance from the places
-        let myNewCoord = CLLocationCoordinate2D(latitude: self.locationNew.latitude, longitude: self.locationNew.longitude)
-        let mySecCoord = manager.itemAt(position: 0)?.coordinate  // TODO: we consider places[0] the center of places, by now
-        let actualDistance = myNewCoord.distance(from: mySecCoord!)
-        if actualDistance > (manager.maxDistBtPlaces * 10) {
-            let alert = UIAlertController(title: "Warning", message: "These coordinates are far from current places. The map range will be expanded and current places will be represented too narrow. Consider to change the coordinates", preferredStyle: UIAlertController.Style.alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        }
-    }
-
     //
     // Overrided members of UIViewController
     //
@@ -150,7 +95,7 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
         self.picktypePlace.delegate = self
         self.picktypePlace.dataSource = self
         // Initial values to show in the view
-        typeLabelPlace.text = "Select Type of place"
+        typeLabelPlace.text = "type"
         if tbv != nil  || mpv != nil {     // Add from Table  or  // Add from Map
             locationButton.setTitle(String(format: "Latitude: %3.2f Longitude: %3.2f", arguments: [(newPlace.coordinate.latitude), (newPlace.coordinate.longitude)]), for: .normal)
             picktypePlace.selectRow(0, inComponent: 0, animated: false)
@@ -217,6 +162,60 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
         // The parameter named row and component represents what was selected.
         currenPickerValue = pickerData[picktypePlace.selectedRow(inComponent: component)]
         self.switchLeftBarButton()
+    }
+    
+    // Actions
+    //
+    
+    // Button DELETE
+    @IBAction func deletePlace(_ sender: Any) {
+        // SHOW Alert message
+        let dialogMessage = UIAlertController(title: "Confirm", message: "Are you SURE you want to DELETE this?", preferredStyle: .alert)
+        // Create OK button with action handler and Cancel w/o
+        let ok = UIAlertAction(title: "OK", style: .default, handler: { [self]  (paramAction:UIAlertAction!) in
+            print("deletePlace: Ok button tapped")
+            if self.pdv != nil {
+                let previousVC = self.previousScreen as! PlaceDetailViewController
+                let oldId = self.inputPlace.id   // preserve id
+                self.manager.remove(self.manager.itemWithId(oldId)!)
+                if let ItemFirebaseRef = self.manager.refDB?.child(oldId.lowercased()) {
+                    ItemFirebaseRef.removeValue()
+                }
+                previousVC.deletedPlace = true
+                self.dismiss(animated: false, completion: nil )
+            }
+        })
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        dialogMessage.addAction(ok)
+        dialogMessage.addAction(cancel)
+        self.present(dialogMessage, animated: true, completion: nil)
+    }
+    
+    //  Button importImageButton to import image into MyImageView
+    @IBAction func ImportImage(_ sender: Any) {
+        let image = UIImagePickerController()
+        image.delegate = self
+        image.sourceType =     UIImagePickerController.SourceType.photoLibrary
+        image.allowsEditing = false
+        self.present(image, animated: true)
+        {   // After it is presented
+            
+        }
+    }
+    
+    //TODO: Delete Feature of Button locationButton to enter GPS coordinates in a Dialog :
+    // Button locationButton to show/edit GPS coordinates
+    @IBAction func editGPSLocation(_ sender: UIButton, forEvent event: UIEvent) {
+        showInputDialogCoordinates(latitude: self.locationNew.latitude, longitude: self.locationNew.longitude)
+        // Advice to user of not suitable coordinates if more than 10 times the distance from the places
+        let myNewCoord = CLLocationCoordinate2D(latitude: self.locationNew.latitude, longitude: self.locationNew.longitude)
+        let mySecCoord = manager.itemAt(position: 0)?.coordinate  // TODO: we consider places[0] the center of places, by now
+        let actualDistance = myNewCoord.distance(from: mySecCoord!)
+        if actualDistance > (manager.maxDistBtPlaces * 10) {
+            let alert = UIAlertController(title: "Warning", message: "These coordinates are far from current places. The map range will be expanded and current places will be represented too narrow. Consider to change the coordinates", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     //
