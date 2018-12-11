@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "PlaceMapViewController.centerMapOnLocation(location:):PlaceMapViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "PlaceManager.calcCenterOfPlaces():PlaceManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.count()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "PlaceMapViewController.viewDidAppear(_:):PlaceMapViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "PlaceMapViewController.setMapObservers():PlaceMapViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "manager.count()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
