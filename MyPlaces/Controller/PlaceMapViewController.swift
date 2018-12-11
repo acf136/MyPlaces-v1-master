@@ -59,8 +59,10 @@ class PlaceMapViewController: UIViewController , CLLocationManagerDelegate {
         }
     }
     
+    // Previous to redraw
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        determineMyCurrentLocation()
         // if changes on annotations from last didAppear then refresh
         if lastNumberOfPlaces != manager.count() || dataChangedOnObserve {
             self.refreshMap()
@@ -69,6 +71,7 @@ class PlaceMapViewController: UIViewController , CLLocationManagerDelegate {
             self.setMapObservers()
         }
     }
+    
     
     // Previous to redraw, reload
     override func viewDidLoad() {

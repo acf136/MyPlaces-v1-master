@@ -72,7 +72,13 @@ class PlacesTableViewController: UITableViewController, CLLocationManagerDelegat
         }
     }
     
-    // Previous to redraw, reload
+    // Previous to redraw
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        determineMyCurrentLocation()
+    }
+    
+    // Previous to redraw
     override func viewDidLoad() {
         super.viewDidLoad()
         determineMyCurrentLocation()
