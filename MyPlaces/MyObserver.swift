@@ -12,30 +12,67 @@ class MyObserver: NSObject {
     @objc var objectToObserve: Place
     var observation: NSKeyValueObservation?
     
-    init(object: Place, property: PropertyKVO) {
+    init(object: Place, property: PropertyKVO, action: (()->Void)? )  {
         objectToObserve = object
         super.init()
         
-        //     case id = 1
-        switch property {
-//        case .id :
-//        case .type :
-//        case .locationName :
+        switch property {   //only observable properties can be observed
+        case .id:
+            observation = observe( \.objectToObserve.id,
+                                   options: [.old, .new]
+            ) { object, value in
+                if value.oldValue != value.newValue {
+                    print("\(property) changed from: \(String(describing: value.oldValue!)), updated to: \(String(describing: value.newValue!))")
+                    action!()
+                }
+            }
+        case .locationName :
+            observation = observe( \.objectToObserve.locationName,
+                                   options: [.old, .new]
+            ) { object, value in
+                if value.oldValue != value.newValue {
+                    print("\(property) changed from: \(value.oldValue!), updated to: \(value.newValue!)")
+                    action!()
+                }
+            }
         case .myDescription :
             observation = observe( \.objectToObserve.myDescription,
                                    options: [.old, .new]
             ) { object, value in
                 if value.oldValue != value.newValue {
                     print("\(property) changed from: \(value.oldValue!), updated to: \(value.newValue!)")
+                    action!()
                 }
             }
-//        case .coordinate :
-//        case .www :
-//        case .title :
-//        case .discipline :
-//        case .image :
+        case .www :
+            observation = observe( \.objectToObserve.www,
+                                   options: [.old, .new]
+            ) { object, value in
+                if value.oldValue != value.newValue {
+                    print("\(property) changed from: \(String(describing: value.oldValue!)), updated to: \(String(describing: value.newValue!))")
+                    action!()
+                }
+            }
+        case .title :
+            observation = observe( \.objectToObserve.title,
+                                   options: [.old, .new]
+            ) { object, value in
+                if value.oldValue != value.newValue {
+                    print("\(property) changed from: \(String(describing: value.oldValue!)), updated to: \(String(describing: value.newValue!))")
+                    action!()
+                }
+            }
+        case .discipline :
+            observation = observe( \.objectToObserve.discipline,
+                                   options: [.old, .new]
+            ) { object, value in
+                if value.oldValue != value.newValue {
+                    print("\(property) changed from: \(String(describing: value.oldValue!)), updated to: \(String(describing: value.newValue!))")
+                    action!()
+                }
+            }
         default:
-//            print("KVO: No Property for Observer")
+            print("KVO: No Property for Observer")
             observation = observe( \.objectToObserve , options: [.old, .new] ) { object, value in return }
         }
 

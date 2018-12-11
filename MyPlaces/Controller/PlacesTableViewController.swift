@@ -38,7 +38,9 @@ class PlacesTableViewController: UITableViewController, CLLocationManagerDelegat
     // Called from PlaceDetailViewController: must exist, even if empty
     @IBAction func unwindFromPlaceDetail(for unwindSegue: UIStoryboardSegue, towards subsequentVC: UIViewController) {
         print("PlacesTableViewController: unwindFromPlaceDetail")
-        if dataChangedOnDetail { self.tableView.reloadData() }
+        if dataChangedOnDetail {
+            self.tableView.reloadData()
+        }
     }
     
     

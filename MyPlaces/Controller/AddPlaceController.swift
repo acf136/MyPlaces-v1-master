@@ -56,7 +56,7 @@ class AddPlaceController: UIViewController ,  UIPickerViewDelegate, UIPickerView
             // if Add from Table or Add from Map
             //      if allRequiredDataIsFilled() -> change data
             if (tbv != nil || mpv != nil) {
-                if allRequiredDataIsFilled() {
+                if anyDataChanged() {
                     let newId = UUID().uuidString
                     let newPlace = Place(id: newId , type: currenPickerValue ,locationName: nameEditPlace.text!, myDescription: descrEditPlace.text!, coordinate: locationNew, www: nil , image:  MyImageView.image , title : nameEditPlace.text! , discipline: "")
                     manager.append(newPlace)

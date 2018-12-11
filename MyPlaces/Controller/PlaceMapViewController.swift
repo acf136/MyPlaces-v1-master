@@ -17,10 +17,12 @@ class PlaceMapViewController: UIViewController , CLLocationManagerDelegate {
     var waitingForAddPlace = false
     var dataChangedOnAdd = false
     var deletedPlace = false
+    var dataChangedOnObserve = false
     // Own Outlets initialitzation
     // ...
     // Data for own management
     let manager = PlaceManager.shared
+    var lastNumberOfPlaces = 0
     var locationNew = CLLocationCoordinate2D(latitude: Double.random(in: 1...360) - 90.0, longitude: Double.random(in: 1...360) - 180.0)
     let regionRadius: CLLocationDistance = 1000 //meters
     // Data to delegate
@@ -57,21 +59,32 @@ class PlaceMapViewController: UIViewController , CLLocationManagerDelegate {
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        // if changes on annotations from last didAppear then refresh
+        if lastNumberOfPlaces != manager.count() || dataChangedOnObserve {
+            self.refreshMap()
+            lastNumberOfPlaces = manager.count()
+            dataChangedOnObserve = false
+            self.setMapObservers()
+        }
+    }
+    
     // Previous to redraw, reload
     override func viewDidLoad() {
         // Get fom GPS
         determineMyCurrentLocation()
         super.viewDidLoad()
         mapView.delegate = self     // delegating for "marker" views
-        // set initial location at "Plaza Cataluña 1, Barcelona 08001, Spain"
-        let initialLocation = CLLocation(latitude: 41.381760, longitude: 2.167330)
-        //let initialLocation = CLLocation(latitude: locationNew.latitude, longitude: locationNew.longitude)
-        centerMapOnLocation(location: initialLocation)
-        showPlacesOnMap()
         // initial status
         waitingForAddPlace = false
         dataChangedOnAdd = false
         deletedPlace = false
+        dataChangedOnObserve = false
+        lastNumberOfPlaces = self.manager.count()
+        refreshMap()
+        // Set observers
+        self.setMapObservers()
     }
     
     // Previous to go to other screen
@@ -92,10 +105,7 @@ class PlaceMapViewController: UIViewController , CLLocationManagerDelegate {
     
     // Refresh map, called when unwind
     public func refreshMap() {
-        print("Received Notification")
-        let initialLocation = CLLocation(latitude: 41.381760, longitude: 2.167330)
-        //let initialLocation = CLLocation(latitude: locationNew.latitude, longitude: locationNew.longitude)
-        centerMapOnLocation(location: initialLocation)
+        centerMap()
         showPlacesOnMap()
     }
     
@@ -107,14 +117,30 @@ class PlaceMapViewController: UIViewController , CLLocationManagerDelegate {
     // Private Functions of PlaceMapViewController
     //
     
+    // Set KVO observers for every property defined as KVO in places
+    public func setMapObservers() {
+        var pos = 0
+        while pos < manager.count() {
+            manager.setObserver(place: manager.itemAt(position: pos)!, property: .locationName, action: {
+                self.dataChangedOnObserve = true } )
+            manager.setObserver(place: manager.itemAt(position: pos)!, property: .myDescription, action: {
+                self.dataChangedOnObserve = true } )
+            manager.setObserver(place: manager.itemAt(position: pos)!, property: .title, action: {
+                self.dataChangedOnObserve = true } )
+            pos += 1
+        }
+    }
+    
     // Basic feature to center mapView
-    private func centerMapOnLocation(location: CLLocation) {
+    private func centerMap() {
         let regionRadius = manager.maxDistBtPlaces * 2
-        let coordinateRegion = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
+        let center = manager.calcCenterOfPlaces()
+        let coordinateRegion = MKCoordinateRegion(center: center, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
         self.mapView.setRegion(coordinateRegion, animated: true)
     }
     // Show the places of manager as MKAnnotations in mapView
     private func showPlacesOnMap() {
+        mapView.removeAnnotations(self.mapView.annotations)
         var position = 0
         while position < manager.count() { //TODO:Until we can introduce GPS coordinates in editing Place
             let place = manager.itemAt(position: position)

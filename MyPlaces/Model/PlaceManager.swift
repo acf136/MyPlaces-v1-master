@@ -18,7 +18,7 @@ import Firebase
 // Click on the last element and you will get a drop down list from which you can navigate to any
 // method in current file. Those MARK lines let you specify some sections to group related methods.
 
-class PlaceManager : NSObject {
+@objc class PlaceManager : NSObject {
     
     // MARK: - Singleton
     
@@ -31,7 +31,7 @@ class PlaceManager : NSObject {
     private override init() { }
     
     // Contains max. distance between all points in places in meters
-    var maxDistBtPlaces: Double = 0.0 // max. distance between places
+    @objc dynamic var maxDistBtPlaces: Double = 0.0 // max. distance between places
     
     // MARK: - Class implementation
     
@@ -51,13 +51,33 @@ class PlaceManager : NSObject {
     var user: User!
     
     //  Set myObservers : [MyObserver]
-    func setObservers(place: Place) {
-        // observer for myDescription
-        myObservers.append(MyObserver(object: place, property: .myDescription ))
-        // observer for image
-        //myObservers.append(MyObserver(object: place, property: .image ))
+    func setObserver(place: Place , property: PropertyKVO, action : @escaping (()->Void) ) {
+        myObservers.append( MyObserver(object: place, property: property , action: action) )
     }
-    
+    // Return center of places
+    func calcCenterOfPlaces() -> CLLocationCoordinate2D {
+        var pos : Int = 0
+        var minLatitude = Double( (self.itemAt(position: pos)?.coordinate.latitude)! )
+        var maxLatitude = minLatitude
+        var minLongitude = Double( (self.itemAt(position: pos)?.coordinate.longitude)! )
+        var maxLongitude = minLongitude
+        if self.count() > 0 {
+            repeat {
+                let currentLat : Double = (self.itemAt(position: pos)?.coordinate.latitude)!
+                let currentLong : Double = (self.itemAt(position: pos)?.coordinate.longitude)!
+                if currentLat > maxLatitude { maxLatitude = currentLat }
+                if currentLat < minLatitude { minLatitude = currentLat }
+                if currentLong > maxLongitude { maxLongitude = currentLong }
+                if currentLong < minLongitude { minLongitude = currentLong }
+                pos += 1
+            } while pos < (self.count() - 1)
+        }
+        let distLat = abs(maxLatitude - minLatitude) / 2
+        let distLong = abs(maxLongitude - minLongitude) / 2
+        let center = CLLocationCoordinate2D(latitude: minLatitude + distLat ,
+                                            longitude: minLongitude + distLong )
+        return center
+    }
     // Return max. distance between places in meters
     func calcMaxDistBtPlaces() -> Double {
         var maxdist = 0.0
@@ -71,14 +91,12 @@ class PlaceManager : NSObject {
                 pos += 1
             } while pos < (self.count() - 1)
         }
-        
         return maxdist
     }
     // Inserts a new place into list of places managed by PlaceManager and recalculate the metrics
     func append(_ place: Place) {
         places.append(place)
         self.maxDistBtPlaces = calcMaxDistBtPlaces()
-        self.setObservers(place: place)
     }
     // Modify a Place with Id with the given observable properties of a new object Place passed by parameter
     func modify(properties: [PropertyKVO] ,Id: String , placeNew: Place ) {
@@ -96,6 +114,7 @@ class PlaceManager : NSObject {
                     places[posToModify].myDescription = placeNew.myDescription
                 case .coordinate :
                     places[posToModify].coordinate = placeNew.coordinate
+                    self.maxDistBtPlaces = calcMaxDistBtPlaces()
                 case .www :
                     places[posToModify].www = placeNew.www
                 case .title :
@@ -144,6 +163,7 @@ class PlaceManager : NSObject {
         // Instead of trying to remove anything, we can just filter all places that are not the one
         // we want to remove and then assign the filtered array to same places variable.
         places = places.filter {$0.id != place.id}
+        self.maxDistBtPlaces = calcMaxDistBtPlaces()
     }
     // Return index on places of Place
     func indexOf(_ Place : Place)  -> Int {
@@ -153,6 +173,7 @@ class PlaceManager : NSObject {
     // Insert a place at a given position
     func InsertAt(position: Int, Place: Place) {
         if position < places.count + 1 { places.insert(Place, at: position) }
+        self.maxDistBtPlaces = calcMaxDistBtPlaces()
     }
     
     // Returns a color UIColor for the given place with id calculated in function of the type of place

@@ -26,11 +26,10 @@ class PlaceCell: UITableViewCell {
     // Set data of the place in the cell IBOutlets
     func bind(place: Place?) {
         //idLabel.text = place?.id
-        locationLabel.text = String(format: "Latitude: %3.2f Longitude: %3.2f", arguments: [(place?.coordinate.latitude)!, (place?.coordinate.longitude)!] )
+        locationLabel.text = String(format: "Latit:%3.2f,Longit:%3.2f", arguments: [(place?.coordinate.latitude)!, (place?.coordinate.longitude)!] )
         nameLabel.text = place?.locationName
         // Crop image from left-top corner to adapt to table cell bounds
-//        backgroundImageView.image = place?.image?.cropped(boundingBox :  self.backgroundImageView.bounds )
-        backgroundImageView.image = place?.image?.centerHorizontally(height: self.backgroundImageView.bounds.height)
+        backgroundImageView.image = place?.image
         colorOfType.backgroundColor = manager.itemTypeColor((place?.id)!)
     }
 }

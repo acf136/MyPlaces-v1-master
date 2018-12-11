@@ -73,13 +73,13 @@ struct PlaceJSON : Codable { // Encodable, Decodable  {
     // are and will be String.
     var id = ""
     var type = PlaceType.generic
-    var locationName = ""    // reused for MKAnnotation
+    @objc dynamic var locationName = ""    // reused for MKAnnotation
     @objc dynamic var myDescription = ""  // can't override inmutable property NSOBject.description
     var coordinate: CLLocationCoordinate2D    // reused for MKAnnotation
-    var www: String?
+    @objc dynamic var www: String?
 //  Info for MKAnnotation
-    var title: String?
-    var discipline: String?
+    @objc dynamic var title: String?
+    @objc dynamic var discipline: String?
 //  Next info not Codable in JSON
     var image: UIImage?
     
